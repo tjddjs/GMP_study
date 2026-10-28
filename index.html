@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제품QC 학습노트 · 아세트아미노펜정 해부</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ground & ink — 시약 라벨지에서 가져온 세이지 그레이 */
+  --paper:#ECEFE9;
+  --card:#FAFBF8;
+  --sunk:#E3E7DF;
+  --ink:#11171A;
+  --slate:#4F5D65;
+  --faint:#829097;
+  --line:#D3D9D1;
+  --line-2:#BFC7BD;
+
+  /* 트랙 색 — 공통(graphite) / QC(petrol) / BIO(copper) / JOB(magenta) */
+  --com:#3C4A52;      --com-bg:#E5E9E7;
+  --qc:#0F3540;       --qc-bg:#DEE9E8;
+  --bio:#8A4E14;      --bio-bg:#F4EBDD;
+  --job:#A3215C;      --job-bg:#F8E4EE;
+  --accent:#A3215C;
+  --ok:#2C6A4A;       --ok-bg:#E1EDE4;
+  --warn:#8A6512;     --warn-bg:#F6EEDA;
+
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:"Hahmlet","Noto Serif KR",Georgia,serif;
+  --maxw:1240px;
+  --shadow:0 1px 2px rgba(17,23,26,.04);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1214;
+    --card:#161C1F;
+    --sunk:#1D2528;
+    --ink:#E7ECE9;
+    --slate:#A2AFB4;
+    --faint:#7C8A90;
+    --line:#283236;
+    --line-2:#3A464B;
+    --com:#A9BAC2;      --com-bg:#1E262A;
+    --qc:#79BDB8;       --qc-bg:#132A2C;
+    --bio:#DCA25C;      --bio-bg:#2A2016;
+    --job:#EE86AE;      --job-bg:#2C1622;
+    --accent:#EE86AE;
+    --ok:#79C3A0;       --ok-bg:#14251D;
+    --warn:#D8B166;     --warn-bg:#282014;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1214;
+  --card:#161C1F;
+  --sunk:#1D2528;
+  --ink:#E7ECE9;
+  --slate:#A2AFB4;
+  --faint:#7C8A90;
+  --line:#283236;
+  --line-2:#3A464B;
+  --com:#A9BAC2;      --com-bg:#1E262A;
+  --qc:#79BDB8;       --qc-bg:#132A2C;
+  --bio:#DCA25C;      --bio-bg:#2A2016;
+  --job:#EE86AE;      --job-bg:#2C1622;
+  --accent:#EE86AE;
+  --ok:#79C3A0;       --ok-bg:#14251D;
+  --warn:#D8B166;     --warn-bg:#282014;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15.5px;line-height:1.75;letter-spacing:-.005em;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--qc);text-underline-offset:3px}
+h1,h2,h3,h4,h5{line-height:1.3;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.mono{font-family:var(--mono)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+
+/* ── top bar ── */
+header.top{
+  position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+}
+.topin{max-width:var(--maxw);margin:0 auto;padding:9px 26px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:700;font-size:1rem;letter-spacing:-.03em;white-space:nowrap}
+.brand i{font-style:normal;color:var(--accent)}
+nav.tracks{display:flex;gap:3px;flex-wrap:wrap;flex:1;min-width:200px}
+nav.tracks a{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;text-decoration:none;
+  color:var(--slate);padding:5px 9px;border-radius:3px;white-space:nowrap;
+}
+nav.tracks a:hover{background:var(--sunk);color:var(--ink)}
+.tools{display:flex;gap:8px;align-items:center}
+.search{
+  display:flex;align-items:center;gap:6px;border:1px solid var(--line-2);border-radius:4px;
+  background:var(--card);padding:0 8px;
+}
+.search input{
+  border:0;background:transparent;color:var(--ink);font-family:var(--sans);font-size:.8rem;
+  padding:6px 2px;width:170px;outline:none;
+}
+.search input::placeholder{color:var(--faint)}
+.search span{font-family:var(--mono);font-size:.62rem;color:var(--faint);white-space:nowrap}
+.segs{display:flex;border:1px solid var(--line-2);border-radius:4px;overflow:hidden;background:var(--card)}
+.segs button{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;border:0;background:transparent;
+  padding:6px 10px;cursor:pointer;color:var(--slate);border-right:1px solid var(--line);
+}
+.segs button:last-child{border-right:0}
+.segs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.segs button:hover{color:var(--ink)}
+
+/* ── hero ── */
+.hero{padding:58px 0 34px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--accent);margin-bottom:16px;text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:clamp(2.05rem,5vw,3.35rem);font-weight:700;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{margin-top:20px;max-width:64ch;color:var(--slate);font-size:1.02rem}
+.metarow{margin-top:30px;display:flex;gap:34px;flex-wrap:wrap}
+.metarow div{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.metarow b{display:block;font-family:var(--sans);color:var(--ink);font-weight:500;letter-spacing:-.01em;
+  margin-top:5px;text-transform:none;font-size:.86rem}
+
+/* chromatogram figure */
+.chrom{margin-top:40px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px 18px 12px;overflow-x:auto;box-shadow:var(--shadow)}
+.chrom svg{display:block;width:100%;min-width:700px;height:auto}
+.chrom .cap{font-family:var(--mono);font-size:.63rem;color:var(--faint);letter-spacing:.06em;margin-top:8px}
+.pk{fill:none;stroke-width:1.7}
+.axis{stroke:var(--line-2);stroke-width:1}
+.plab{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;fill:var(--slate)}
+.pnum{font-family:var(--mono);font-size:10.5px;font-weight:600}
+
+/* ── shell ── */
+.shell{display:grid;grid-template-columns:238px 1fr;gap:56px;padding:44px 0 100px;max-width:var(--maxw);margin:0 auto}
+.side{position:sticky;top:110px;align-self:start;max-height:calc(100vh - 140px);overflow-y:auto;padding-left:26px;scrollbar-width:thin}
+.side h5{font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;color:var(--faint);margin:0 0 8px;font-weight:500;text-transform:uppercase}
+.side h5+h5{margin-top:4px}
+.side ol{list-style:none;margin:0 0 20px;padding:0;border-left:1px solid var(--line)}
+.side li a{display:block;padding:3px 0 3px 12px;font-size:.79rem;color:var(--slate);text-decoration:none;border-left:2px solid transparent;margin-left:-1px;line-height:1.5}
+.side li a:hover{color:var(--ink)}
+.side li a.on{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+main{padding-right:26px;min-width:0}
+@media(max-width:960px){
+  .shell{grid-template-columns:1fr;gap:0;padding-top:26px}
+  .side{display:none}
+  main{padding:0 26px}
+  .search input{width:120px}
+}
+
+/* ── block heads ── */
+.block-head{margin:70px 0 22px;padding-top:20px;border-top:2px solid var(--ink)}
+.block-head:first-child{margin-top:0}
+.block-head .k{font-family:var(--mono);font-size:.69rem;letter-spacing:.14em;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.block-head .k b{font-weight:600}
+.block-head h2{font-family:var(--serif);font-size:1.62rem;font-weight:700;margin-top:8px;letter-spacing:-.03em}
+.block-head p{color:var(--slate);margin-top:9px;font-size:.94rem;max-width:66ch}
+.tr-com .k b{color:var(--com)} .tr-qc .k b{color:var(--qc)} .tr-bio .k b{color:var(--bio)} .tr-job .k b{color:var(--job)}
+
+/* ── cards ── */
+section.card{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:24px 26px;margin:14px 0;box-shadow:var(--shadow);
+}
+section.card>h3{font-size:1.1rem;font-weight:700;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;letter-spacing:-.02em}
+section.card>h3 .no{font-family:var(--mono);font-size:.7rem;color:var(--faint);font-weight:500;letter-spacing:.05em}
+section.card>h3 .tag{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;padding:2px 6px;border-radius:3px;font-weight:600;
+  text-transform:uppercase;
+}
+.t-must{background:var(--job-bg);color:var(--job)}
+.t-core{background:var(--qc-bg);color:var(--qc)}
+.t-near{background:var(--com-bg);color:var(--com)}
+.t-key{background:var(--sunk);color:var(--faint)}
+.t-new{background:var(--warn-bg);color:var(--warn)}
+section.card>p, section.card>div>p{margin-top:12px;max-width:70ch;color:var(--ink)}
+section.card h4{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;color:var(--slate);
+  text-transform:uppercase;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);font-weight:600;
+}
+section.card h5{font-size:.95rem;font-weight:600;margin:20px 0 6px}
+strong{font-weight:600}
+mark{background:color-mix(in srgb,var(--accent) 18%,transparent);color:inherit;padding:0 2px;border-radius:2px}
+
+ul,ol.n{margin:12px 0;padding-left:0;list-style:none}
+ul li,ol.n li{position:relative;padding-left:17px;margin:6px 0;max-width:72ch}
+ul li::before{content:"";position:absolute;left:2px;top:.72em;width:5px;height:1px;background:var(--line-2)}
+ol.n{counter-reset:n}
+ol.n li{counter-increment:n;padding-left:24px}
+ol.n li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:0;font-family:var(--mono);font-size:.68rem;color:var(--faint);top:.15em}
+li b{font-weight:600}
+
+/* ── tables ── */
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:5px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.87rem;min-width:520px}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+thead th{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);
+  background:var(--sunk);font-weight:600;white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:500}
+table.num td{font-variant-numeric:tabular-nums}
+caption{caption-side:bottom;text-align:left;font-family:var(--mono);font-size:.63rem;color:var(--faint);padding:8px 13px;letter-spacing:.04em}
+
+/* ── flow ── */
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0;padding:14px;background:var(--sunk);border-radius:5px}
+.flow span{font-family:var(--mono);font-size:.72rem;background:var(--card);border:1px solid var(--line);padding:5px 9px;border-radius:3px;white-space:nowrap}
+.flow i{font-style:normal;color:var(--faint);font-size:.8rem}
+.flow span.hi{border-color:var(--accent);color:var(--accent);font-weight:600}
+
+/* ── callouts ── */
+.note{border-left:3px solid var(--line-2);padding:12px 0 12px 15px;margin:16px 0;font-size:.9rem;color:var(--slate);max-width:72ch}
+.note b.lb{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;font-weight:600}
+.note.tip{border-left-color:var(--qc);background:var(--qc-bg);padding:13px 15px;border-radius:0 4px 4px 0}
+.note.tip b.lb{color:var(--qc)}
+.note.tip, .note.warn, .note.say{color:var(--ink)}
+.note.warn{border-left-color:var(--warn);background:var(--warn-bg);padding:13px 15px;border-radius:0 4px 4px 0}
+.note.warn b.lb{color:var(--warn)}
+.note.say{border-left-color:var(--accent);background:var(--job-bg);padding:13px 15px;border-radius:0 4px 4px 0}
+.note.say b.lb{color:var(--accent)}
+.note.fix{border-left-color:var(--ok);background:var(--ok-bg);padding:13px 15px;border-radius:0 4px 4px 0}
+.note.fix b.lb{color:var(--ok)}
+
+/* ── keyword chips ── */
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin:14px 0}
+.chip{border:1px solid var(--line);border-radius:4px;padding:9px 11px;background:var(--card);font-size:.83rem;line-height:1.55}
+.chip b{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--accent);margin-bottom:3px;font-weight:600}
+
+/* ── QA self-test ── */
+details.qa{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;margin:9px 0;background:var(--card)}
+details.qa>summary{
+  cursor:pointer;padding:11px 14px;font-weight:600;font-size:.92rem;list-style:none;display:flex;gap:9px;align-items:flex-start;
+}
+details.qa>summary::-webkit-details-marker{display:none}
+details.qa>summary::before{content:"Q";font-family:var(--mono);font-size:.68rem;color:var(--accent);font-weight:600;margin-top:.28em;flex:none}
+details.qa>summary::after{content:"펼치기";margin-left:auto;font-family:var(--mono);font-size:.6rem;color:var(--faint);letter-spacing:.06em;font-weight:400;flex:none;padding-left:10px}
+details.qa[open]>summary::after{content:"접기"}
+details.qa[open]>summary{border-bottom:1px solid var(--line)}
+.qa-body{padding:13px 14px 15px 33px;font-size:.9rem;color:var(--ink)}
+.qa-body p{margin:0 0 9px;max-width:72ch}
+.qa-body p:last-child{margin-bottom:0}
+.qa-body em{font-style:normal;font-family:var(--mono);font-size:.63rem;letter-spacing:.08em;color:var(--faint);text-transform:uppercase;display:block;margin-bottom:4px}
+.qa-body .src{font-size:.79rem;color:var(--faint);margin-top:9px}
+
+/* ── cram sheet ── */
+.cram{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;margin:14px 0}
+.cram .box{border:1px solid var(--line);border-radius:5px;background:var(--card);padding:13px 14px}
+.cram .box h6{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:600}
+.cram .box dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:.83rem}
+.cram .box dt{font-weight:500;white-space:nowrap}
+.cram .box dd{margin:0;color:var(--slate);font-variant-numeric:tabular-nums}
+
+/* ── misc ── */
+.kbd{font-family:var(--mono);font-size:.78em;background:var(--sunk);border:1px solid var(--line);border-radius:3px;padding:1px 5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+footer.end{border-top:2px solid var(--ink);padding:26px 0 60px;margin-top:60px;font-size:.85rem;color:var(--slate)}
+footer.end .mono{font-size:.65rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.hidden{display:none!important}
+.nohit{padding:30px;text-align:center;color:var(--faint);font-family:var(--mono);font-size:.78rem}
+
+sub{font-size:.75em}
+.calc{border:1px solid var(--line);background:var(--sunk);border-radius:5px;padding:16px;margin:14px 0;max-width:72ch}
+.calc label{display:block;font-size:.85rem;color:var(--slate);margin-bottom:8px}
+.calc textarea{width:100%;font-family:var(--mono);font-size:.85rem;padding:10px;border:1px solid var(--line-2);border-radius:4px;background:var(--card);color:var(--ink);resize:vertical}
+.calc .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.calc button{font-family:var(--sans);font-size:.85rem;padding:7px 16px;border-radius:4px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+.calc button.ghost{background:transparent;color:var(--accent)}
+.calc .tiny{font-family:var(--mono);font-size:.66rem;color:var(--faint)}
+.calc .out{margin-top:12px;font-size:.88rem;line-height:1.7}
+.calc .out.good{border-left:3px solid var(--ok);background:var(--ok-bg);padding:10px 14px;border-radius:0 4px 4px 0}
+.calc .out.bad{border-left:3px solid var(--warn);background:var(--warn-bg);padding:10px 14px;border-radius:0 4px 4px 0}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <div class="brand">제품QC <i>학습노트</i></div>
+    <nav class="tracks" aria-label="이동">
+      <a href="#map">0 · 근거 문서 지도</a>
+      <a href="#anatomy">1 · 각조 해부</a>
+      <a href="#tests">2 · 시험 항목별</a>
+      <a href="#cu">3 · 제제균일성</a>
+      <a href="#practice">4 · 실무 연결</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="eyebrow">Product QC · Finished Dosage Form · KP 13 (고시 제2026-44호)</div>
+  <h1>각조 한 장에서<br><em>별표 5</em>까지,<br>아세트아미노펜정 해부</h1>
+  <p class="lede">이화학 QC 중 <strong>완제품·반제품을 시험하는 일</strong>을 기준으로, 대한민국약전 제13개정 별표 1~6의 짜임을 아세트아미노펜정 하나로 따라가 봅니다. 각조는 시험을 다 풀어쓰지 않고 일반시험법으로 연결하므로, 이 연결을 읽을 수 있으면 다른 완제도 같은 방식으로 읽힙니다.</p>
+  <div class="metarow">
+    <div>기준 문서<b>대한민국약전 제13개정 · 식약처 고시 제2026-44호</b></div>
+    <div>예제 품목<b>아세트아미노펜정 (의약품각조 제1부, 별표 3)</b></div>
+    <div>연결 시험법<b>별표 5 제제균일성 · 용출시험 · 4-아미노페놀</b></div>
+    <div>한계<b>판정기준은 회사 SOP·허가 기시법에 따라 다를 수 있음</b></div>
+  </div>
+
+  <div class="flow" style="margin-top:34px">
+    <span>의약품각조 (별표 3)</span><i>›</i><span>"시험할 때 적합" 한 줄</span><i>›</i><span>일반시험법 (별표 5)</span><i>›</i><span>판정기준</span><i>›</i><span class="hi">COA의 한 줄</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<div class="block-head" id="map">
+  <div class="k"><b>BLOCK 0</b></div>
+  <h2>시험의 근거 문서 지도</h2>
+  <p>제품QC가 시험할 때 펴 보는 문서는 두 갈래입니다. 약전에 실린 규격을 따르는 경우와, 허가받은 자사 규격(기준 및 시험방법, 기시법)을 따르는 경우입니다.</p>
+</div>
+
+<section class="card" id="pq-01" data-tag="must">
+  <h3><span class="tag t-must">최우선</span> 약전 별표 1~6, 어디에 무엇이 있나 <span class="no">PQ-01</span></h3>
+  <div class="tw"><table>
+    <thead><tr><th>별표</th><th>이름</th><th>제품QC 관점에서 하는 일</th></tr></thead>
+    <tbody>
+      <tr><td>별표 1</td><td>통칙</td><td>용어의 뜻을 정합니다. 예: "정밀하게 단다"는 0.1 mg 등 최소 자릿수까지 단다는 뜻, "정확하게 단다"는 지시된 수치의 자릿수까지 단다는 뜻(1.19).</td></tr>
+      <tr><td>별표 2</td><td>제제총칙</td><td>제형별 일반 규칙. 정제, 캡슐제, 주사제 등 제형마다 정의·제법·시험법·용기·보존을 정합니다.</td></tr>
+      <tr><td>별표 3</td><td>의약품각조 제1부</td><td>품목별 규격과 시험법. 화학의약품의 원료와 제제가 실려 있고 아세트아미노펜정도 여기 있습니다.</td></tr>
+      <tr><td>별표 4</td><td>의약품각조 제2부</td><td>생약 및 생약제제. 화학 완제를 시험하는 일과는 거리가 있습니다.</td></tr>
+      <tr><td>별표 5</td><td>일반시험법</td><td>각조에서 반복해서 인용하는 시험법 모음. 제제균일성시험법, 용출시험법, 아세트아미노펜 함유 제제 중 4-아미노페놀시험법 등.</td></tr>
+      <tr><td>별표 6</td><td>일반정보</td><td>참고 정보와 가이드라인 성격의 자료.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note tip"><b class="lb">통칙 1.3 — 무엇이 적부 판정의 대상인가</b>약전 수재 의약품의 적부는 <strong>의약품각조의 규정, 통칙, 제제총칙, 일반시험법의 규정</strong>에 따라 판정합니다. 다만 각조 중 색을 제외한 성상과 저장법의 보존조건은 참고로 적은 것이며 적부의 판정기준이 아닙니다(생약은 예외). 그래서 시험 항목을 셀 때 성상과 저장법은 따로 구분해서 생각합니다.</div>
+  <div class="note warn"><b class="lb">두 갈래 근거</b>① 약전 수재 품목은 별표 3의 각조와 별표 5의 일반시험법으로 시험합니다. ② 약전에 없거나 약전과 다르게 허가받은 항목은 <strong>기준 및 시험방법(기시법)</strong>, 즉 품목허가 때 심사받은 자사 규격으로 시험합니다. 이 페이지는 ①을 다룹니다.</div>
+</section>
+
+<div class="block-head" id="anatomy">
+  <div class="k"><b>BLOCK 1</b></div>
+  <h2>아세트아미노펜정 각조 한 장 해부</h2>
+  <p>아세트아미노펜정 각조(별표 3, 732~735쪽)에 실린 항목을 순서대로 놓고, 각 항목이 어디로 이어지는지 표시했습니다.</p>
+</div>
+
+<section class="card" id="pq-02" data-tag="must">
+  <h3><span class="tag t-must">최우선</span> 각조의 항목과 이어지는 곳 <span class="no">PQ-02</span></h3>
+  <p>정의에서 "표시량의 90.0~110.0 %에 해당하는 아세트아미노펜(C<sub>8</sub>H<sub>9</sub>NO<sub>2</sub> : 151.17)을 함유한다"고 규정합니다. 통칙 2.1에 따르면 이 규정은 <strong>정량할 때 그 범위 안에 있다</strong>는 뜻입니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>각조 항목</th><th>원문 요지</th><th>이어지는 곳</th></tr></thead>
+    <tbody>
+      <tr><td>제법</td><td>「아세트아미노펜」을 가지고 정제의 제법에 따라 만든다.</td><td>별표 2 제제총칙 정제</td></tr>
+      <tr><td>확인시험</td><td>① 정량법의 검액과 표준액에서 얻은 주피크의 유지시간이 같다. ② 박층크로마토그래프법으로 반점의 R<sub>f</sub>값이 같다.</td><td>정량법(HPLC), 별표 5 박층크로마토그래프법</td></tr>
+      <tr><td>순도시험 (유연물질)</td><td>HPLC로 4-아미노페놀 및 각 유연물질 각각 0.15 % 이하, 아세트아미노펜 이외의 총 유연물질 0.60 % 이하.</td><td>각조 자체 조작법</td></tr>
+      <tr><td>용출시험</td><td>pH 5.8 인산염완충액 900 mL, 제2법(패들), 매분 50회전. 30분 용출률 80 % 이상이면 적합.</td><td>별표 5 용출시험법</td></tr>
+      <tr><td>제제균일성시험</td><td>"시험할 때 적합하여야 한다."</td><td>별표 5 제제균일성시험법</td></tr>
+      <tr><td>정량법</td><td>HPLC(243 nm). 표시량 90.0~110.0 %.</td><td>각조 자체 조작법 + 시스템적합성</td></tr>
+      <tr><td>저장법</td><td>기밀용기.</td><td>참고 사항(통칙 1.3)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note fix"><b class="lb">읽을 때 얻은 점</b>이 각조에는 <strong>성상과 붕해시험 항목이 보이지 않습니다.</strong> 정제를 용출시험으로 관리하기 때문으로 보이지만, 이는 제가 읽은 범위에서 관찰한 것입니다. 허가 기시법에는 따로 있을 수 있으니 실제 품목은 허가 규격을 확인해야 합니다.</div>
+  <div class="note say"><b class="lb">면접 답변안 · "완제 시험은 무엇을 근거로 하나요?"</b>"약전 수재 품목은 <strong>의약품각조에 시험 항목과 기준이 있고, 제제균일성이나 용출처럼 반복되는 시험은 일반시험법으로 연결</strong>됩니다. 예를 들어 아세트아미노펜정 각조는 제제균일성을 '시험할 때 적합'이라고만 쓰고, 방법과 판정은 별표 5로 보냅니다. 약전에 없는 품목은 허가받은 기준 및 시험방법을 따릅니다."</div>
+</section>
+
+<div class="block-head" id="tests">
+  <div class="k"><b>BLOCK 2</b></div>
+  <h2>시험 항목별로 풀어 보기</h2>
+  <p>각 항목마다 조작의 핵심, 판정, 실무에서 주의할 점 순서로 정리했습니다. 시약 농도 등 세부 조작은 약전 원문을 기준으로 하세요.</p>
+</div>
+
+<section class="card" id="pq-03" data-tag="core">
+  <h3><span class="tag t-core">핵심</span> 확인시험 <span class="no">PQ-03</span></h3>
+  <p>같은 물질인지 확인하는 시험이고, 각조에는 두 가지가 있습니다.</p>
+  <ol class="n">
+    <li><b>HPLC 유지시간 비교</b> — 정량법의 검액과 표준액에서 얻은 주피크의 유지시간이 같으면 적합입니다. 정량 시험의 크로마토그램을 그대로 쓰므로 추가 조작이 없습니다.</li>
+    <li><b>박층크로마토그래프법(TLC)</b> — 정제를 가루로 하여 아세트아미노펜 50 mg에 해당하는 양을 메탄올 50 mL로 흔들어 섞어 여과한 액을 검액으로 합니다. 표준액은 아세트아미노펜표준품 5 mg을 메탄올 5 mL에 녹인 액입니다. 박층판은 형광제가 들어 있는 실리카겔, 전개용매는 염화메틸렌·메탄올(4 : 1)로 약 10 cm 전개하고, 자외선(254 nm)을 쪼일 때 검액과 표준액의 반점 R<sub>f</sub>값이 같으면 적합입니다.</li>
+  </ol>
+  <div class="note tip"><b class="lb">실무 포인트</b>유지시간만으로는 다른 물질과 겹칠 수 있어서 원리가 다른 TLC를 같이 둔 구조로 이해하면 됩니다. 표준품과 검액을 같은 판에서 같은 조건으로 전개해야 R<sub>f</sub>를 비교할 수 있습니다.</div>
+</section>
+
+<section class="card" id="pq-04" data-tag="must">
+  <h3><span class="tag t-must">최우선</span> 순도시험 — 유연물질과 4-아미노페놀 <span class="no">PQ-04</span></h3>
+  <p>아세트아미노펜의 대표적 분해 산물인 4-아미노페놀과 그 밖의 유연물질을 HPLC로 시험합니다.</p>
+  <h4>판정 기준</h4>
+  <div class="tw"><table>
+    <thead><tr><th>대상</th><th>한도</th></tr></thead>
+    <tbody>
+      <tr><td>4-아미노페놀 및 각 유연물질</td><td>각각 0.15 % 이하</td></tr>
+      <tr><td>아세트아미노펜 이외의 총 유연물질</td><td>0.60 % 이하</td></tr>
+    </tbody>
+  </table></div>
+  <h4>조작의 핵심</h4>
+  <ul>
+    <li>검체: 10정 이상을 가루로 하여 아세트아미노펜 약 350 mg에 해당하는 양을 희석액으로 100 mL로 한 것이 검액입니다.</li>
+    <li>표준액: 아세트아미노펜표준품과 4-아미노페놀표준품 약 21.0 mg을 각각 100 mL로 하고, 각각 5 mL씩 취해 200 mL로 만듭니다.</li>
+    <li>조건: 검출기 자외부흡광광도계 272 nm, 칼럼 안지름 약 4.6 mm·길이 약 15 cm(3 μm), 칼럼온도 40 ℃ 부근, 유량 0.9 mL/분, 주입량 25 μL. 이동상은 A, B, C를 단계적 또는 농도기울기적으로 제어합니다.</li>
+    <li>계산: 4-아미노페놀(%) = (A<sub>T</sub>/A<sub>S</sub>) × (C<sub>S</sub>/C<sub>T</sub>) × 100. 개개 유연물질도 같은 식에 표준액 중 아세트아미노펜의 피크면적을 씁니다.</li>
+  </ul>
+  <div class="note tip"><b class="lb">숫자로 확인하기 — 표준액은 한도의 농도</b>검액은 350 mg/100 mL = 3.5 mg/mL이고, 표준액의 각 성분은 21.0 mg/100 mL를 5 mL → 200 mL로 희석하여 약 0.00525 mg/mL입니다. 비율은 0.00525 ÷ 3.5 = 0.15 %이므로, <strong>표준액의 농도가 곧 한도(0.15 %)</strong>입니다. 즉 검액의 4-아미노페놀 피크가 표준액의 피크보다 크면 부적합입니다.</div>
+  <h4>시스템적합성</h4>
+  <ul>
+    <li>검출 확인: 4-아미노페놀 표준품 약 7.0 mg을 100 mL로 하고 단계 희석한 액 25 μL로 시험할 때 4-아미노페놀의 신호 대 잡음비가 10 이상.</li>
+    <li>재현성: 표준액 25 μL씩 6회 반복할 때 아세트아미노펜 및 4-아미노페놀 피크면적의 상대표준편차 5.0 % 이하.</li>
+  </ul>
+  <div class="note warn"><b class="lb">별표 5와의 관계</b>별표 5에는 <strong>40. 아세트아미노펜 함유 제제 중 4-아미노페놀시험법</strong>이 따로 있습니다(0.15 % 이하, 분해산물 관리용). 각조와 일반시험법이 겹치는 부분이므로 어느 규정을 따르는지는 각조와 허가 규격을 확인해야 합니다. 기존 노트의 SST(QC-13)와 이어서 보면 좋습니다.</div>
+</section>
+
+<section class="card" id="pq-05" data-tag="must">
+  <h3><span class="tag t-must">최우선</span> 용출시험 <span class="no">PQ-05</span></h3>
+  <p>정제가 체내에서 녹아 나오는 정도를 보는 시험으로, 각조는 조건과 기준만 쓰고 장치와 판정 방법은 별표 5 용출시험법에서 가져옵니다.</p>
+  <h4>각조의 조건</h4>
+  <div class="tw"><table>
+    <thead><tr><th>항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>검체</td><td>이 약 1정 (용출시험법은 별도 규정이 없으면 정제는 1정)</td></tr>
+      <tr><td>시험액</td><td>pH 5.8 인산염완충액 900 mL (0.2 mol/L 인산이수소칼륨시액 50 mL에 0.2 mol/L 수산화나트륨시액 3.6 mL와 물을 넣어 200 mL로 한 것)</td></tr>
+      <tr><td>장치</td><td>용출시험법 제2법(패들법), 매분 50회전</td></tr>
+      <tr><td>채취 시점</td><td>시작 30분 후</td></tr>
+      <tr><td>정량</td><td>용출액을 여과하고 시험액으로 희석한 것이 검액. 표준액은 아세트아미노펜표준품(실리카겔 데시케이터에서 18시간 건조)을 시험액에 녹여 같은 농도로 합니다. 자외가시부흡광도측정법, 243 nm 부근 극대파장의 흡광도.</td></tr>
+      <tr><td>기준</td><td>30분 용출률이 80 % 이상이면 적합</td></tr>
+    </tbody>
+  </table></div>
+  <h4>별표 5 용출시험법에서 가져오는 것</h4>
+  <ul>
+    <li>패들법의 용기 온도는 37 ± 0.5 ℃이고, 회전수는 규정값의 ± 4 % 이내로 조절합니다.</li>
+    <li>패들 아래 끝과 용기 안쪽 바닥의 거리는 25 ± 2 mm로 고정합니다.</li>
+    <li>판정법은 <strong>각조에 Q값이 있으면 판정법 1, 없으면 판정법 2</strong>를 씁니다. 판정법 2는 6정을 시험하여 모두 규정값이면 적합, 1~2정이 벗어나면 6정을 추가하여 12정 중 10정 이상이 규정값일 때 적합입니다.</li>
+  </ul>
+  <div class="note warn"><b class="lb">확인이 필요한 해석</b>이 각조는 "80 % 이상"이라고만 적고 Q라는 표기가 없어서 판정법 2로 읽었습니다. 이 해석은 별표 5 용출시험법 원문과 한 번 더 대조해 확정하세요.</div>
+</section>
+
+<section class="card" id="pq-06" data-tag="must">
+  <h3><span class="tag t-must">최우선</span> 정량법 <span class="no">PQ-06</span></h3>
+  <p>표시량의 90.0~110.0 %에 있는지 확인하는 시험으로, 시험 결과는 크로마토그램의 피크면적비로 계산합니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>단계</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>검체</td><td>20정 이상의 질량을 정밀하게 달아 가루로 합니다.</td></tr>
+      <tr><td>검액</td><td>아세트아미노펜 약 0.1 g에 해당하는 양을 정밀하게 달아 이동상 100 mL를 넣고 10분 흔들어 섞은 뒤 5분 세게 흔들고, 이동상으로 정확하게 200 mL로 합니다. 이 액 5 mL를 이동상으로 250 mL로 하고 공경 0.5 μm 이하의 막여과기로 여과하여 처음 여액 10 mL를 버리고 다음 여액을 검액으로 합니다.</td></tr>
+      <tr><td>표준액</td><td>105 ℃에서 2시간 건조한 아세트아미노펜표준품 약 20 mg을 이동상으로 100 mL로 하고, 이 액 5 mL를 100 mL로 합니다.</td></tr>
+      <tr><td>조건</td><td>HPLC, 243 nm, 칼럼 안지름 약 4 mm·길이 약 30 cm, 이동상 물·메탄올혼합액(3 : 1), 유량 1.5 mL/분, 주입량 10 μL.</td></tr>
+      <tr><td>시스템적합성</td><td>성능: 대칭계수 2.0 이하. 재현성: 표준액 10 μL씩 6회 반복할 때 피크면적의 상대표준편차 2.0 % 이하.</td></tr>
+      <tr><td>계산</td><td>아세트아미노펜의 양(mg) = 표준품의 양(mg) × (A<sub>T</sub>/A<sub>S</sub>) × 5</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note tip"><b class="lb">숫자로 확인하기 — 마지막의 "× 5"</b>검액은 약 100 mg이 200 mL에 있다가 5 mL → 250 mL로 희석되어 약 0.01 mg/mL, 표준액은 20 mg/100 mL를 5 mL → 100 mL로 희석하여 0.01 mg/mL입니다. 농도가 맞추어져 있으므로 표준품 양(약 20 mg)에 대한 검체의 목표량(약 100 mg)의 비가 5이고, 그것이 계산식의 5입니다.</div>
+  <div class="note warn"><b class="lb">정밀하게 vs 정확하게 (통칙 1.19)</b>"약 20 mg을 정밀하게 달아"는 대략 20 mg 근처에서 최소 자릿수(0.1 mg 등)까지 읽어 기록한다는 뜻이고, "정확하게 200 mL로"는 지시된 수치의 자릿수까지 맞춘다는 뜻입니다. 계산에는 실제로 단 값을 씁니다.</div>
+</section>
+
+<div class="block-head" id="cu">
+  <div class="k"><b>BLOCK 3</b></div>
+  <h2>제제균일성 — 각조 한 줄이 별표 5의 한 시험이 되는 예</h2>
+  <p>각조에는 "시험할 때 적합하여야 한다"만 있고, 방법과 판정은 별표 5 제66번 제제균일성시험법이 정합니다.</p>
+</div>
+
+<section class="card" id="pq-07" data-tag="must">
+  <h3><span class="tag t-must">최우선</span> 함량균일성(CU)인가 질량편차(MV)인가 <span class="no">PQ-07</span></h3>
+  <p>같은 배치 안에서 개개 정제의 주성분 함량이 표시량 가까이에 모여 있는지 보는 시험입니다. 시험 방법은 두 가지이고, 제형과 함량에 따라 어느 것을 쓰는지가 정해집니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>제형</th><th>함량 25 mg 이상 및 25 % 이상</th><th>25 mg 미만 또는 25 % 미만</th></tr></thead>
+    <tbody>
+      <tr><td>나정</td><td>MV</td><td>CU</td></tr>
+      <tr><td>필름코팅정</td><td>MV</td><td>CU</td></tr>
+      <tr><td>그 밖의 정제</td><td>CU</td><td>CU</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>CU(함량균일성시험)</b>은 개개 제제의 주성분 함량을 직접 측정하는 방법이고 모든 제제에 적용할 수 있습니다.</li>
+    <li><b>MV(질량편차시험)</b>은 제제 질량의 편차를 함량의 편차로 보고, 개개 질량으로 함량을 추정하는 방법입니다. 주성분 농도가 균일하다는 가정이 전제입니다.</li>
+    <li>예외: 25 mg·25 % 기준에 못 미치더라도, 제조공정밸리데이션과 제제개발 자료에서 개개 제제의 주성분 농도 RSD가 2 % 이하이고 질량편차시험으로의 변경이 인정되면 MV를 적용합니다.</li>
+  </ul>
+  <div class="note warn"><b class="lb">이 품목은 어느 쪽인가</b>아세트아미노펜정이 MV인지 CU인지는 <strong>제품의 함량과 주성분 비율, 정제의 종류(나정·필름코팅정 등)</strong>에 따라 달라집니다. 위 표에 제품 값을 대입해서 판단합니다.</div>
+
+  <h4>판정값(AV)의 계산</h4>
+  <p>검체 10개로 시험하여 판정값 AV를 계산합니다. 기호는 표 2에서 정의합니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>기호</th><th>뜻</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>X̄</td><td>표시량에 대한 %로 나타낸 개개 함량의 평균</td><td></td></tr>
+      <tr><td>k</td><td>판정계수</td><td>n = 10일 때 2.4, n = 30일 때 2.0</td></tr>
+      <tr><td>s</td><td>표준편차</td><td>√(Σ(x<sub>i</sub> − X̄)² / (n − 1))</td></tr>
+      <tr><td>T</td><td>목표함량</td><td>각조에 따로 규정하지 않으면 100.0 %</td></tr>
+      <tr><td>M</td><td>기준값 (T ≤ 101.5일 때)</td><td>98.5 ≤ X̄ ≤ 101.5이면 M = X̄, X̄ &lt; 98.5이면 M = 98.5, X̄ &gt; 101.5이면 M = 101.5</td></tr>
+      <tr><td>AV</td><td>판정값</td><td>|M − X̄| + k·s</td></tr>
+      <tr><td>L1</td><td>판정값의 최대 허용한도값</td><td>15.0 (따로 규정하지 않으면)</td></tr>
+      <tr><td>L2</td><td>개개 함량의 M으로부터의 최대 허용편차</td><td>25.0 (하한 0.75 M, 상한 1.25 M)</td></tr>
+    </tbody>
+  </table></div>
+  <h4>판정기준 (고형제제)</h4>
+  <ol class="n">
+    <li>처음 검체 10개의 판정값이 <strong>L1(15.0 %)을 넘지 않으면 적합</strong>입니다.</li>
+    <li>L1을 넘으면 남은 검체 20개로 같은 방법으로 시험하여 판정값을 계산합니다. 30개를 합한 판정값이 L1을 넘지 않고, 동시에 개개 함량이 (1 − L2 × 0.01) M 이상이며 (1 + L2 × 0.01) M을 초과하는 것이 없을 때 적합입니다.</li>
+  </ol>
+
+  <h4>직접 계산해 보기</h4>
+  <div class="calc">
+    <label for="cu-in">개개 정제 함량 추정값 (표시량 대비 %), 10개 또는 30개를 공백·쉼표·줄바꿈으로 구분해 입력</label>
+    <textarea id="cu-in" rows="3" placeholder="예: 99.8 101.2 100.5 98.7 100.1 99.4 101.0 100.3 99.9 100.6"></textarea>
+    <div class="row">
+      <button type="button" id="cu-go">계산</button>
+      <button type="button" id="cu-ex" class="ghost">예시 넣기</button>
+      <span class="tiny">T = 100.0 %, L1 = 15.0, L2 = 25.0 기준</span>
+    </div>
+    <div id="cu-out" class="out" aria-live="polite"></div>
+  </div>
+</section>
+
+<div class="block-head" id="practice">
+  <div class="k"><b>BLOCK 4</b></div>
+  <h2>실무로 연결하기</h2>
+  <p>각조를 읽는 눈이 생기면, 이 시험들이 실제 업무에서 어떻게 이어지는지 볼 차례입니다.</p>
+</div>
+
+<section class="card" id="pq-08" data-tag="core">
+  <h3><span class="tag t-core">핵심</span> 한 배치를 시험하려면 정제가 몇 개 필요한가 <span class="no">PQ-08</span></h3>
+  <p>각조와 일반시험법에서 읽은 최소 수량입니다. 시험이 재시험 단계로 넘어가면 더 필요합니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>시험</th><th>1단계</th><th>단계가 넘어가면</th></tr></thead>
+    <tbody>
+      <tr><td>정량법</td><td>20정 이상(질량을 달아 가루로 함)</td><td>-</td></tr>
+      <tr><td>확인시험</td><td>가루를 일부 사용(TLC), 유지시간은 정량 크로마토그램 재사용</td><td>-</td></tr>
+      <tr><td>순도시험(유연물질)</td><td>10정 이상</td><td>-</td></tr>
+      <tr><td>용출시험(판정법 2)</td><td>6정</td><td>6정 추가, 총 12정</td></tr>
+      <tr><td>제제균일성</td><td>10정</td><td>20정 추가, 총 30정</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note tip"><b class="lb">실무 포인트</b>검체 수량이 곧 채취량의 근거가 됩니다. 시험의 판정이 재시험 단계로 넘어가는 경우를 대비해 처음 채취할 때 여유를 두는지, 일탈이 나면 어떤 절차를 밟는지는 기존 노트의 OOS 카드(QC-15)와 이어서 보세요.</div>
+</section>
+
+<section class="card" id="pq-09" data-tag="core">
+  <h3><span class="tag t-core">핵심</span> 시험이 믿을 만한 이유 — 기존 노트와의 연결 <span class="no">PQ-09</span></h3>
+  <div class="tw"><table>
+    <thead><tr><th>질문</th><th>답이 되는 활동</th><th>기존 노트</th></tr></thead>
+    <tbody>
+      <tr><td>시험법이 맞는가</td><td>공정서 시험법은 자사 적용 확인(Verification), 자사 시험법은 시험법 밸리데이션(MV)</td><td>QC-11, QC-12</td></tr>
+      <tr><td>오늘 시스템이 맞는가</td><td>시스템적합성(SST): 분리도, 대칭계수, 반복성 RSD, 신호 대 잡음비</td><td>QC-13</td></tr>
+      <tr><td>기기가 맞는가</td><td>기기 적격성평가(AIQ)와 검교정</td><td>QC-14</td></tr>
+      <tr><td>시험 결과가 이상하면</td><td>OOS·OOT 조사</td><td>QC-15</td></tr>
+      <tr><td>시간이 지나도 괜찮은가</td><td>안정성시험</td><td>QC-10</td></tr>
+    </tbody>
+  </table></div>
+  <p>앞의 카드들은 "무엇을 시험하는가"였고, 이 표는 "그 결과를 왜 믿을 수 있는가"입니다. 두 가지를 짝지어 말할 수 있으면 제품QC 업무의 큰 그림이 잡힙니다.</p>
+</section>
+
+<section class="card" id="pq-10" data-tag="near">
+  <h3><span class="tag t-near">인접</span> 다음에 채울 것 <span class="no">PQ-10</span></h3>
+  <ul>
+    <li>별표 2 제제총칙의 정제 항목(제법, 보존 용기)을 원문으로 확인</li>
+    <li>용출시험법 판정법 1·2 중 이 각조에 적용되는 것을 원문 문구로 확정</li>
+    <li>제제균일성 MV/CU 결정을 실제 제품 함량으로 연습</li>
+    <li>공정 밸리데이션·세척 밸리데이션에서 채취한 검체의 이화학 시험 (기존 노트 QC-17을 보강)</li>
+    <li>다른 완제(캡슐제, 주사제)로 같은 틀을 적용</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="end">
+  <p class="mono">제품QC 학습노트 · 아세트아미노펜정 해부 · 대한민국약전 제13개정(식약처 고시 제2026-44호) 기준</p>
+  <p style="margin-top:12px">이 페이지는 약전 원문을 읽고 학습용으로 재구성한 요약이며 약전 원문을 대신하지 않습니다. 시험 조건과 판정기준은 반드시 약전 원문과 허가받은 기준 및 시험방법, 회사 SOP를 기준으로 하세요.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var inp=document.getElementById('cu-in'), out=document.getElementById('cu-out');
+  var T=100.0, L1=15.0, L2=25.0;
+  function parse(s){ return (s.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number); }
+  function calc(xs){
+    var n=xs.length, mean=xs.reduce(function(a,b){return a+b;},0)/n;
+    var s=Math.sqrt(xs.reduce(function(a,b){return a+(b-mean)*(b-mean);},0)/(n-1));
+    var k=(n===10)?2.4:2.0, M;
+    if(mean<98.5) M=98.5; else if(mean>101.5) M=101.5; else M=mean;
+    var AV=Math.abs(M-mean)+k*s;
+    return {n:n,mean:mean,s:s,k:k,M:M,AV:AV};
+  }
+  function fmt(v){ return v.toFixed(2); }
+  document.getElementById('cu-ex').addEventListener('click',function(){
+    inp.value='99.8 101.2 100.5 98.7 100.1 99.4 101.0 100.3 99.9 100.6';
+    document.getElementById('cu-go').click();
+  });
+  document.getElementById('cu-go').addEventListener('click',function(){
+    var xs=parse(inp.value);
+    if(xs.length!==10 && xs.length!==30){
+      out.className='out bad';
+      out.textContent='값이 '+xs.length+'개입니다. 10개(1단계) 또는 30개(2단계)를 입력하세요.';
+      return;
+    }
+    var r=calc(xs), lo=(1-L2*0.01)*r.M, hi=(1+L2*0.01)*r.M, ok, why;
+    var head='n = '+r.n+' · 평균 X̄ = '+fmt(r.mean)+' · s = '+fmt(r.s)+' · k = '+r.k+' · M = '+fmt(r.M)+' · AV = '+fmt(r.AV);
+    if(r.n===10){
+      ok=r.AV<=L1;
+      why=ok?'AV가 L1('+L1+') 이하이므로 1단계에서 적합합니다.':'AV가 L1('+L1+')을 넘으므로 남은 20개를 추가로 시험하여 30개 값을 입력하세요.';
+    } else {
+      var outside=xs.filter(function(x){return x<lo||x>hi;}).length;
+      ok=(r.AV<=L1)&&(outside===0);
+      why='30개 기준: AV '+(r.AV<=L1?'≤':'>')+' L1('+L1+'), 허용범위('+fmt(lo)+' ~ '+fmt(hi)+')를 벗어난 개수 '+outside+'개 → '+(ok?'적합':'부적합');
+    }
+    out.className='out '+(ok?'good':'bad');
+    out.innerHTML='<b>'+(ok?'적합':(r.n===10?'1단계 미충족':'부적합'))+'</b><br>'+head+'<br>'+why;
+  });
+})();
+</script>
+
+</body>
+</html>
