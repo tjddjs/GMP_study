@@ -299,7 +299,8 @@ sub{font-size:.75em}
 .mm-wrap{display:grid;grid-template-columns:1fr 310px;gap:16px;align-items:start}
 @media(max-width:900px){.mm-wrap{grid-template-columns:1fr}}
 .mm-scroll{overflow:auto;border:1px solid var(--line);border-radius:5px;background:var(--card);max-height:74vh;min-height:300px}
-.mm-canvas{position:relative;margin:18px}
+.mm-sizer{position:relative;margin:18px}
+.mm-canvas{position:absolute;left:0;top:0;transform-origin:0 0}
 .mm-canvas svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
 .mm-canvas svg path{fill:none;stroke-width:1.6;opacity:.55}
 .mm-node{position:absolute;display:flex;flex-direction:column;justify-content:center;text-align:left;
@@ -359,6 +360,28 @@ mark.hit{background:color-mix(in srgb,var(--accent) 22%,transparent);color:inher
 mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent);outline-offset:1px}
 .mm-node.hit{background:color-mix(in srgb,var(--accent) 14%,var(--card))}
 .mm-node.curhit{outline:3px solid var(--accent);outline-offset:1px}
+
+.mm-wrap>*{min-width:0}
+.mm-bar .zoom{display:inline-flex;gap:0}
+.mm-bar .zoom button{border-radius:0;margin-left:-1px;min-width:34px}
+.mm-bar .zoom button:first-child{border-radius:4px 0 0 4px;margin-left:0}
+.mm-bar .zoom button:last-child{border-radius:0 4px 4px 0}
+#mm-stage.full{position:fixed;inset:0;z-index:200;background:var(--paper);padding:12px 18px 14px;display:flex;flex-direction:column;overflow:hidden}
+#mm-stage.full .mm-bar{margin:0 0 10px}
+#mm-stage.full .mm-wrap{flex:1;min-height:0;grid-template-columns:minmax(0,1fr) 320px;grid-template-rows:minmax(0,1fr)}
+#mm-stage.full .mm-scroll{max-height:none;height:100%}
+#mm-stage.full .mm-panel{position:static;max-height:100%;overflow:auto}
+#mm-stage.full .mm-legend{margin-top:8px}
+@media(max-width:900px){
+  #mm-stage.full .mm-wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+  #mm-stage.full .mm-panel{max-height:34vh}
+}
+
+.mm-canvas.compact .mm-node{padding:1px 20px 1px 8px;border-radius:5px}
+.mm-canvas.compact .mm-node .tt{font-size:.76rem}
+.mm-canvas.compact .mm-node .ss{display:none}
+.mm-canvas.compact .mm-node.root .tt{font-size:.9rem}
+.mm-canvas.compact .mm-tog{width:15px;height:15px;font-size:.6rem}
 </style>
 </head>
 <body>
@@ -392,7 +415,11 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
   <h2>이화학 QC 마인드맵</h2>
   <p>가지를 누르면 오른쪽에 설명이 열리고, "관련 카드 보기"로 아래 본문으로 이동합니다. 편집 모드에서 노드를 추가·수정·삭제할 수 있고, 변경은 이 브라우저에 자동 저장됩니다.</p>
 </div>
+<div id="mm-stage">
 <div class="mm-bar">
+  <button type="button" id="mm-full" aria-pressed="false">전체화면</button>
+  <button type="button" id="mm-fit">한눈에 보기</button>
+  <span class="zoom"><button type="button" id="mm-zout" aria-label="축소">−</button><button type="button" id="mm-zreset" aria-label="배율 100%">100%</button><button type="button" id="mm-zin" aria-label="확대">+</button></span>
   <button type="button" id="mm-edit" aria-pressed="false">편집 모드</button>
   <button type="button" id="mm-open">모두 펼치기</button>
   <button type="button" id="mm-close">모두 접기</button>
@@ -402,10 +429,11 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
   <span class="st" id="mm-st"></span>
 </div>
 <div class="mm-wrap">
-  <div class="mm-scroll"><div class="mm-canvas" id="mm-canvas"></div></div>
+  <div class="mm-scroll" id="mm-scroll"><div class="mm-sizer" id="mm-sizer"><div class="mm-canvas" id="mm-canvas"></div></div></div>
   <aside class="mm-panel" id="mm-panel" aria-live="polite"></aside>
 </div>
 <div class="mm-legend"><span><i style="color:var(--job)">빨강</i> 중요</span><span><i style="color:var(--qc)">파랑</i> 참고</span><span>↗ 본문 카드와 연결됨</span><span>일반시험법 번호는 제13개정 별표 5 기준이며 이전 개정판 번호와 다를 수 있습니다.</span></div>
+</div>
   <p class="lede">이화학 QC 중 <strong>완제품·반제품을 시험하는 일</strong>을 기준으로 정리한 학습노트입니다. 대한민국약전 제13개정 별표 1~6의 짜임을 아세트아미노펜정 하나로 따라가 보고, 시험법 밸리데이션·시스템적합성·기기 적격성평가·안정성시험·OOS 조사까지 제품QC 업무 전체를 한 지도로 묶었습니다. 맨 위 마인드맵에서 가지를 눌러 개념을 파고들 수 있고, 직접 추가·수정할 수도 있습니다.</p>
     <div class="metarow">
     <div>기준 문서<b>대한민국약전 제13개정 · 식약처 고시 제2026-44호</b></div>
@@ -1550,7 +1578,8 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
 
   var tree=load(), sel='root', edit=false, hitSet={}, curHit=null;
   var $=function(id){return document.getElementById(id);};
-  var canvas=$('mm-canvas'), panel=$('mm-panel'), stEl=$('mm-st');
+  var canvas=$('mm-canvas'), panel=$('mm-panel'), stEl=$('mm-st'), sizer=$('mm-sizer'), scroller=$('mm-scroll'), stage=$('mm-stage');
+  var scale=1, fit=false, cw=0, ch=0;
   function setStatus(s){ if(stEl) stEl.textContent=s; }
 
   function find(n,id,par){ if(n.id===id) return {n:n,p:par}; for(var i=0;i<n.k.length;i++){ var r=find(n.k[i],id,n); if(r) return r; } return null; }
@@ -1581,7 +1610,12 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
   }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
+  function density(){
+    if(fit){ W=186; H=28; GX=38; GY=5; canvas.classList.add('compact'); }
+    else { W=210; H=44; GX=58; GY=10; canvas.classList.remove('compact'); }
+  }
   function renderMap(){
+    density();
     var L=layout(), pos=L.pos, w=(L.maxd+1)*(W+GX)-GX, h=Math.max(L.rows*(H+GY)-GY,H);
     var html='<svg width="'+w+'" height="'+h+'">', nodes='';
     Object.keys(pos).forEach(function(id){
@@ -1602,8 +1636,20 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
       }
     });
     html+='</svg>';
-    canvas.style.width=w+'px'; canvas.style.height=h+'px';
+    canvas.style.width=w+'px'; canvas.style.height=h+'px'; cw=w; ch=h;
     canvas.innerHTML=html+nodes;
+    applyZoom();
+  }
+  function isFull(){ return stage.classList.contains('full'); }
+  function applyZoom(){
+    if(fit){
+      var aw=scroller.clientWidth-36, ah=isFull()?scroller.clientHeight-36:Math.max(340,window.innerHeight-290);
+      scale=Math.max(0.2,Math.min(1,aw/cw,ah/ch));
+    }
+    canvas.style.transform='scale('+scale+')';
+    sizer.style.width=Math.ceil(cw*scale)+'px'; sizer.style.height=Math.ceil(ch*scale)+'px';
+    var zr=$('mm-zreset'); if(zr) zr.textContent=Math.round(scale*100)+'%';
+    var fb=$('mm-fit'); if(fb) fb.setAttribute('aria-pressed',fit?'true':'false');
   }
 
   function renderPanel(){
@@ -1686,8 +1732,8 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
   });
 
   function centerRoot(){
-    var sc=canvas.parentNode, root=canvas.querySelector('.mm-node.root'); if(!sc||!root) return;
-    var top=root.offsetTop+root.offsetHeight/2-sc.clientHeight/2; sc.scrollTop=Math.max(0,top); sc.scrollLeft=0;
+    var sc=scroller, root=canvas.querySelector('.mm-node.root'); if(!sc||!root) return;
+    var top=(root.offsetTop+root.offsetHeight/2)*scale-sc.clientHeight/2; sc.scrollTop=Math.max(0,top); sc.scrollLeft=0;
   }
   window.QCMap={
     search:function(term){
@@ -1701,11 +1747,27 @@ mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent)
       (function f(n,a){ if(n.id===id){ path=a; return true; } for(var i=0;i<n.k.length;i++){ if(f(n.k[i],a.concat(n))) return true; } return false; })(tree,[]);
       if(!path) return; path.forEach(function(a){ a.x=false; });
       sel=id; curHit=id; render();
-      var node=canvas.querySelector('[data-id="'+id+'"]'), sc=canvas.parentNode;
-      if(node&&sc){ sc.scrollTo({top:Math.max(0,node.offsetTop-sc.clientHeight/2+H/2),left:Math.max(0,node.offsetLeft-sc.clientWidth/2+W/2),behavior:'smooth'}); }
+      var node=canvas.querySelector('[data-id="'+id+'"]'), sc=scroller;
+      if(node&&sc){ sc.scrollTo({top:Math.max(0,node.offsetTop*scale-sc.clientHeight/2+H*scale/2),left:Math.max(0,node.offsetLeft*scale-sc.clientWidth/2+W*scale/2),behavior:'smooth'}); }
       var m=$('mindmap'); if(m) m.scrollIntoView({behavior:'smooth',block:'start'});
     }
   };
+  function setFull(on){
+    stage.classList.toggle('full',on);
+    var b=$('mm-full'); b.setAttribute('aria-pressed',on?'true':'false'); b.textContent=on?'전체화면 닫기 (Esc)':'전체화면';
+    document.body.style.overflow=on?'hidden':'';
+    if(on){ try{ if(stage.requestFullscreen) stage.requestFullscreen().catch(function(){}); }catch(e){} }
+    else { try{ if(document.fullscreenElement) document.exitFullscreen().catch(function(){}); }catch(e){} }
+    setTimeout(function(){ applyZoom(); centerRoot(); },60);
+  }
+  $('mm-full').addEventListener('click',function(){ setFull(!isFull()); });
+  document.addEventListener('fullscreenchange',function(){ if(!document.fullscreenElement&&isFull()) setFull(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isFull()) setFull(false); });
+  $('mm-fit').addEventListener('click',function(){ each(tree,function(n){ n.x=false; }); save(); fit=true; render(); scroller.scrollTo(0,0); });
+  $('mm-zin').addEventListener('click',function(){ var was=fit; fit=false; scale=Math.min(2,(was?0.6:scale)*1.25); renderMap(); });
+  $('mm-zout').addEventListener('click',function(){ fit=false; scale=Math.max(0.2,scale/1.25); renderMap(); });
+  $('mm-zreset').addEventListener('click',function(){ fit=false; scale=1; renderMap(); centerRoot(); });
+  var rz=null; window.addEventListener('resize',function(){ clearTimeout(rz); rz=setTimeout(applyZoom,120); });
   buildCardList(); render(); centerRoot();
   try{ if(!localStorage.getItem(KEY)) setStatus('편집하면 이 브라우저에 자동 저장됩니다'); else setStatus('저장된 지도를 불러왔습니다'); }catch(e){ setStatus('이 브라우저는 저장을 지원하지 않아 내보내기를 이용하세요'); }
 })();
