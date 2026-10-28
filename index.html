@@ -283,13 +283,80 @@ sub{font-size:.75em}
 .calc .out.good{border-left:3px solid var(--ok);background:var(--ok-bg);padding:10px 14px;border-radius:0 4px 4px 0}
 .calc .out.bad{border-left:3px solid var(--warn);background:var(--warn-bg);padding:10px 14px;border-radius:0 4px 4px 0}
 @media (max-width:700px){header.top{position:static}}
+
+/* ── mind map ── */
+.mm-head{margin:46px 0 16px;padding-top:20px;border-top:2px solid var(--ink)}
+.mm-head .k{font-family:var(--mono);font-size:.69rem;letter-spacing:.14em}
+.mm-head h2{font-family:var(--serif);font-size:1.62rem;font-weight:700;margin-top:8px;letter-spacing:-.03em}
+.mm-head p{color:var(--slate);margin-top:9px;font-size:.94rem;max-width:72ch}
+.mm-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.mm-bar button,.mm-panel button,.mm-bar label.btn{
+  font-family:var(--sans);font-size:.8rem;padding:6px 12px;border-radius:4px;border:1px solid var(--line-2);
+  background:var(--card);color:var(--ink);cursor:pointer;line-height:1.3}
+.mm-bar button:hover,.mm-panel button:hover,.mm-bar label.btn:hover{border-color:var(--accent);color:var(--accent)}
+.mm-bar button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.mm-bar .st{font-family:var(--mono);font-size:.66rem;color:var(--faint);margin-left:auto}
+.mm-wrap{display:grid;grid-template-columns:1fr 310px;gap:16px;align-items:start}
+@media(max-width:900px){.mm-wrap{grid-template-columns:1fr}}
+.mm-scroll{overflow:auto;border:1px solid var(--line);border-radius:5px;background:var(--card);max-height:74vh;min-height:300px}
+.mm-canvas{position:relative;margin:18px}
+.mm-canvas svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.mm-canvas svg path{fill:none;stroke-width:1.6;opacity:.55}
+.mm-node{position:absolute;display:flex;flex-direction:column;justify-content:center;text-align:left;
+  padding:3px 26px 3px 10px;border:1.5px solid var(--bc,var(--line-2));border-radius:7px;background:var(--card);color:var(--ink);
+  font-family:var(--sans);cursor:pointer;overflow:hidden;box-shadow:var(--shadow)}
+.mm-node .tt{font-size:.8rem;font-weight:500;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm-node .ss{font-family:var(--mono);font-size:.6rem;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm-node.imp .tt{color:var(--job);font-weight:700}
+.mm-node.ref .tt{color:var(--qc);font-weight:600}
+.mm-node.root{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.mm-node.root .tt{color:var(--paper);font-size:.95rem;font-family:var(--serif);font-weight:700}
+.mm-node.sel{outline:2px solid var(--accent);outline-offset:1px}
+.mm-node.lnk::after{content:"↗";position:absolute;right:7px;bottom:2px;font-size:.62rem;color:var(--faint)}
+.mm-tog{position:absolute;width:18px;height:18px;border-radius:50%;border:1px solid var(--line-2);background:var(--card);
+  color:var(--slate);font-size:.66rem;line-height:1;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+.mm-tog:hover{border-color:var(--accent);color:var(--accent)}
+.mm-panel{border:1px solid var(--line);border-radius:5px;background:var(--card);padding:16px;position:sticky;top:96px}
+.mm-panel h4{font-family:var(--serif);font-size:1.05rem;margin:0 0 4px;letter-spacing:-.02em}
+.mm-panel .sub{font-family:var(--mono);font-size:.68rem;color:var(--faint);margin-bottom:10px}
+.mm-panel .note-t{font-size:.86rem;color:var(--slate);white-space:pre-wrap;margin:8px 0 12px;line-height:1.7}
+.mm-panel .row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.mm-panel label{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--faint);text-transform:uppercase;margin:10px 0 4px}
+.mm-panel input[type=text],.mm-panel textarea,.mm-panel select{width:100%;font-family:var(--sans);font-size:.85rem;padding:6px 8px;
+  border:1px solid var(--line-2);border-radius:4px;background:var(--paper);color:var(--ink)}
+.mm-panel textarea{min-height:90px;resize:vertical}
+.mm-panel button.go{background:var(--accent);border-color:var(--accent);color:#fff}
+.mm-panel button.danger{color:var(--warn);border-color:var(--warn)}
+.mm-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.76rem;color:var(--slate);margin:10px 0 0}
+.mm-legend i{font-style:normal;font-weight:700}
+.mm-to-top{position:fixed;right:18px;bottom:18px;z-index:30;font-family:var(--sans);font-size:.78rem;padding:8px 13px;border-radius:999px;
+  border:1px solid var(--accent);background:var(--card);color:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15);text-decoration:none}
+.card.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,60%{box-shadow:0 0 0 3px var(--accent)}100%{box-shadow:var(--shadow)}}
+
+.hero{padding:30px 0 20px}
+.hero h1{font-size:clamp(1.7rem,3.6vw,2.4rem)}
+.hero .lede{margin-top:12px}
+.mm-head{margin-top:26px}
+.metarow{margin-top:24px}
+
+.hero{padding:22px 0 8px;border-bottom:none}
+.hero .eyebrow{margin-bottom:8px}
+.hero h1{font-size:clamp(1.35rem,2.6vw,1.9rem);letter-spacing:-.03em}
+.mm-head{margin:10px 0 8px;border-top:none;padding-top:0}
+.mm-head h2{font-size:1.3rem;margin-top:2px}
+.mm-head .k{display:none}
+.mm-head p{margin-top:4px;font-size:.88rem}
+.mm-bar{margin:8px 0}
+.mm-scroll{max-height:calc(100vh - 250px);min-height:340px}
+.lede{margin-top:0}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="topin">
     <div class="brand">제품QC <i>학습노트</i></div>
-    <nav class="tracks" aria-label="이동"><a href="#map">A 근거</a><a href="#anatomy">B 시험 항목</a><a href="#prep">C 준비물</a><a href="#trust">D 신뢰성</a><a href="#stab">E 안정성</a><a href="#oos">F 이상 결과</a><a href="#pvcv">G 밸리데이션 지원</a><a href="#dosage">H 제형 특화</a></nav>
+    <nav class="tracks" aria-label="이동"><a href="#mindmap">마인드맵</a><a href="#map">A 근거</a><a href="#anatomy">B 시험 항목</a><a href="#prep">C 준비물</a><a href="#trust">D 신뢰성</a><a href="#stab">E 안정성</a><a href="#oos">F 이상 결과</a><a href="#pvcv">G 밸리데이션 지원</a><a href="#dosage">H 제형 특화</a></nav>
     <div class="tools">
       <label class="search">
         <input id="q" type="search" placeholder="카드 내용 검색 (예: 용출)" aria-label="카드 검색">
@@ -305,21 +372,40 @@ sub{font-size:.75em}
 
 <div class="wrap hero">
   <div class="eyebrow">Product QC · Finished Dosage Form · KP 13 (고시 제2026-44호)</div>
-  <h1>완제품 시험은<br><em>약전 각조</em>에서 시작해<br>COA 한 장으로 끝납니다</h1>
-  <p class="lede">이화학 QC 중 <strong>완제품·반제품을 시험하는 일</strong>을 기준으로 정리한 학습노트입니다. 대한민국약전 제13개정 별표 1~6의 짜임을 아세트아미노펜정 하나로 따라가 보고, 시험법 밸리데이션·시스템적합성·기기 적격성평가·안정성시험·OOS 조사까지 제품QC 업무 전체를 한 지도로 묶었습니다.</p>
-  <div class="metarow">
+  <h1>완제품 시험은 <em>약전 각조</em>에서 시작해 COA 한 장으로 끝납니다</h1>
+</div>
+
+<div class="wrap">
+<main>
+<div class="mm-head" id="mindmap">
+  <div class="k"><b>MAP</b></div>
+  <h2>이화학 QC 마인드맵</h2>
+  <p>가지를 누르면 오른쪽에 설명이 열리고, "관련 카드 보기"로 아래 본문으로 이동합니다. 편집 모드에서 노드를 추가·수정·삭제할 수 있고, 변경은 이 브라우저에 자동 저장됩니다.</p>
+</div>
+<div class="mm-bar">
+  <button type="button" id="mm-edit" aria-pressed="false">편집 모드</button>
+  <button type="button" id="mm-open">모두 펼치기</button>
+  <button type="button" id="mm-close">모두 접기</button>
+  <button type="button" id="mm-export">내보내기(JSON)</button>
+  <label class="btn" for="mm-import">가져오기</label><input type="file" id="mm-import" accept="application/json,.json" style="display:none">
+  <button type="button" id="mm-reset">처음 상태로</button>
+  <span class="st" id="mm-st"></span>
+</div>
+<div class="mm-wrap">
+  <div class="mm-scroll"><div class="mm-canvas" id="mm-canvas"></div></div>
+  <aside class="mm-panel" id="mm-panel" aria-live="polite"></aside>
+</div>
+<div class="mm-legend"><span><i style="color:var(--job)">빨강</i> 중요</span><span><i style="color:var(--qc)">파랑</i> 참고</span><span>↗ 본문 카드와 연결됨</span><span>일반시험법 번호는 제13개정 별표 5 기준이며 이전 개정판 번호와 다를 수 있습니다.</span></div>
+  <p class="lede">이화학 QC 중 <strong>완제품·반제품을 시험하는 일</strong>을 기준으로 정리한 학습노트입니다. 대한민국약전 제13개정 별표 1~6의 짜임을 아세트아미노펜정 하나로 따라가 보고, 시험법 밸리데이션·시스템적합성·기기 적격성평가·안정성시험·OOS 조사까지 제품QC 업무 전체를 한 지도로 묶었습니다. 맨 위 마인드맵에서 가지를 눌러 개념을 파고들 수 있고, 직접 추가·수정할 수도 있습니다.</p>
+    <div class="metarow">
     <div>기준 문서<b>대한민국약전 제13개정 · 식약처 고시 제2026-44호</b></div>
     <div>예제 품목<b>아세트아미노펜정 (의약품각조 제1부, 별표 3)</b></div>
     <div>쓰는 법<b>위에서 아래로 = 근거 → 매 배치 시험 → 신뢰성 → 예외 상황</b></div>
     <div>한계<b>판정기준은 회사 SOP·허가 기시법에 따라 다를 수 있음</b></div>
   </div>
-  <div class="flow" style="margin-top:34px">
+  <div class="flow" style="margin-top:20px">
     <span>의약품각조 (별표 3)</span><i>›</i><span>"시험할 때 적합" 한 줄</span><i>›</i><span>일반시험법 (별표 5)</span><i>›</i><span>판정기준</span><i>›</i><span class="hi">COA의 한 줄</span>
   </div>
-</div>
-
-<div class="wrap">
-<main>
 <div class="block-head" id="map">
   <div class="k"><b>BLOCK A</b></div>
   <h2>시험의 근거 — 어디서 규격이 오는가</h2>
@@ -1318,5 +1404,232 @@ sub{font-size:.75em}
   bCore.addEventListener('click',function(){coreOnly=true;bCore.setAttribute('aria-pressed','true');bAll.setAttribute('aria-pressed','false');apply();});
 })();
 </script>
+<script>
+(function(){
+  var KEY='qcmap.v1';
+  var W=210,H=44,GX=58,GY=10;
+  var COLORS=['var(--com)','var(--qc)','var(--bio)','var(--job)','var(--ok)','var(--warn)'];
+  var uidn=0; function uid(){ uidn++; return 'n'+Date.now().toString(36)+uidn; }
+  function N(id,t,o,k){ o=o||{}; return {id:id,t:t,s:o.s||'',n:o.n||'',l:o.l||'',c:o.c||'',x:!!o.x,k:k||[]}; }
+
+  var DEFAULT=N('root','이화학 QC',{n:'제품QC 학습노트의 지도입니다. 가지를 눌러 설명을 보고, "관련 카드 보기"로 아래 본문 카드로 이동하세요. 편집 모드에서는 노드를 추가·수정·삭제할 수 있습니다.'},[
+    N('r1','시험실 관리',{n:'시험이 신뢰받을 수 있도록 시험실 전체를 운영하는 일입니다. 문서·물질·기기·환경을 모두 포함합니다.'},[
+      N('r1a','품질시험관리',{l:'qc-08',n:'시험 의뢰 → 시험 → 검토 → 승인으로 이어지는 절차와 LIMS 데이터 흐름.'}),
+      N('r1b','시약·표준품 관리',{l:'qc-07',n:'표준품·시약의 입고, 보관, 사용기한, 조제 기록 관리.'}),
+      N('r1c','환경·안전 관리',{n:'시험실 온·습도, 청결, 폐기물, 안전 규정.'}),
+      N('r1d','시험실 기기·장비관리',{c:'ref',l:'qc-14',n:'기기가 쓸 수 있는 상태임을 보증하는 일: 적격성평가, 교정, 시스템적합성, 전산 시스템 밸리데이션.'},[
+        N('r1d1','적격성평가',{s:'업체 / 자체',l:'qc-14',n:'DQ → IQ → OQ → PQ. 업체가 수행하는 부분과 자체가 수행하는 부분을 구분해서 기록합니다.'}),
+        N('r1d2','Calibration',{l:'qc-14',n:'검교정. 저울·pH미터 등은 주기적 교정이 사실상 성능 확인(PQ)의 역할을 합니다.'}),
+        N('r1d3','CSV',{l:'qc-17',n:'전산화 시스템 밸리데이션. 크로마토그래피 데이터 시스템(CDS), LIMS 등. Validation으로 이어지는 영역입니다.'}),
+        N('r1d4','SST',{l:'qc-13',n:'시스템적합성시험. 시험할 때마다 그날의 시스템이 적합한지 확인합니다(이론단수·분리도·반복성 RSD 등).'})
+      ])
+    ]),
+    N('r2','Validation',{l:'qc-11',n:'밸리데이션은 시험법·공정·소프트웨어가 의도한 대로 신뢰할 수 있음을 증명하는 활동입니다.'},[
+      N('r2a','MV',{c:'imp',l:'qc-11',s:'시험방법 밸리데이션',n:'새 시험법을 확정하거나 변경할 때 한 번 수행합니다. 이후 일상 시험은 SST로 확인합니다.'},[
+        N('r2a0','parameter',{c:'imp',l:'qc-11',n:'평가항목. 시험의 목적(확인, 순도, 정량 등)에 따라 어떤 항목을 평가할지가 달라집니다.'},[
+          N('p1','특이성',{s:'blank, 위약, 샘플',l:'qc-11',n:'불순물·분해물·부형제가 공존해도 분석대상을 구별해내는 능력.'}),
+          N('p2','직선성',{s:'n = 3, 회귀분석, 비례',l:'qc-11'}),
+          N('p3','범위',{s:'검증 가능 상/하한 농도',l:'qc-11'}),
+          N('p4','정밀성',{s:'반복성, 실험실 내 정밀성',l:'qc-11'}),
+          N('p5','정확성',{s:'직선성 검증',l:'qc-11'}),
+          N('p6','LOD',{s:'S/N ratio 3:1',l:'qc-11',n:'검출한계.'}),
+          N('p7','LOQ',{s:'S/N ratio 10:1',l:'qc-11',n:'정량한계.'}),
+          N('p8','완건성',{s:'조건 변화: 컬럼, 온도',l:'qc-11',n:'시험 조건이 조금 변해도 결과가 유지되는 정도.'})
+        ])
+      ])
+    ]),
+    N('r3','품질 시험',{c:'imp',n:'제품QC가 시험하는 항목들입니다. 이화학 시험이 중심이고 미생물·환경·생물학적 시험은 인접 영역입니다.'},[
+      N('r3a','검체 채취',{c:'ref',l:'qc-07',n:'승인된 문서화된 절차에 따라 대표성 있게 채취합니다.'}),
+      N('r3b','환경모니터링'),
+      N('r3c','생물학적제제 시험'),
+      N('r3d','미생물 시험',{n:'무균시험, 미생물한도시험, 엔도톡신시험 등.'}),
+      N('r3e','이화학 시험',{c:'imp',l:'pq-02',n:'각조 → 일반시험법(별표 5)으로 이어지는 시험들. 번호는 약전 제13개정 별표 5 기준입니다.'},[
+        N('t1','크로마토그래프법',{},[
+          N('t1a','44. 액체크로마토그래프법',{c:'imp',l:'pq-06',n:'아세트아미노펜정의 정량법과 유연물질 시험이 HPLC입니다.'}),
+          N('t1b','10. 기체크로마토그래프법',{c:'imp'},[
+            N('t1b1','58. 잔류용매시험법',{c:'imp',n:'기체크로마토그래프법을 이용하는 시험입니다.'})
+          ])
+        ]),
+        N('t2','59. 적외부스펙트럼측정법',{c:'ref',s:'IR'}),
+        N('t3','57. 자외가시부흡광도측정법',{c:'ref',s:'UV-Vis',l:'pq-05',n:'아세트아미노펜정 용출시험에서 용출액의 흡광도를 측정하는 데 쓰입니다.'}),
+        N('t4','8. 금속(원소)불순물시험법',{c:'ref'}),
+        N('t5','26. 붕해시험법'),
+        N('t6','38. 수분측정법',{s:'칼피셔법'}),
+        N('t7','83. pH 측정법'),
+        N('t8','49. 용출시험법',{l:'pq-05',n:'경구제제의 용출 규격 적합 여부를 판정하는 시험.'}),
+        N('t9','66. 제제균일성시험법',{l:'pq-07',n:'함량균일성(CU) 또는 질량편차(MV)로 시험합니다.'})
+      ])
+    ]),
+    N('r4','안정성 시험',{c:'imp',s:'제품 QC',l:'qc-10',n:'사용기간과 저장조건을 정하는 시험입니다.'},[
+      N('r4a','허가 전',{},[
+        N('r4a1','R&D',{n:'개발 단계에서 수행하는 시험.'},[
+          N('r4a1a','가혹 시험'),
+          N('r4a1b','광 안정성 시험'),
+          N('r4a1c','사용 시 안정성 시험')
+        ]),
+        N('r4a2','QC',{n:'허가 신청 자료를 위해 수행하는 시험. 허가 후에는 시판 후 안정성 시험으로 이어집니다.'},[
+          N('r4a2a','장기 보존 안정성 시험',{c:'imp',l:'qc-10',s:'25±2℃, 60±5% / 12개월'}),
+          N('r4a2b','가속 안정성 시험',{c:'imp',l:'qc-10',s:'40±2℃, 75±5% / 6개월'}),
+          N('r4a2c','중간 조건 안정성 시험',{c:'imp',l:'qc-10',s:'30±2℃, 65±5% / 6개월',n:'6개월은 최초 허가 신청 시 필요한 최소 자료 기간입니다. 시험 자체의 설계는 12개월(0, 6, 9, 12개월)입니다.'})
+        ])
+      ]),
+      N('r4b','허가 후',{},[
+        N('r4b1','시판 후 안정성 시험',{c:'imp',l:'qc-10'})
+      ])
+    ])
+  ]);
+
+  (function collapseDefault(n){ ['r1d','r2a','r3e','r4a1','r4a2','r4b'].forEach(function(id){ var r=find(DEFAULT,id); if(r) r.n.x=true; }); })();
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function load(){ try{ var s=localStorage.getItem(KEY); if(s){ var o=JSON.parse(s); if(o&&o.t&&o.k) return o; } }catch(e){} return clone(DEFAULT); }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(tree)); setStatus('자동 저장됨 (이 브라우저)'); }catch(e){ setStatus('저장 불가: 내보내기를 이용하세요'); } }
+
+  var tree=load(), sel='root', edit=false;
+  var $=function(id){return document.getElementById(id);};
+  var canvas=$('mm-canvas'), panel=$('mm-panel'), stEl=$('mm-st');
+  function setStatus(s){ if(stEl) stEl.textContent=s; }
+
+  function find(n,id,par){ if(n.id===id) return {n:n,p:par}; for(var i=0;i<n.k.length;i++){ var r=find(n.k[i],id,n); if(r) return r; } return null; }
+  function each(n,f){ f(n); n.k.forEach(function(c){each(c,f);}); }
+
+  var cardList=[];
+  function buildCardList(){
+    document.querySelectorAll('section.card').forEach(function(sc){
+      var h=sc.querySelector('h3'); if(!h) return;
+      var c=h.cloneNode(true); c.querySelectorAll('span').forEach(function(s){s.remove();});
+      cardList.push({id:sc.id,t:c.textContent.trim()});
+    });
+  }
+  function cardTitle(id){ for(var i=0;i<cardList.length;i++) if(cardList[i].id===id) return cardList[i].t; return id; }
+
+  function layout(){
+    var row=0,pos={},maxd=0;
+    function walk(n,d,b){
+      maxd=Math.max(maxd,d);
+      var kids=(n.x||!n.k.length)?[]:n.k, y;
+      if(!kids.length){ y=row*(H+GY); row++; }
+      else { var ys=kids.map(function(k,i){ return walk(k,d+1,d===0?i:b); }); y=(ys[0]+ys[ys.length-1])/2; }
+      pos[n.id]={x:d*(W+GX),y:y,n:n,d:d,b:b};
+      return y;
+    }
+    walk(tree,0,-1);
+    return {pos:pos,rows:row,maxd:maxd};
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function renderMap(){
+    var L=layout(), pos=L.pos, w=(L.maxd+1)*(W+GX)-GX, h=Math.max(L.rows*(H+GY)-GY,H);
+    var html='<svg width="'+w+'" height="'+h+'">', nodes='';
+    Object.keys(pos).forEach(function(id){
+      var p=pos[id], n=p.n;
+      if(!(n.x||!n.k.length)){
+        n.k.forEach(function(c){
+          var q=pos[c.id], x1=p.x+W, y1=p.y+H/2, x2=q.x, y2=q.y+H/2, m=(x1+x2)/2;
+          var col=COLORS[(q.b<0?0:q.b)%COLORS.length];
+          html+='<path d="M'+x1+' '+y1+' C'+m+' '+y1+' '+m+' '+y2+' '+x2+' '+y2+'" style="stroke:'+col+'"/>';
+        });
+      }
+      var col=p.b<0?'var(--ink)':COLORS[p.b%COLORS.length];
+      var cls='mm-node'+(n.c?' '+n.c:'')+(p.d===0?' root':'')+(n.id===sel?' sel':'')+(n.l?' lnk':'');
+      nodes+='<button type="button" class="'+cls+'" data-id="'+n.id+'" style="left:'+p.x+'px;top:'+p.y+'px;width:'+W+'px;height:'+H+'px;--bc:'+col+'" title="'+esc(n.t+(n.s?' · '+n.s:''))+'">'
+        +'<span class="tt">'+esc(n.t)+'</span>'+(n.s?'<span class="ss">'+esc(n.s)+'</span>':'')+'</button>';
+      if(n.k.length){
+        nodes+='<button type="button" class="mm-tog" data-tog="'+n.id+'" aria-label="'+(n.x?'펼치기':'접기')+'" style="left:'+(p.x+W-9)+'px;top:'+(p.y+H/2-9)+'px">'+(n.x?'+':'−')+'</button>';
+      }
+    });
+    html+='</svg>';
+    canvas.style.width=w+'px'; canvas.style.height=h+'px';
+    canvas.innerHTML=html+nodes;
+  }
+
+  function renderPanel(){
+    var r=find(tree,sel); if(!r){ sel='root'; r=find(tree,sel); }
+    var n=r.n, h='';
+    if(!edit){
+      h+='<h4>'+esc(n.t)+'</h4>'+(n.s?'<div class="sub">'+esc(n.s)+'</div>':'');
+      h+='<div class="note-t">'+(n.n?esc(n.n):'<span style="color:var(--faint)">메모가 없습니다. 편집 모드에서 추가할 수 있어요.</span>')+'</div>';
+      h+='<div class="row">';
+      if(n.l) h+='<button type="button" class="go" data-act="goto">관련 카드 보기 →</button>';
+      if(n.k.length) h+='<button type="button" data-act="toggle">'+(n.x?'하위 펼치기 ('+n.k.length+')':'하위 접기')+'</button>';
+      h+='</div>';
+      if(n.l) h+='<div class="sub" style="margin-top:10px">연결: '+esc(cardTitle(n.l))+'</div>';
+    } else {
+      h+='<label for="e-t">이름</label><input type="text" id="e-t" value="'+esc(n.t)+'">';
+      h+='<label for="e-s">부제 (선택)</label><input type="text" id="e-s" value="'+esc(n.s)+'">';
+      h+='<label for="e-n">메모</label><textarea id="e-n">'+esc(n.n)+'</textarea>';
+      h+='<label for="e-c">강조</label><select id="e-c"><option value="">기본</option><option value="imp"'+(n.c==='imp'?' selected':'')+'>중요 (빨강)</option><option value="ref"'+(n.c==='ref'?' selected':'')+'>참고 (파랑)</option></select>';
+      h+='<label for="e-l">연결할 본문 카드</label><select id="e-l"><option value="">연결 없음</option>';
+      cardList.forEach(function(c){ h+='<option value="'+c.id+'"'+(n.l===c.id?' selected':'')+'>'+esc(c.t.length>34?c.t.slice(0,34)+'…':c.t)+'</option>'; });
+      h+='</select>';
+      h+='<div class="row"><button type="button" class="go" data-act="addchild">+ 하위 추가</button><button type="button" data-act="addsib"'+(r.p?'':' disabled')+'>+ 형제 추가</button></div>';
+      h+='<div class="row"><button type="button" data-act="up"'+(r.p?'':' disabled')+'>↑ 위로</button><button type="button" data-act="down"'+(r.p?'':' disabled')+'>↓ 아래로</button><button type="button" class="danger" data-act="del"'+(r.p?'':' disabled')+' id="b-del">삭제</button></div>';
+    }
+    panel.innerHTML=h;
+  }
+  function render(){ renderMap(); renderPanel(); }
+
+  function gotoCard(id){
+    var el=$(id); if(!el) return;
+    if(el.classList.contains('hidden')){ var q=$('q'); if(q){ q.value=''; q.dispatchEvent(new Event('input')); } var a=$('f-all'); if(a) a.click(); }
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  }
+
+  var delArmed=null;
+  canvas.addEventListener('click',function(e){
+    var t=e.target.closest('[data-tog]');
+    if(t){ var r=find(tree,t.getAttribute('data-tog')); r.n.x=!r.n.x; save(); renderMap(); renderPanel(); return; }
+    var b=e.target.closest('[data-id]');
+    if(b){ sel=b.getAttribute('data-id'); renderMap(); renderPanel(); }
+  });
+  panel.addEventListener('click',function(e){
+    var a=e.target.closest('[data-act]'); if(!a) return;
+    var act=a.getAttribute('data-act'), r=find(tree,sel), n=r.n;
+    if(act==='goto'){ gotoCard(n.l); return; }
+    if(act==='toggle'){ n.x=!n.x; save(); render(); return; }
+    if(act==='addchild'){ var c=N(uid(),'새 노드'); n.k.push(c); n.x=false; sel=c.id; save(); render(); var i=$('e-t'); if(i){i.focus();i.select();} return; }
+    if(act==='addsib'&&r.p){ var c2=N(uid(),'새 노드'); var i2=r.p.k.indexOf(n); r.p.k.splice(i2+1,0,c2); sel=c2.id; save(); render(); var j=$('e-t'); if(j){j.focus();j.select();} return; }
+    if((act==='up'||act==='down')&&r.p){ var arr=r.p.k, i3=arr.indexOf(n), j3=act==='up'?i3-1:i3+1; if(j3>=0&&j3<arr.length){ arr.splice(i3,1); arr.splice(j3,0,n); save(); render(); } return; }
+    if(act==='del'&&r.p){
+      if(delArmed===n.id){ var arr2=r.p.k; arr2.splice(arr2.indexOf(n),1); sel=r.p.id; delArmed=null; save(); render(); }
+      else { delArmed=n.id; a.textContent='정말 삭제 (하위 포함)'; setTimeout(function(){ if(delArmed===n.id){ delArmed=null; var bb=$('b-del'); if(bb) bb.textContent='삭제'; } },3500); }
+    }
+  });
+  panel.addEventListener('input',function(e){
+    var r=find(tree,sel); if(!r) return; var n=r.n, id=e.target.id;
+    if(id==='e-t') n.t=e.target.value; else if(id==='e-s') n.s=e.target.value; else if(id==='e-n') n.n=e.target.value;
+    else if(id==='e-c') n.c=e.target.value; else if(id==='e-l') n.l=e.target.value; else return;
+    save(); renderMap();
+  });
+
+  var bEdit=$('mm-edit');
+  bEdit.addEventListener('click',function(){ edit=!edit; bEdit.setAttribute('aria-pressed',edit?'true':'false'); bEdit.textContent=edit?'편집 모드 끄기':'편집 모드'; renderPanel(); });
+  $('mm-open').addEventListener('click',function(){ each(tree,function(n){n.x=false;}); save(); render(); });
+  $('mm-close').addEventListener('click',function(){ each(tree,function(n){ n.x=(n.id!=='root'&&n.k.length>0); }); tree.x=false; save(); render(); });
+  $('mm-export').addEventListener('click',function(){
+    var blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'}), a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='qc-mindmap.json'; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+  });
+  $('mm-import').addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f) return; var rd=new FileReader();
+    rd.onload=function(){ try{ var o=JSON.parse(rd.result); if(!o||!o.t||!Array.isArray(o.k)) throw 0; tree=o; sel=tree.id||'root'; if(!tree.id) tree.id='root'; save(); render(); setStatus('가져오기 완료'); }catch(err){ setStatus('가져오기 실패: 형식이 올바르지 않습니다'); } e.target.value=''; };
+    rd.readAsText(f);
+  });
+  var resetArmed=false, bReset=$('mm-reset');
+  bReset.addEventListener('click',function(){
+    if(resetArmed){ tree=clone(DEFAULT); sel='root'; resetArmed=false; bReset.textContent='처음 상태로'; try{localStorage.removeItem(KEY);}catch(e){} render(); setStatus('처음 상태로 되돌렸습니다'); }
+    else { resetArmed=true; bReset.textContent='한 번 더 누르면 초기화'; setTimeout(function(){ resetArmed=false; bReset.textContent='처음 상태로'; },3500); }
+  });
+
+  function centerRoot(){
+    var sc=canvas.parentNode, root=canvas.querySelector('.mm-node.root'); if(!sc||!root) return;
+    var top=root.offsetTop+root.offsetHeight/2-sc.clientHeight/2; sc.scrollTop=Math.max(0,top); sc.scrollLeft=0;
+  }
+  buildCardList(); render(); centerRoot();
+  try{ if(!localStorage.getItem(KEY)) setStatus('편집하면 이 브라우저에 자동 저장됩니다'); else setStatus('저장된 지도를 불러왔습니다'); }catch(e){ setStatus('이 브라우저는 저장을 지원하지 않아 내보내기를 이용하세요'); }
+})();
+</script>
+
+<a class="mm-to-top" href="#mindmap">↑ 마인드맵</a>
 </body>
 </html>
