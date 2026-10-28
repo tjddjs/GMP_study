@@ -350,6 +350,15 @@ sub{font-size:.75em}
 .mm-bar{margin:8px 0}
 .mm-scroll{max-height:calc(100vh - 250px);min-height:340px}
 .lede{margin-top:0}
+
+.qnav{display:flex;gap:3px}
+.qnav button{font-family:var(--sans);font-size:.7rem;padding:4px 8px;border:1px solid var(--line-2);border-radius:4px;background:var(--card);color:var(--ink);cursor:pointer;line-height:1.2}
+.qnav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.qnav button:disabled{opacity:.4;cursor:default}
+mark.hit{background:color-mix(in srgb,var(--accent) 22%,transparent);color:inherit;padding:0 1px;border-radius:2px}
+mark.hit.cur{background:var(--accent);color:#fff;outline:2px solid var(--accent);outline-offset:1px}
+.mm-node.hit{background:color-mix(in srgb,var(--accent) 14%,var(--card))}
+.mm-node.curhit{outline:3px solid var(--accent);outline-offset:1px}
 </style>
 </head>
 <body>
@@ -359,9 +368,10 @@ sub{font-size:.75em}
     <nav class="tracks" aria-label="이동"><a href="#mindmap">마인드맵</a><a href="#map">A 근거</a><a href="#anatomy">B 시험 항목</a><a href="#prep">C 준비물</a><a href="#trust">D 신뢰성</a><a href="#stab">E 안정성</a><a href="#oos">F 이상 결과</a><a href="#pvcv">G 밸리데이션 지원</a><a href="#dosage">H 제형 특화</a></nav>
     <div class="tools">
       <label class="search">
-        <input id="q" type="search" placeholder="카드 내용 검색 (예: 용출)" aria-label="카드 검색">
+        <input id="q" type="search" placeholder="검색 (카드·마인드맵)" aria-label="검색">
         <span id="qn"></span>
       </label>
+      <div class="qnav"><button type="button" id="q-prev" aria-label="이전 결과" title="이전 결과 (Shift+Enter)" disabled>▲</button><button type="button" id="q-next" aria-label="다음 결과" title="다음 결과 (Enter)" disabled>▼</button></div>
       <div class="segs" role="group" aria-label="표시 범위">
         <button id="f-all" aria-pressed="true">전체</button>
         <button id="f-core" aria-pressed="false">핵심만</button>
@@ -1384,26 +1394,80 @@ sub{font-size:.75em}
 <script>
 (function(){
   var cards=Array.prototype.slice.call(document.querySelectorAll('section.card'));
-  var q=document.getElementById('q'),qn=document.getElementById('qn'),bAll=document.getElementById('f-all'),bCore=document.getElementById('f-core'),coreOnly=false;
+  var q=document.getElementById('q'),qn=document.getElementById('qn'),bAll=document.getElementById('f-all'),bCore=document.getElementById('f-core');
+  var bPrev=document.getElementById('q-prev'),bNext=document.getElementById('q-next');
+  var coreOnly=false,hits=[],cur=-1,timer=null;
+  function clearMarks(){
+    document.querySelectorAll('section.card mark.hit').forEach(function(m){ var p=m.parentNode; m.replaceWith(document.createTextNode(m.textContent)); p.normalize(); });
+  }
+  function markCard(card,re){
+    var w=document.createTreeWalker(card,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+      if(!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if(n.parentNode.closest('script,style,textarea,mark')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT; }});
+    var nodes=[],n,count=0; while((n=w.nextNode())) nodes.push(n);
+    nodes.forEach(function(t){
+      var s=t.nodeValue; re.lastIndex=0; if(!re.test(s)) return; re.lastIndex=0;
+      var frag=document.createDocumentFragment(),last=0,m;
+      while((m=re.exec(s))){
+        if(m[0].length===0){ re.lastIndex++; continue; }
+        if(m.index>last) frag.appendChild(document.createTextNode(s.slice(last,m.index)));
+        var mk=document.createElement('mark'); mk.className='hit'; mk.textContent=m[0]; frag.appendChild(mk);
+        last=m.index+m[0].length; count++;
+      }
+      if(last<s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+      t.parentNode.replaceChild(frag,t);
+    });
+    return count;
+  }
+  function label(){
+    var term=q.value.trim();
+    if(term){ qn.textContent=hits.length?((cur>=0)?((cur+1)+' / '+hits.length):(hits.length+'건')):'0건'; }
+    else if(coreOnly){ qn.textContent=document.querySelectorAll('section.card:not(.hidden)').length+'개 카드'; }
+    else qn.textContent='';
+    var dis=!(term&&hits.length); bPrev.disabled=dis; bNext.disabled=dis;
+  }
   function apply(){
-    var term=(q.value||'').trim().toLowerCase(),hits=0;
+    clearMarks();
+    var term=q.value.trim(), re=term?new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'):null;
     cards.forEach(function(c){
-      var tagOk=!coreOnly||c.dataset.tag==='must'||c.dataset.tag==='core';
-      var textOk=!term||(c.textContent||'').toLowerCase().indexOf(term)!==-1;
-      var show=tagOk&&textOk; c.classList.toggle('hidden',!show); if(show)hits++;
+      var tagOk=!coreOnly||c.dataset.tag==='must'||c.dataset.tag==='core', cnt=0;
+      if(re&&tagOk) cnt=markCard(c,re);
+      c.classList.toggle('hidden',!(tagOk&&(!re||cnt>0)));
     });
     document.querySelectorAll('.block-head').forEach(function(h){
       var el=h.nextElementSibling,any=false;
       while(el&&!el.classList.contains('block-head')){ if(el.classList.contains('card')&&!el.classList.contains('hidden')){any=true;break;} el=el.nextElementSibling; }
       h.classList.toggle('hidden',!any);
     });
-    qn.textContent=(term||coreOnly)?hits+'개':'';
+    var nodeIds=window.QCMap?window.QCMap.search(term):[];
+    var marks=Array.prototype.slice.call(document.querySelectorAll('section.card:not(.hidden) mark.hit'));
+    hits=nodeIds.map(function(id){return {n:id};}).concat(marks.map(function(e){return {e:e};}));
+    cur=-1; label();
   }
-  q.addEventListener('input',apply);
+  function show(){
+    document.querySelectorAll('mark.hit.cur').forEach(function(m){m.classList.remove('cur');});
+    var h=hits[cur];
+    if(h.e){ if(window.QCMap) window.QCMap.setCur(null); h.e.classList.add('cur'); h.e.scrollIntoView({block:'center',behavior:'smooth'}); }
+    else if(window.QCMap){ window.QCMap.reveal(h.n); }
+    label();
+  }
+  function go(d){
+    if(!hits.length) return;
+    cur=(cur<0)?(d>0?0:hits.length-1):(cur+d+hits.length)%hits.length;
+    show();
+  }
+  q.addEventListener('input',function(){ clearTimeout(timer); timer=setTimeout(apply,140); });
+  q.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); clearTimeout(timer); if(cur<0&&q.value.trim()&&!hits.length) apply(); go(e.shiftKey?-1:1); } });
+  bNext.addEventListener('click',function(){ go(1); });
+  bPrev.addEventListener('click',function(){ go(-1); });
   bAll.addEventListener('click',function(){coreOnly=false;bAll.setAttribute('aria-pressed','true');bCore.setAttribute('aria-pressed','false');apply();});
   bCore.addEventListener('click',function(){coreOnly=true;bCore.setAttribute('aria-pressed','true');bAll.setAttribute('aria-pressed','false');apply();});
+  window.QCSearch={clear:function(){ q.value=''; apply(); },showAll:function(){ coreOnly=false; bAll.setAttribute('aria-pressed','true'); bCore.setAttribute('aria-pressed','false'); }};
+  label();
 })();
 </script>
+
 <script>
 (function(){
   var KEY='qcmap.v1';
@@ -1484,7 +1548,7 @@ sub{font-size:.75em}
   function load(){ try{ var s=localStorage.getItem(KEY); if(s){ var o=JSON.parse(s); if(o&&o.t&&o.k) return o; } }catch(e){} return clone(DEFAULT); }
   function save(){ try{ localStorage.setItem(KEY,JSON.stringify(tree)); setStatus('자동 저장됨 (이 브라우저)'); }catch(e){ setStatus('저장 불가: 내보내기를 이용하세요'); } }
 
-  var tree=load(), sel='root', edit=false;
+  var tree=load(), sel='root', edit=false, hitSet={}, curHit=null;
   var $=function(id){return document.getElementById(id);};
   var canvas=$('mm-canvas'), panel=$('mm-panel'), stEl=$('mm-st');
   function setStatus(s){ if(stEl) stEl.textContent=s; }
@@ -1530,7 +1594,7 @@ sub{font-size:.75em}
         });
       }
       var col=p.b<0?'var(--ink)':COLORS[p.b%COLORS.length];
-      var cls='mm-node'+(n.c?' '+n.c:'')+(p.d===0?' root':'')+(n.id===sel?' sel':'')+(n.l?' lnk':'');
+      var cls='mm-node'+(n.c?' '+n.c:'')+(p.d===0?' root':'')+(n.id===sel?' sel':'')+(n.l?' lnk':'')+(hitSet[n.id]?' hit':'')+(curHit===n.id?' curhit':'');
       nodes+='<button type="button" class="'+cls+'" data-id="'+n.id+'" style="left:'+p.x+'px;top:'+p.y+'px;width:'+W+'px;height:'+H+'px;--bc:'+col+'" title="'+esc(n.t+(n.s?' · '+n.s:''))+'">'
         +'<span class="tt">'+esc(n.t)+'</span>'+(n.s?'<span class="ss">'+esc(n.s)+'</span>':'')+'</button>';
       if(n.k.length){
@@ -1570,7 +1634,7 @@ sub{font-size:.75em}
 
   function gotoCard(id){
     var el=$(id); if(!el) return;
-    if(el.classList.contains('hidden')){ var q=$('q'); if(q){ q.value=''; q.dispatchEvent(new Event('input')); } var a=$('f-all'); if(a) a.click(); }
+    if(el.classList.contains('hidden')){ if(window.QCSearch){ window.QCSearch.showAll(); window.QCSearch.clear(); } }
     el.scrollIntoView({behavior:'smooth',block:'start'});
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
   }
@@ -1625,6 +1689,23 @@ sub{font-size:.75em}
     var sc=canvas.parentNode, root=canvas.querySelector('.mm-node.root'); if(!sc||!root) return;
     var top=root.offsetTop+root.offsetHeight/2-sc.clientHeight/2; sc.scrollTop=Math.max(0,top); sc.scrollLeft=0;
   }
+  window.QCMap={
+    search:function(term){
+      hitSet={}; curHit=null; var out=[]; var t=(term||'').toLowerCase();
+      if(t){ each(tree,function(n){ if(((n.t||'')+' '+(n.s||'')+' '+(n.n||'')).toLowerCase().indexOf(t)!==-1){ out.push(n.id); hitSet[n.id]=1; } }); }
+      renderMap(); return out;
+    },
+    setCur:function(id){ curHit=id; renderMap(); },
+    reveal:function(id){
+      var path=null;
+      (function f(n,a){ if(n.id===id){ path=a; return true; } for(var i=0;i<n.k.length;i++){ if(f(n.k[i],a.concat(n))) return true; } return false; })(tree,[]);
+      if(!path) return; path.forEach(function(a){ a.x=false; });
+      sel=id; curHit=id; render();
+      var node=canvas.querySelector('[data-id="'+id+'"]'), sc=canvas.parentNode;
+      if(node&&sc){ sc.scrollTo({top:Math.max(0,node.offsetTop-sc.clientHeight/2+H/2),left:Math.max(0,node.offsetLeft-sc.clientWidth/2+W/2),behavior:'smooth'}); }
+      var m=$('mindmap'); if(m) m.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  };
   buildCardList(); render(); centerRoot();
   try{ if(!localStorage.getItem(KEY)) setStatus('편집하면 이 브라우저에 자동 저장됩니다'); else setStatus('저장된 지도를 불러왔습니다'); }catch(e){ setStatus('이 브라우저는 저장을 지원하지 않아 내보내기를 이용하세요'); }
 })();
