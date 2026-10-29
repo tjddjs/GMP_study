@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>제약 QC 면접 준비</title><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--paper:#ECEFE9;--card:#FAFBF8;--sunk:#E3E7DF;--ink:#11171A;--slate:#4F5D65;--faint:#829097;--line:#D3D9D1;--accent:#A3215C;--qc:#0F3540;--ok:#2C6A4A;--ok-bg:#E1EDE4;--warn:#8A6512;--warn-bg:#F6EEDA;--job-bg:#F8E4EE;
+--sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--serif:"Hahmlet","Noto Serif KR",Georgia,serif}
+@media(prefers-color-scheme:dark){:root{--paper:#0E1214;--card:#161C1F;--sunk:#1B2326;--ink:#E7ECE9;--slate:#A3B0B6;--faint:#7C8A90;--line:#283236;--accent:#EE86AE;--qc:#7FC4D3;--ok:#7BC49B;--ok-bg:#16291F;--warn:#E0B65A;--warn-bg:#2B2410;--job-bg:#2B1822}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.7 var(--sans)}
+header{padding:22px 20px 8px;max-width:980px;margin:0 auto}h1{font:700 24px var(--serif);margin:0 0 4px}header p{color:var(--slate);margin:4px 0}
+header a{color:var(--accent)}
+main{max-width:980px;margin:0 auto;padding:0 20px 80px}
+.tabs{position:sticky;top:0;background:var(--paper);display:flex;gap:6px;overflow-x:auto;padding:10px 20px;max-width:980px;margin:0 auto;border-bottom:1px solid var(--line);z-index:5}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit;white-space:nowrap}
+.tab.on{background:var(--qc);color:#fff;border-color:var(--qc)}
+.pane{padding-top:18px}h2{font:700 19px var(--serif);margin:0 0 8px}h3{font-size:15px;margin:18px 0 6px}
+.muted{color:var(--faint)}.note{background:var(--warn-bg);border-left:3px solid var(--warn);padding:8px 12px;border-radius:4px;margin:10px 0}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;font:inherit}
+.btn.sm{padding:3px 10px;font-size:13px}.btn.on{background:var(--qc);color:#fff;border-color:var(--qc)}.btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+textarea,input[type=text],input[type=number],select{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px}
+label{display:block;margin-top:8px;font-size:13px;color:var(--slate)}label textarea{margin-top:3px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:8px 0}
+summary{padding:10px 14px;cursor:pointer;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.expb,.qb{padding:2px 14px 14px;border-top:1px solid var(--line)}
+.chip{font-size:12px;background:var(--sunk);padding:1px 8px;border-radius:999px;color:var(--slate)}
+.chip.x{cursor:pointer;background:var(--job-bg);color:var(--accent)}
+.chipb{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:3px 10px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px;margin:2px}
+.chipb.on{background:var(--qc);color:#fff;border-color:var(--qc)}
+.cat{font-size:12px;background:var(--sunk);color:var(--qc);padding:1px 8px;border-radius:4px}
+.src{font-size:11px;color:var(--faint);border:1px solid var(--line);padding:0 6px;border-radius:4px}
+.stb{margin-left:auto;font-size:12px;color:var(--faint)}.q.st1 .stb{color:var(--warn)}.q.st2 .stb{color:var(--ok)}
+.hint{background:var(--sunk);padding:8px 12px;border-radius:6px}.fu{margin:8px 0 0}.lk a{color:var(--accent)}
+.mapx{margin-top:8px}.mapx select{width:auto}
+.time{font:700 48px/1 var(--serif);text-align:center;margin:12px 0}.time.warn{color:var(--warn)}.time.over{color:var(--accent)}
+.big{font:600 20px/1.5 var(--serif);padding:16px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.tb{border-collapse:collapse;width:100%}.tb th,.tb td{border:1px solid var(--line);padding:6px 10px;text-align:left}.tb th{background:var(--sunk)}
+.ck{display:inline-block;margin:2px 10px 2px 0;color:var(--ink)}.ptq{display:block;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0;color:var(--ink);background:var(--card)}
+ul.chk{list-style:none;padding:0}ul.chk li{padding:2px 0}.mineview{white-space:pre-wrap}
+#top{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+</style></head><body><header><h1>제약 QC 면접 준비</h1><p>경험 은행에서 시작해서, 질문에 경험을 연결하고, 말로 연습합니다. 내용은 이 브라우저에만 저장됩니다. <a href="index.html">QC 학습노트로 이동 ↗</a></p>
+<div id="top"><button class="btn sm" id="exp">내보내기(백업)</button><label class="btn sm" style="margin:0;color:var(--ink)">가져오기<input type="file" id="imp" accept=".json" hidden></label><button class="btn sm" id="rst">전체 지우기</button></div></header>
+<nav class="tabs"><button class="tab" data-t="exp">경험 은행</button><button class="tab" data-t="q">질문 은행</button><button class="tab" data-t="mock">모의 면접</button><button class="tab" data-t="pt">PT 면접</button><button class="tab" data-t="map">현황</button><button class="tab" data-t="chk">체크리스트</button></nav><main>
+<section class="pane" id="p-exp"><h2>경험 은행</h2>
+<p>경험 6~8개를 정리하면 자소서 문항과 면접 질문 대부분에 쓸 수 있습니다. 한 경험을 여러 질문에 다른 각도로 씁니다 (협업, 책임감, 실패, 개선 등).</p>
+<details class="exp"><summary><b>경험 떠올리기 질문</b></summary><div class="expb"><ol id="prompts"></ol><p class="muted">좋은 경험의 조건: 내가 직접 한 일이 보이고, 결과를 숫자나 평가로 말할 수 있고, 직무(꼼꼼함, 기록, 절차, 소통)와 이어진다.</p></div></details>
+<div id="exps"></div><div class="row"><button class="btn pri" id="addexp">+ 경험 추가</button></div></section>
+<section class="pane" id="p-q" hidden><h2>질문 은행</h2>
+<p class="muted">질문을 펼쳐서 쓸 경험을 연결하고, 말하는 문장으로 답변을 적습니다.</p>
+<div id="qf"></div><div class="row"><input type="text" id="qsearch" placeholder="질문 검색" style="max-width:240px"><select id="qst" style="width:auto"><option value="all">상태 전체</option><option value="0">미준비</option><option value="1">초안</option><option value="2">말로 연습함</option></select><span id="qcount" class="muted"></span></div><div id="qs"></div></section>
+<section class="pane" id="p-mock" hidden><h2>모의 면접</h2>
+<div id="mset"><p>질문 분류</p><div id="mcats"></div><div class="row"><label>문항 수<input type="number" id="mn" value="5" min="1" max="30"></label><label>답변 시간<select id="msec"><option value="30">30초</option><option value="60" selected>1분</option><option value="90">1분 30초</option><option value="120">2분</option></select></label></div>
+<label class="ck"><input type="checkbox" id="mweak"> 아직 "말로 연습함"이 아닌 질문만</label><div class="row"><button class="btn pri" id="mstart">시작</button></div>
+<p class="muted">소리 내어 말하세요. 시간이 끝나면 답변 방향과 꼬리질문이 보입니다. 가능하면 녹음해서 군말을 확인하세요.</p></div>
+<div id="mrun" hidden><p class="muted" id="mprog"></p><div class="big" id="mq"></div><div class="time" id="mtime"></div><div class="row" style="justify-content:center"><button class="btn pri" id="mgo">답변 시작</button><button class="btn" id="mnext">다음 질문</button><button class="btn" id="mstop">그만하기</button></div><div id="mans" hidden></div></div></section>
+<section class="pane" id="p-pt" hidden><h2>PT 면접 연습</h2><p>실제 형식: 문제 3개 중 1개를 골라 15분 준비 → 메모를 들고 2~3분 발표. 준비 메모 칸에 구조를 적고 발표하세요.</p>
+<div id="ptq"></div><div class="time" id="pttime">15:00</div><div class="row" style="justify-content:center"><button class="btn pri" id="ptgo">준비 시작 (15분)</button></div><label>준비 메모<textarea id="ptnote" rows="8" placeholder="결론 / 근거 3가지 / 사례 / 입사 후 적용 / 마무리"></textarea></label><p id="pthint" class="hint" hidden></p></section>
+<section class="pane" id="p-map" hidden><h2>현황</h2><div id="mapbox"></div></section>
+
+<section class="pane" id="p-chk" hidden><h2>체크리스트</h2><div id="chk"></div></section>
+</main><script>window.IV_DATA={"Q": [{"cat": "vision", "q": "가장 이루고 싶은 것은 무엇입니까?", "hint": "거창한 꿈보다 직무와 이어지는 구체적 목표 한 가지. 이유(왜 그것인지)와 오늘 하고 있는 준비를 붙인다.", "fu": ["그걸 이루려면 지금 무엇이 가장 부족한가요?", "회사 일과 어떻게 연결되나요?"], "cards": [], "src": ""}, {"cat": "vision", "q": "입사 후 5년 이내에 달성하고 싶은 목표는?", "hint": "1년차 업무 숙달 → 3년차 독립 수행·후배 안내 → 5년차 시험법·SOP 개선 기여처럼 단계로 말한다. 자격증·교육 계획을 한 가지 곁들인다.", "fu": ["1년차에는 무엇을 가장 먼저 익히겠습니까?", "목표가 안 맞게 되면 어떻게 하겠습니까?"], "cards": ["qc-04"], "src": ""}, {"cat": "vision", "q": "10년 뒤 이 회사가 어떤 점에서 좋아질 것 같습니까?", "hint": "회사의 제품·산업 방향(공고·홈페이지)을 근거로 말하고, 그 안에서 내가 기여할 부분을 한 줄 붙인다. 모르는 것을 아는 척하지 않는다.", "fu": ["그 변화에서 QC가 할 역할은요?"], "cards": [], "src": ""}, {"cat": "drive", "q": "동기부여가 되지 않는 일을 억지로 했던 경험을 말해 보세요.", "hint": "일이 하기 싫었다는 사실을 숨기지 말고, 끝까지 해낸 방법(작게 쪼개기, 의미 찾기)과 결과를 말한다. 불평으로 끝나지 않게.", "fu": ["지금 같은 상황이면 다시 어떻게 하겠습니까?", "반복 업무가 많은 QC 일도 괜찮겠습니까?"], "cards": [], "src": ""}, {"cat": "team", "q": "다른 사람과 장기 프로젝트를 진행해 성공한 경험은?", "hint": "기간, 인원, 내 역할, 결과 수치를 먼저 말한다. 중간 위기와 해결 장면이 있으면 설득력이 생긴다.", "fu": ["가장 힘들었던 시점은?", "내가 빠졌다면 어떻게 됐을까요?"], "cards": [], "src": ""}, {"cat": "solve", "q": "단점을 개선했거나 문제를 해결한 경험은?", "hint": "단점은 직무에 치명적이지 않은 것(예: 걱정이 많아 확인을 반복함)을 고르고, 개선 방법과 지금의 상태를 말한다.", "fu": ["아직 남아 있는 단점은?", "그 단점이 시험실에서 문제가 된다면?"], "cards": [], "src": ""}, {"cat": "drive", "q": "묵묵히 수행했던 경험은?", "hint": "주목받지 못해도 맡은 일을 끝낸 장면. 반복·정리·기록처럼 QC와 닮은 일이면 좋다.", "fu": ["지치지 않았나요? 어떻게 유지했나요?"], "cards": [], "src": ""}, {"cat": "drive", "q": "과제를 완수하려 노력했지만 달성하지 못한 경험은?", "hint": "실패 자체보다 원인 분석과 이후 달라진 행동이 핵심. 남 탓으로 끝내지 않는다.", "fu": ["지금 다시 한다면 무엇을 바꾸겠습니까?", "그 경험에서 배운 것을 실제로 적용한 적이 있나요?"], "cards": [], "src": ""}, {"cat": "team", "q": "팀원들이 적극적으로 참여하지 않았을 때 어떻게 했나요? 앞으로는 어떻게 하겠습니까?", "hint": "먼저 이유를 묻고(몰라서·바빠서·불만), 역할을 나누고 작은 일부터 맡기는 순서. 압박이나 혼자 떠맡기로 끝내지 않는다.", "fu": ["끝까지 안 따라오면요?", "혼자 떠맡다가 지치면요?"], "cards": [], "src": ""}, {"cat": "solve", "q": "남들과 다른 새로운 아이디어로 문제를 해결한 경험은?", "hint": "아이디어 자체보다 문제 정의 → 시도 → 검증(결과 수치) 흐름. 기존 방식의 어떤 한계를 봤는지를 말한다.", "fu": ["그 아이디어가 실패할 가능성은 어떻게 확인했나요?"], "cards": [], "src": ""}, {"cat": "solve", "q": "지원한 직무에서 일하기 위해 어떤 노력을 했습니까?", "hint": "교육·실습·자격증·독학을 시간순으로 말하고, 가장 직무와 가까운 한 가지(예: 분석기기 실습, GMP 교육)를 구체화한다. 그 경험에서 실제로 해 본 것을 말한다.", "fu": ["그 노력 중 가장 도움이 된 것은?", "아직 부족한 부분은 무엇이라 생각합니까?"], "cards": ["pq-13"], "src": ""}, {"cat": "job", "q": "지원한 분야에서 가장 중요한 능력이나 기술은 무엇이라 생각합니까?", "hint": "QC라면 정확한 기록과 정직성(데이터 신뢰성), 절차 준수, 꼼꼼함. 하나를 고르고 이유를 경험이나 직무 지식(ALCOA++ 등)으로 뒷받침한다.", "fu": ["그 능력을 어떻게 키웠습니까?", "가장 중요한 것을 하나만 꼽는다면?"], "cards": ["com-06"], "src": ""}, {"cat": "ethic", "q": "규칙을 지켰던 경험은?", "hint": "손해를 보더라도 지킨 장면이 좋다. 규칙의 이유를 이해하고 지켰다는 점을 말한다. QC의 SOP 준수와 연결한다.", "fu": ["규칙이 비효율적이라면 어떻게 하겠습니까?"], "cards": ["com-05"], "src": ""}, {"cat": "ethic", "q": "상사에게 부당한 지시를 받았다면 어떻게 하겠습니까?", "hint": "먼저 정중히 근거를 묻고 확인한 뒤, 규정·데이터 조작과 관련되면 따르지 않고 절차(상급자·QA 보고)에 따른다고 말한다. 시험 결과 조작은 절대 불가라는 선을 분명히.", "fu": ["지시를 거절하면 불이익이 있을 텐데요?", "상사가 계속 요구하면요?"], "cards": ["com-06"], "src": ""}, {"cat": "ethic", "q": "책임감을 가장 잘 보여준 경험은?", "hint": "맡은 일이 끝난 뒤에도 책임을 진 장면(실수 인정, 뒷처리, 재발 방지). 결과가 좋았던 이야기보다 실수를 바로잡은 이야기가 더 설득력 있다.", "fu": ["그때 실수를 먼저 보고했나요?"], "cards": ["com-05"], "src": ""}, {"cat": "ethic", "q": "다른 사람에게 모범을 보인 행동이나 경험은?", "hint": "말이 아니라 행동으로 보여준 장면. 상대가 따라 바뀐 결과가 있으면 한 줄 붙인다.", "fu": ["따라오지 않은 사람은 없었나요?"], "cards": [], "src": ""}, {"cat": "drive", "q": "태도를 좋게 평가받아 배우고 싶다거나 닮고 싶다는 말을 들은 경험은?", "hint": "칭찬받은 행동과 그 행동을 하게 된 이유(습관)를 말한다. 자랑이 아니라 평소 태도 설명으로 끝낸다.", "fu": ["그 태도를 유지하는 방법은?"], "cards": [], "src": ""}, {"cat": "intro", "q": "주변에서 어떤 사람이라고 많이 불립니까?", "hint": "별명보다 평가 단어 2개와 근거 일화 1개. 직무에 쓸모 있는 단어를 고른다(꼼꼼한, 믿을 수 있는).", "fu": ["반대로 아쉽다는 말을 들은 적은?"], "cards": [], "src": ""}, {"cat": "drive", "q": "스트레스나 압박을 받았던 경험과 그것을 어떻게 해소했는지 말해 보세요.", "hint": "상황 → 내가 한 행동 → 결과 순서. 감정을 다루는 방법이 건강하고 재현 가능해야 한다(운동, 정리, 대화).", "fu": ["직무 스트레스가 큰 시기(마감, OOS)에도 같은 방법이 통할까요?"], "cards": ["qc-15"], "src": ""}, {"cat": "drive", "q": "나만의 스트레스 해소 방법이 있습니까?", "hint": "구체적이고 건강한 방법 한 가지, 빈도, 효과를 말한다. 음주 등은 피하는 편이 안전하다.", "fu": ["직장에서는 어떻게 하겠습니까?"], "cards": [], "src": ""}, {"cat": "team", "q": "상대 입장에서 생각해 신뢰를 얻었던 경험은?", "hint": "상대의 말을 먼저 듣고 요구를 파악한 뒤 행동을 바꾼 장면. 결과로 관계가 어떻게 달라졌는지를 말한다.", "fu": ["의견이 정말 달랐을 때는?"], "cards": [], "src": ""}, {"cat": "team", "q": "친구나 동료에게 무엇을 가르쳐 준 경험은?", "hint": "가르치는 과정에서 내가 이해한 방식, 상대가 달라진 점. 설명하는 능력은 SOP 작성, 후배 안내와도 연결된다.", "fu": ["상대가 이해하지 못하면 어떻게 했나요?"], "cards": [], "src": ""}, {"cat": "lead", "q": "주도적으로 일을 맡아 처리한 경험은?", "hint": "시키지 않았는데 먼저 맡은 이유, 진행 방식, 결과. 도움을 청한 장면이 있으면 신뢰도가 오른다.", "fu": ["혼자 하기 어려웠던 부분은?"], "cards": [], "src": ""}, {"cat": "team", "q": "협력을 통해 성공적으로 수행한 과제는?", "hint": "역할 분담, 내가 맡은 부분, 소통 방식을 구체적으로. 성과를 팀의 결과와 내 기여로 구분해 말한다.", "fu": ["팀 안에서 가장 의견이 달랐던 점은?"], "cards": [], "src": ""}, {"cat": "team", "q": "개인이나 집단 간 갈등을 해결한 경험은?", "hint": "갈등의 원인을 사람이 아니라 문제로 보고, 양쪽을 듣고 기준을 정한 과정. 승패가 아닌 해결 방식을 보여준다.", "fu": ["내가 틀렸던 부분은 없었나요?", "해결이 안 된 갈등도 있었나요?"], "cards": [], "src": ""}, {"cat": "lead", "q": "팀플에서 여러 사람의 의견을 하나로 모으려 했던 경험은?", "hint": "의견을 정리해서 공통점을 보이고, 기준(시간·결과물)을 먼저 합의한 뒤 선택한 과정. 강요가 아닌 합의로 마무리.", "fu": ["끝까지 합의가 안 되면 어떻게 하나요?"], "cards": [], "src": ""}, {"cat": "lead", "q": "비전이나 목표를 잘 전달해 신뢰를 얻은 경험은?", "hint": "목표를 숫자나 한 문장으로 만들고 이유를 설명한 장면. 상대가 실제로 움직였다는 결과가 필요하다.", "fu": ["반대하는 사람은 어떻게 설득했나요?"], "cards": [], "src": ""}, {"cat": "drive", "q": "갑자기 상황이 바뀌어 불편하거나 어려웠던 경험은?", "hint": "당황했다는 사실을 인정하고, 우선순위를 다시 세운 방법을 말한다. 변경 관리와 일탈 대응도 같은 사고방식이라고 연결할 수 있다.", "fu": ["변경이 계속되면 어떻게 하겠습니까?"], "cards": ["com-05"], "src": ""}, {"cat": "lead", "q": "리더로 일하며 팀원에게 의사결정 권한을 주고 일했던 경험은?", "hint": "권한을 나눈 기준(어떤 일을 맡겼는지)과 책임의 선, 확인 방법. 믿고 맡기되 방치하지 않았다는 점이 핵심.", "fu": ["실수가 났을 때는 어떻게 했나요?"], "cards": [], "src": ""}, {"cat": "lead", "q": "리더로 일할 때 의사결정이 가장 어려웠던 경험은?", "hint": "선택지 비교 기준, 결정 이유, 결과에 대한 책임. 틀렸다면 그 뒤 어떻게 수습했는지까지 말한다.", "fu": ["다시 결정한다면 같은 선택을 하겠습니까?"], "cards": [], "src": ""}, {"cat": "intro", "q": "1분 자기소개를 해 보세요.", "hint": "구조: 나는 누구(전공·핵심 경험) → 직무와 맞는 강점 2개와 근거 → 입사 후 하고 싶은 일. 외워서 같은 길이로 연습한다. 50~60초.", "fu": ["방금 말한 경험 하나를 자세히 말해 주세요."], "cards": [], "src": ""}, {"cat": "intro", "q": "우리 회사(또는 이 직무)에 지원한 동기는 무엇입니까?", "hint": "이 산업·이 직무(이화학 QC)·이 회사 순서로 좁혀 말한다. 공고와 회사 제품 정보를 근거로 쓰고, 연봉·거리만 이유로 들지 않는다.", "fu": ["다른 회사도 지원했습니까? 왜 여기입니까?", "QC와 QA 중 어느 쪽이 더 맞습니까?"], "cards": ["pq-13"], "src": ""}, {"cat": "intro", "q": "QC와 QA 중 어느 쪽을 더 선호합니까?", "hint": "질문의 의도는 일에 대한 이해. 한쪽을 선택하고 이유를 말한 뒤, 다른 쪽도 필요한 일이라는 이해를 한 줄 보여준다.", "fu": ["QC와 QA의 차이를 설명해 보세요."], "cards": ["pq-13"], "src": ""}, {"cat": "intro", "q": "본인의 강점 세 가지를 말하고 직무와 연결해 보세요.", "hint": "강점마다 근거 경험 한 줄과 실무 장면 한 줄. 세 개 모두 직무와 이어져야 한다(예: 꼼꼼함 → 기록·계산 검토).", "fu": ["그 중 가장 자신 있는 것은?", "반대로 약점은?"], "cards": [], "src": ""}, {"cat": "intro", "q": "본인의 단점은 무엇입니까?", "hint": "직무에 치명적이지 않은 단점과 관리 방법을 함께 말한다. 단점이 없다는 답은 피한다.", "fu": ["그 단점 때문에 실수한 적이 있나요?"], "cards": [], "src": ""}, {"cat": "job", "q": "품질검사(자재·포장재)와 품질시험(제품 성분 시험) 직무의 차이를 아십니까?", "hint": "회사마다 부서 이름이 다르니 공고의 직무 설명을 먼저 확인한다. 일반적으로 자재·포장재는 입고 검사 중심, 제품은 성분 시험과 규격 판정 중심으로 설명한다.", "fu": ["본인이 지원한 직무는 어느 쪽입니까?"], "cards": ["pq-13"], "src": ""}, {"cat": "job", "q": "자재·포장재 품질검사에는 어떤 취약점이 있고 어떻게 해결하겠습니까?", "hint": "취약점을 사람·방법·기록으로 나눠 말한다(육안 판정 편차, 샘플링, 공급자 변경, 기록 누락). 해결은 한계견본, 표준화된 기준, 교육, 이중 확인으로.", "fu": ["공급자가 품질을 갑자기 바꾸면 어떻게 합니까?"], "cards": ["qc-04"], "src": ""}, {"cat": "job", "q": "업무 표준화에서 가장 중요한 것은 무엇이라고 생각합니까?", "hint": "현장에서 실제로 지킬 수 있는 수준일 것, 이유가 설명될 것, 교육과 개정 관리가 있을 것. SOP 작성 경험이 있으면 연결한다.", "fu": ["SOP가 현장과 맞지 않으면요?"], "cards": ["com-10"], "src": ""}, {"cat": "job", "q": "품질 직무에서 가장 중요한 것은 무엇이며, 데이터가 나오기 전 공정 단계에서 문제를 예방하려면 어떻게 해야 합니까?", "hint": "데이터 신뢰성과 절차 준수를 꼽고, 예방은 시험 전 준비(기기 적격성, 표준품·시약 관리, SST)와 샘플링·보관 관리를 말한다.", "fu": ["시험 전에 확인하는 항목을 말해 보세요."], "cards": ["com-06", "pq-09"], "src": ""}, {"cat": "job", "q": "고객의 요구와 회사 표준이 다르면 어떻게 하겠습니까?", "hint": "안전성·품질 규격은 맞출 수 없다는 선을 분명히 하고, 조정 가능한 부분은 근거와 함께 협의하며 상급자·QA에 보고한다.", "fu": ["고객이 계속 요구한다면?"], "cards": ["com-05"], "src": ""}, {"cat": "job", "q": "시험 결과가 기준을 벗어났다면(OOS) 어떻게 대응합니까?", "hint": "재시험으로 바로 가지 않고 즉시 보고 → 시험실 조사(계산·기기·시료·시약) → 결과에 따라 일탈·CAPA 순으로 말한다. 데이터를 임의로 버리거나 반복 시험하지 않는다.", "fu": ["조사에서 원인이 안 나오면요?"], "cards": ["qc-15", "pq-17", "com-05"], "src": ""}, {"cat": "job", "q": "데이터 무결성(ALCOA++)이 왜 중요합니까?", "hint": "시험 결과가 곧 약의 품질 판정 근거이기 때문. 기록은 그때 바로 쓰고, 지우지 않으며, 수정 시 이유를 남긴다는 원칙을 말한다.", "fu": ["실수로 잘못 적었다면 어떻게 고칩니까?"], "cards": ["com-06"], "src": ""}, {"cat": "job", "q": "분석기기(HPLC 등)로 시험한 경험을 설명해 보세요.", "hint": "시료 → 전처리 → 시스템 적합성 → 분석 → 계산 → 기록 순서로. 기기 이름, 시험 목적, 내가 한 부분과 하지 않은 부분을 정직하게 구분한다.", "fu": ["시스템 적합성은 왜 합니까?", "결과가 이상하면 무엇을 확인합니까?"], "cards": ["pq-09", "qc-11"], "src": ""}, {"cat": "job", "q": "시험 중 내가 한 실수를 알았다면 어떻게 하겠습니까?", "hint": "숨기지 않고 즉시 보고하고, 사실을 기록하고, 절차(일탈 처리)를 따른다. 정직이 가장 중요하다는 점을 한 문장으로.", "fu": ["아무도 모를 실수라면요?"], "cards": ["com-05", "com-06"], "src": ""}, {"cat": "job", "q": "모르는 질문을 받았을 때 어떻게 대답하겠습니까?", "hint": "모른다고 인정하고, 아는 범위에서 추론해서 말하고, 입사 후 배우겠다고 한다. 아는 척은 가장 위험하다.", "fu": [], "cards": [], "src": ""}, {"cat": "real", "q": "근무지가 멀거나 야근·교대가 있을 수 있는데 괜찮습니까?", "hint": "현실적인 계획(자취·자차·대중교통 등)을 구체적으로 말한다. 막연히 괜찮다고만 하지 말고 이미 준비한 것이 있으면 말한다.", "fu": ["출퇴근에 2시간이 걸려도요?"], "cards": [], "src": ""}, {"cat": "real", "q": "공백기가 있는데 그 기간에 무엇을 했습니까?", "hint": "사실을 짧게 말하고 직무와 가까운 활동(교육, 자격증, 학습)을 근거로 붙인다. 변명처럼 길게 말하지 않는다.", "fu": ["공백기 동안 가장 아쉬웠던 점은?"], "cards": [], "src": ""}, {"cat": "real", "q": "이화학 시험 경력이 없는데 괜찮겠습니까? (직무 전환·경력 불일치)", "hint": "부족한 점을 인정하고, 기초(전공·실습·교육)와 빠르게 배우겠다는 근거를 말한다. 분석기기 실습 경험이 있으면 이름과 시험 내용까지 구체적으로 말한다.", "fu": ["경력자와 비교하면 무엇이 강점입니까?"], "cards": ["pq-09"], "src": ""}, {"cat": "real", "q": "다른 회사에도 지원했습니까? 왜 이곳입니까?", "hint": "솔직하게 지원했다고 말하고, 이 회사를 고른 이유(제품, 직무, 공고)를 한 가지 말한다. 다른 회사를 깎아내리지 않는다.", "fu": ["여기가 안 되면 어떻게 하겠습니까?"], "cards": [], "src": ""}, {"cat": "real", "q": "희망 연봉이나 입사 가능 시기는 어떻게 됩니까?", "hint": "입사 가능 시기는 구체적으로. 연봉은 회사 규정에 따르겠다는 답이 안전하다. 협상이 필요하면 근거를 준비한다.", "fu": [], "cards": [], "src": ""}, {"cat": "real", "q": "영어로 간단히 자기소개나 최근 인상 깊게 본 영화를 말해 보세요. 해외 기관과 영어로 소통할 수 있습니까?", "hint": "수준을 과장하지 말고(가능하다고 했다가 곤란해지는 경우가 있다), 지금 가능한 수준과 학습 계획을 말한다. 10초 영어 답변 한 개를 미리 만들어 둔다.", "fu": ["지금 영어 공부는 어떻게 하고 있습니까?"], "cards": [], "src": ""}], "CATS": {"intro": ["자기소개·동기", "나를 한 줄로 설명하고, 왜 이 일인지 말하는 질문"], "vision": ["목표·비전", "회사에서 오래 일할 사람인지, 방향이 있는지 보는 질문"], "drive": ["태도·끈기", "어려운 상황에서 어떻게 버티고 회복하는지 보는 질문"], "team": ["협업·갈등", "같이 일하기 편한 사람인지 보는 질문"], "lead": ["주도·리더십", "맡았을 때 움직이는 사람인지 보는 질문"], "solve": ["문제해결·성장", "스스로 개선하고 배우는 사람인지 보는 질문"], "ethic": ["책임·원칙", "QC에서 가장 중요한 정직·규칙·책임감을 보는 질문"], "job": ["직무 지식", "QC 일을 이해하고 있는지 보는 질문"], "real": ["현실 질문", "근무지·야근·공백기·직무 전환처럼 피할 수 없는 질문"]}, "PT": [["신입은 실무 능력이 부족합니다. 회사의 목표와 자신의 강점·잠재력을 연결해 회사에 기여할 구체적 방안을 제시하세요.", "강점 3개 → 각 근거 경험 → 입사 후 실무 적용 한 줄. 마지막에 배우는 방법(현직자 조언, 교육)을 붙인다. 지식이 필요 없어 가장 많이 고르는 유형이므로 차별점(구체적 예시)이 필요하다."], ["자재·포장재 품질검사에는 다양한 취약점이 있습니다. 어떤 취약점이 있는지와 해결 방안을 제시하세요.", "취약점을 사람·방법·기록·공급자로 분류하고, 각각에 해결책(교육·한계견본·이중 확인·공급자 평가)을 붙인다. 사례를 하나 들어 구체화."], ["(공정 지식 문제) 제조 공정에서 제품 시험 결과가 기준에서 벗어났을 때, 품질 부서가 어떻게 원인을 찾고 재발을 막을지 설명하세요.", "즉시 보고·격리 → 시험실 조사 → 제조 공정 조사 → 원인 확정 → CAPA와 효과 확인 순서. 데이터 신뢰성을 지키며 진행한다는 점을 강조."]], "CHECK": [["면접 전날", "공고와 직무 설명을 다시 읽고 회사 제품·사업장·모집 부문을 한 장에 정리"], ["면접 전날", "자소서에 쓴 경험마다 \"상황·내가 한 일·결과·배운 점\"을 말로 설명할 수 있는지 확인"], ["면접 전날", "자소서와 이력서에 적은 기기·시험은 원리와 목적까지 설명할 수 있게 복습 (쓴 것은 모두 질문받는다고 가정)"], ["면접 전날", "1분 자기소개를 시간을 재고 세 번 연습"], ["면접 당일", "일찍 도착하면 대기 시간과 첫 인사 말을 준비 (질문이 바로 시작될 수 있음)"], ["면접 당일", "물을 조금 마시고 목소리를 풀기. 천천히, 끊어 말하기"], ["면접 당일", "\"어\", \"음\"을 줄이고 문장을 짧게. 모르면 정직하게"], ["역질문", "입사 후 첫 3개월 동안 신입이 하는 일은 무엇입니까?"], ["역질문", "이 팀에서 신입에게 가장 기대하는 점은 무엇입니까?"], ["역질문", "교육과 OJT는 어떻게 진행됩니까?"], ["역질문", "이 직무에서 일을 잘하는 사람의 공통점은 무엇입니까?"], ["피할 것", "회사·직무에 관한 사전 조사 없이 하는 질문, 연봉과 복지만 묻기"], ["피할 것", "지원한 직무가 아닌 일에 관한 질문 (그 회사에 실제 해당되는지 확인되지 않은 경우)"]], "BASE": "index.html"};</script><script>(function(){
+var D=window.IV_DATA, KEY='qcint.v1';
+var S; try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){S=null}
+if(!S||typeof S!=='object')S={};
+S.exps=S.exps||[]; S.ans=S.ans||{}; S.pt=S.pt||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function qid(i){return 'q'+i}
+function ans(i){var a=S.ans[qid(i)];if(!a){a=S.ans[qid(i)]={exp:[],text:'',st:0}}return a}
+var ST=['미준비','초안','말로 연습함'];
+/* tabs */
+var tabs=$$('.tab'), panes=$$('.pane');
+function show(id){tabs.forEach(function(t){t.classList.toggle('on',t.dataset.t===id)});panes.forEach(function(p){p.hidden=p.id!=='p-'+id});try{history.replaceState(null,'','#'+id)}catch(e){}if(id==='map')renderMap();if(id==='q')renderQs();if(id==='exp')renderExps()}
+tabs.forEach(function(t){t.onclick=function(){show(t.dataset.t)}});
+/* ---- experiences ---- */
+var EF=[['title','경험 이름 (한 줄)','예: 학부 연구실 HPLC 데이터 정리'],['s','상황·배경','언제, 어디서, 어떤 상황이었나'],['t','내가 맡은 일·과제','내 역할과 목표'],['a','내가 한 행동','구체적으로 무엇을 했나 (여기가 가장 길어야 함)'],['r','결과·수치','숫자로: 시간 단축, 오류 감소, 평가'],['l','배운 점·직무 연결','QC 일과 어떻게 이어지나'],['kw','키워드','협업, 갈등, 책임감, 끈기... 쉼표로']];
+function renderExps(){
+  var box=$('#exps'); box.innerHTML='';
+  if(!S.exps.length){box.innerHTML='<p class="muted">아직 경험이 없습니다. 아래 "경험 떠올리기" 질문으로 시작해 보세요.</p>'}
+  S.exps.forEach(function(e,idx){
+    var cnt=0;Object.keys(S.ans).forEach(function(k){if((S.ans[k].exp||[]).indexOf(e.id)>-1)cnt++});
+    var d=document.createElement('details');d.className='exp';if(e._open)d.open=true;
+    var h='<summary><b>'+esc(e.title||'(제목 없음)')+'</b><span class="chip">질문 '+cnt+'개에 사용</span></summary><div class="expb">';
+    EF.forEach(function(f){h+='<label>'+f[1]+'<textarea data-f="'+f[0]+'" rows="'+(f[0]==='a'?4:f[0]==='title'||f[0]==='kw'?1:2)+'" placeholder="'+esc(f[2])+'">'+esc(e[f[0]]||'')+'</textarea></label>'});
+    h+='<div class="row"><button class="btn sm" data-del>이 경험 삭제</button></div></div>';
+    d.innerHTML=h;box.appendChild(d);
+    d.addEventListener('toggle',function(){e._open=d.open});
+    $$('textarea',d).forEach(function(t){t.oninput=function(){e[t.dataset.f]=t.value;save();if(t.dataset.f==='title')$('summary b',d).textContent=t.value||'(제목 없음)'}});
+    $('[data-del]',d).onclick=function(){if(confirm('이 경험을 삭제할까요? 질문에 연결된 것도 풀립니다.')){S.exps.splice(idx,1);Object.keys(S.ans).forEach(function(k){S.ans[k].exp=(S.ans[k].exp||[]).filter(function(x){return x!==e.id})});save();renderExps();renderQs()}};
+  });
+}
+$('#addexp').onclick=function(){S.exps.push({id:'e'+Date.now().toString(36),title:'',_open:true});save();renderExps()};
+/* prompts to recall experiences */
+var PR=['학교·실습·연구실에서 한 번이라도 끝까지 해낸 일은?','실수하거나 틀렸다가 바로잡은 일은?','누군가와 의견이 달랐다가 맞춰 간 일은?','시키지 않았는데 먼저 한 일은?','반복적이고 지루했지만 끝낸 일은?','누군가에게 설명하거나 가르쳐 준 일은?','계획이 갑자기 바뀌어서 당황한 일은?','기록·정리·표준화처럼 꼼꼼함이 필요했던 일은?','인턴, 교육, 아르바이트, 군대, 동아리에서 기억에 남는 일은?','잘 안 됐지만 무언가 배운 일은?'];
+$('#prompts').innerHTML=PR.map(function(p){return '<li>'+esc(p)+'</li>'}).join('');
+/* ---- questions ---- */
+var Qs=D.Q; var catSel='all', stSel='all', txt='';
+function expName(id){for(var i=0;i<S.exps.length;i++)if(S.exps[i].id===id)return S.exps[i].title||'(제목 없음)';return null}
+function renderFilters(){
+  var f=$('#qf');var h='<button data-c="all" class="chipb on">전체 '+Qs.length+'</button>';
+  Object.keys(D.CATS).forEach(function(c){var n=Qs.filter(function(q){return q.cat===c}).length;if(n)h+='<button data-c="'+c+'" class="chipb">'+D.CATS[c][0]+' '+n+'</button>'});
+  f.innerHTML=h;
+  $$('button',f).forEach(function(b){b.onclick=function(){catSel=b.dataset.c;$$('button',f).forEach(function(x){x.classList.toggle('on',x===b)});renderQs()}});
+}
+function renderQs(){
+  var box=$('#qs');box.innerHTML='';var shown=0;
+  Qs.forEach(function(q,i){
+    var a=ans(i);
+    if(catSel!=='all'&&q.cat!==catSel)return;
+    if(stSel!=='all'&&String(a.st)!==stSel)return;
+    if(txt&&(q.q+q.hint+(a.text||'')).indexOf(txt)<0)return;
+    shown++;
+    var d=document.createElement('details');d.className='q st'+a.st;
+    var h='<summary><span class="cat">'+D.CATS[q.cat][0]+'</span> '+esc(q.q)+(q.src?' <span class="src">'+esc(q.src)+'</span>':'')+'<span class="stb">'+ST[a.st]+'</span></summary><div class="qb">';
+    h+='<p class="hint"><b>면접관이 보는 것·답변 방향</b> '+esc(q.hint)+'</p>';
+    if(q.fu.length)h+='<p class="fu"><b>예상 꼬리질문</b></p><ul>'+q.fu.map(function(f){return '<li>'+esc(f)+'</li>'}).join('')+'</ul>';
+    if(q.cards.length)h+='<p class="lk"><b>관련 QC 카드</b> '+q.cards.map(function(c){return '<a href="'+D.BASE+'#'+c+'" target="_blank" rel="noopener">'+c.toUpperCase()+'</a>'}).join(' · ')+'</p>';
+    h+='<div class="mapx"><b>쓸 경험</b> <span class="mp"></span> <select class="addx"><option value="">+ 경험 연결</option>'+S.exps.map(function(e){return '<option value="'+e.id+'">'+esc(e.title||'(제목 없음)')+'</option>'}).join('')+'</select></div>';
+    h+='<label>내 답변 (말하는 문장으로 적기)<textarea class="mine" rows="6" placeholder="결론 한 문장 → 상황 → 내가 한 행동 → 결과 → 직무 연결">'+esc(a.text||'')+'</textarea></label>';
+    h+='<div class="row"><span>상태</span> '+ST.map(function(s,k){return '<button class="btn sm stbtn'+(a.st===k?' on':'')+'" data-s="'+k+'">'+s+'</button>'}).join('')+'</div></div>';
+    d.innerHTML=h;box.appendChild(d);
+    function mp(){var m=$('.mp',d);m.innerHTML=(a.exp||[]).map(function(id){var n=expName(id);return n==null?'':'<span class="chip x" data-id="'+id+'">'+esc(n)+' ×</span>'}).join('')||'<span class="muted">없음</span>';$$('.x',m).forEach(function(c){c.onclick=function(){a.exp=a.exp.filter(function(x){return x!==c.dataset.id});save();mp()}})}
+    mp();
+    $('.addx',d).onchange=function(){var v=this.value;if(v&&(a.exp=a.exp||[]).indexOf(v)<0){a.exp.push(v);save();mp()}this.value=''};
+    $('.mine',d).oninput=function(){a.text=this.value;save()};
+    $$('.stbtn',d).forEach(function(b){b.onclick=function(){a.st=+b.dataset.s;save();$$('.stbtn',d).forEach(function(x){x.classList.toggle('on',x===b)});d.className='q st'+a.st;$('.stb',d).textContent=ST[a.st]}});
+  });
+  $('#qcount').textContent=shown+'개 표시';
+}
+$('#qsearch').oninput=function(){txt=this.value.trim();renderQs()};
+$('#qst').onchange=function(){stSel=this.value;renderQs()};
+/* ---- coverage map ---- */
+function renderMap(){
+  var h='<h3>경험별 사용 현황</h3>';
+  if(!S.exps.length)h+='<p class="muted">경험을 먼저 등록하세요.</p>';
+  else{h+='<table class="tb"><tr><th>경험</th><th>연결된 질문</th><th>분류</th></tr>';
+    S.exps.forEach(function(e){var qs=[];Qs.forEach(function(q,i){if((ans(i).exp||[]).indexOf(e.id)>-1)qs.push(i)});
+      var cs={};qs.forEach(function(i){cs[D.CATS[Qs[i].cat][0]]=1});
+      h+='<tr><td>'+esc(e.title||'(제목 없음)')+'</td><td>'+qs.length+'</td><td>'+esc(Object.keys(cs).join(', '))+'</td></tr>'});
+    h+='</table>'}
+  var un=[];Qs.forEach(function(q,i){var a=ans(i);if(['intro','job','real'].indexOf(q.cat)<0&&!(a.exp||[]).length)un.push(q.q)});
+  h+='<h3>경험이 연결되지 않은 경험형 질문 '+un.length+'개</h3>';
+  h+=un.length?'<ul>'+un.map(function(u){return '<li>'+esc(u)+'</li>'}).join('')+'</ul>':'<p class="muted">모든 경험형 질문에 경험이 연결되어 있습니다.</p>';
+  var by=[0,0,0];Qs.forEach(function(q,i){by[ans(i).st]++});
+  h+='<h3>준비 현황</h3><p>미준비 '+by[0]+' · 초안 '+by[1]+' · 말로 연습함 '+by[2]+' (전체 '+Qs.length+')</p>';
+  $('#mapbox').innerHTML=h;
+}
+/* ---- mock interview ---- */
+var mock={list:[],i:0,t:null,left:0,total:60};
+function fmt(s){s=Math.max(0,s);return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2)}
+function buildMockCats(){var h='';Object.keys(D.CATS).forEach(function(c){if(Qs.some(function(q){return q.cat===c}))h+='<label class="ck"><input type="checkbox" value="'+c+'" checked> '+D.CATS[c][0]+'</label>'});$('#mcats').innerHTML=h}
+function mockStart(){
+  var cs=$$('#mcats input:checked').map(function(x){return x.value});
+  var only=$('#mweak').checked;
+  var pool=[];Qs.forEach(function(q,i){if(cs.indexOf(q.cat)>-1&&(!only||ans(i).st<2))pool.push(i)});
+  if(!pool.length){alert('조건에 맞는 질문이 없습니다.');return}
+  for(var k=pool.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=pool[k];pool[k]=pool[j];pool[j]=t}
+  var n=Math.min(+$('#mn').value||5,pool.length);
+  mock.list=pool.slice(0,n);mock.i=0;mock.total=+$('#msec').value;
+  $('#mset').hidden=true;$('#mrun').hidden=false;mockShow();
+}
+function mockShow(){
+  clearInterval(mock.t);var i=mock.list[mock.i];var q=Qs[i];
+  $('#mprog').textContent=(mock.i+1)+' / '+mock.list.length;
+  $('#mq').textContent=q.q;$('#mans').hidden=true;$('#mans').innerHTML='';
+  mock.left=mock.total;$('#mtime').textContent=fmt(mock.left);$('#mtime').className='time';
+  $('#mgo').textContent='답변 시작';$('#mgo').disabled=false;
+  mock.q=i;
+}
+function mockGo(){
+  var b=$('#mgo');
+  if(b.dataset.run==='1'){clearInterval(mock.t);b.dataset.run='0';mockReveal();return}
+  b.dataset.run='1';b.textContent='답변 끝';
+  mock.t=setInterval(function(){mock.left--;$('#mtime').textContent=fmt(mock.left);if(mock.left<=10)$('#mtime').className='time warn';if(mock.left<=0){clearInterval(mock.t);$('#mtime').className='time over';$('#mtime').textContent='시간 종료';b.dataset.run='0';mockReveal()}},1000);
+}
+function mockReveal(){
+  var b=$('#mgo');b.dataset.run='0';b.textContent='다시 하기';
+  var q=Qs[mock.q],a=ans(mock.q);var h='<p class="hint"><b>답변 방향</b> '+esc(q.hint)+'</p>';
+  if(q.fu.length)h+='<p><b>꼬리질문</b></p><ul>'+q.fu.map(function(f){return '<li>'+esc(f)+'</li>'}).join('')+'</ul>';
+  h+='<p><b>내 답변 초안</b></p><p class="mineview">'+(a.text?esc(a.text).replace(/\n/g,'<br>'):'<span class="muted">아직 없음</span>')+'</p>';
+  h+='<div class="row"><span>이 질문은</span> <button class="btn sm" data-r="0">어려웠다</button><button class="btn sm" data-r="1">보완 필요</button><button class="btn sm" data-r="2">잘 말했다</button></div>';
+  var el=$('#mans');el.innerHTML=h;el.hidden=false;
+  $$('[data-r]',el).forEach(function(x){x.onclick=function(){var r=+x.dataset.r;var aa=ans(mock.q);aa.st=r===2?2:(r===1?Math.max(aa.st,1):Math.min(aa.st,1));if(r===0&&!aa.text)aa.st=0;save();$$('[data-r]',el).forEach(function(y){y.classList.toggle('on',y===x)})}});
+}
+function mockNext(){if(mock.i+1>=mock.list.length){clearInterval(mock.t);$('#mrun').hidden=true;$('#mset').hidden=false;renderQs();return}mock.i++;$('#mgo').dataset.run='0';mockShow()}
+$('#mstart').onclick=mockStart;$('#mgo').onclick=function(){if($('#mgo').textContent==='다시 하기'){$('#mgo').dataset.run='0';mockShow();return}mockGo()};$('#mnext').onclick=mockNext;$('#mstop').onclick=function(){clearInterval(mock.t);$('#mrun').hidden=true;$('#mset').hidden=false};
+/* ---- PT ---- */
+var pt={t:null,left:0,phase:0,sel:-1};
+$('#ptq').innerHTML=D.PT.map(function(p,i){return '<label class="ptq"><input type="radio" name="pt" value="'+i+'"> '+esc(p[0])+'</label>'}).join('');
+$('#ptnote').value=S.pt.note||'';$('#ptnote').oninput=function(){S.pt.note=this.value;save()};
+function ptTick(){pt.left--;$('#pttime').textContent=fmt(pt.left);if(pt.left<=30)$('#pttime').className='time warn';if(pt.left<=0){clearInterval(pt.t);$('#pttime').className='time over';$('#pttime').textContent='시간 종료';$('#ptgo').textContent='처음부터'}}
+$('#ptgo').onclick=function(){
+  var b=$('#ptgo');
+  if(b.textContent==='처음부터'){b.textContent='준비 시작 (15분)';$('#pttime').textContent='15:00';$('#pttime').className='time';$('#pthint').hidden=true;pt.phase=0;return}
+  if(pt.phase===0){var r=$('input[name=pt]:checked');if(!r){alert('문제를 하나 고르세요 (실제로는 3개 중 1개를 고릅니다).');return}
+    pt.sel=+r.value;pt.phase=1;pt.left=15*60;clearInterval(pt.t);pt.t=setInterval(ptTick,1000);b.textContent='준비 끝 → 발표 시작';$('#pttime').className='time';return}
+  if(pt.phase===1){clearInterval(pt.t);pt.phase=2;pt.left=3*60;pt.t=setInterval(ptTick,1000);b.textContent='발표 끝';$('#pttime').className='time';return}
+  if(pt.phase===2){clearInterval(pt.t);pt.phase=0;b.textContent='처음부터';var h=$('#pthint');h.hidden=false;h.innerHTML='<b>방향</b> '+esc(D.PT[pt.sel][1])+'<br><b>구조</b> 결론 한 문장 → 근거 3가지 → 근거마다 사례 → 입사 후 적용 → 마무리 한 문장';return}
+};
+/* ---- checklist ---- */
+(function(){var by={},h='';D.CHECK.forEach(function(c){(by[c[0]]=by[c[0]]||[]).push(c[1])});
+  var sv=S.chk||{};S.chk=sv;
+  Object.keys(by).forEach(function(k){h+='<h3>'+esc(k)+'</h3><ul class="chk">'+by[k].map(function(t,i){var id=k+i;return '<li><label><input type="checkbox" data-k="'+esc(id)+'"'+(sv[id]?' checked':'')+'> '+esc(t)+'</label></li>'}).join('')+'</ul>'});
+  $('#chk').innerHTML=h;$$('#chk input').forEach(function(x){x.onchange=function(){S.chk[x.dataset.k]=x.checked;save()}})})();
+/* ---- reviews (private) ---- */
+if($('#revbox')){$('#revbox').innerHTML=(D.REV||[]).map(function(r){return '<details class="exp" open><summary><b>'+esc(r[0])+'</b></summary><div class="expb"><p class="muted">'+esc(r[1])+'</p><p><b>질문 흐름</b></p><ol>'+r[2].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol><p><b>교훈</b></p><ul>'+r[3].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div></details>'}).join('')}
+/* ---- export/import ---- */
+$('#exp').onclick=function(){var b=new Blob([JSON.stringify({kind:'qcinterview',v:1,data:S},null,1)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='qc-interview.json';a.click()};
+$('#imp').onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(o.kind!=='qcinterview')throw 0;if(!confirm('가져오면 지금 내용이 바뀝니다. 계속할까요?'))return;S=o.data;S.exps=S.exps||[];S.ans=S.ans||{};S.pt=S.pt||{};save();location.reload()}catch(e){alert('면접 준비 파일이 아닙니다.')}};r.readAsText(f)};
+$('#rst').onclick=function(){if(confirm('모든 경험과 답변을 지울까요? 되돌릴 수 없습니다. 먼저 내보내기를 권합니다.')){localStorage.removeItem(KEY);location.reload()}};
+renderExps();renderFilters();renderQs();buildMockCats();
+var h=(location.hash||'').slice(1);show(['exp','q','mock','pt','chk','rev','map'].indexOf(h)>-1?h:'exp');
+})();
+</script></body></html>
