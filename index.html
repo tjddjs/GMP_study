@@ -447,6 +447,12 @@ body.editing .card-tools button{display:inline-block}
   .memo-bubble{position:static;margin-bottom:6px}
   .memo-bubble.collapsed{display:inline-block;margin-right:4px}
 }
+
+a.xref{font-family:var(--mono);font-size:.88em;font-weight:600;color:var(--accent);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+a.xref:hover{background:color-mix(in srgb,var(--accent) 14%,transparent);border-radius:3px}
+a.xref::after{content:" ↗";font-size:.8em}
+#xref-back{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:45;font-family:var(--sans);font-size:.82rem;padding:8px 16px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+#xref-back[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -717,7 +723,7 @@ body.editing .card-tools button{display:inline-block}
     <li>검출 확인: 4-아미노페놀 표준품 약 7.0 mg을 100 mL로 하고 단계 희석한 액 25 μL로 시험할 때 4-아미노페놀의 신호 대 잡음비가 10 이상.</li>
     <li>재현성: 표준액 25 μL씩 6회 반복할 때 아세트아미노펜 및 4-아미노페놀 피크면적의 상대표준편차 5.0 % 이하.</li>
   </ul>
-  <div class="note warn"><b class="lb">별표 5와의 관계</b>별표 5에는 <strong>40. 아세트아미노펜 함유 제제 중 4-아미노페놀시험법</strong>이 따로 있습니다(0.15 % 이하, 분해산물 관리용). 각조와 일반시험법이 겹치는 부분이므로 어느 규정을 따르는지는 각조와 허가 규격을 확인해야 합니다. 아래 <a href="#qc-13">SST 카드(QC-13)</a>와 이어서 보면 좋습니다.</div>
+  <div class="note warn"><b class="lb">별표 5와의 관계</b>별표 5에는 <strong>40. 아세트아미노펜 함유 제제 중 4-아미노페놀시험법</strong>이 따로 있습니다(0.15 % 이하, 분해산물 관리용). 각조와 일반시험법이 겹치는 부분이므로 어느 규정을 따르는지는 각조와 허가 규격을 확인해야 합니다. 아래 <a class="xref" href="#qc-13" title="카드로 이동">SST 카드(QC-13)</a>와 이어서 보면 좋습니다.</div>
 </section>
 <section class="card" id="pq-05" data-tag="must">
   <h3><span class="tag t-must">최우선</span> 용출시험 <span class="no">PQ-05</span></h3>
@@ -828,7 +834,7 @@ body.editing .card-tools button{display:inline-block}
       <tr><td>제제균일성</td><td>10정</td><td>20정 추가, 총 30정</td></tr>
     </tbody>
   </table></div>
-  <div class="note tip"><b class="lb">실무 포인트</b>검체 수량이 곧 채취량의 근거가 됩니다. 시험의 판정이 재시험 단계로 넘어가는 경우를 대비해 처음 채취할 때 여유를 두는지, 일탈이 나면 어떤 절차를 밟는지는 <a href="#qc-15">OOS 카드(QC-15)</a>와 이어서 보세요.</div>
+  <div class="note tip"><b class="lb">실무 포인트</b>검체 수량이 곧 채취량의 근거가 됩니다. 시험의 판정이 재시험 단계로 넘어가는 경우를 대비해 처음 채취할 때 여유를 두는지, 일탈이 나면 어떤 절차를 밟는지는 <a class="xref" href="#qc-15" title="카드로 이동">OOS 카드(QC-15)</a>와 이어서 보세요.</div>
 </section>
 <section class="card" id="qc-08" data-tag="core">
   <h3><span class="tag t-core">핵심</span> 품질시험 절차와 LIMS <span class="no">QC-08</span></h3>
@@ -897,14 +903,14 @@ body.editing .card-tools button{display:inline-block}
   <div class="tw"><table>
     <thead><tr><th>질문</th><th>답이 되는 활동</th><th>이 페이지의 카드</th></tr></thead>
     <tbody>
-      <tr><td>시험법이 맞는가</td><td>공정서 시험법은 자사 적용 확인(Verification), 자사 시험법은 시험법 밸리데이션(MV)</td><td><a href="#qc-11">QC-11</a>, <a href="#qc-12">QC-12</a></td></tr>
-      <tr><td>오늘 시스템이 맞는가</td><td>시스템적합성(SST): 분리도, 대칭계수, 반복성 RSD, 신호 대 잡음비</td><td><a href="#qc-13">QC-13</a></td></tr>
-      <tr><td>기기가 맞는가</td><td>기기 적격성평가(AIQ)와 검교정</td><td><a href="#qc-14">QC-14</a></td></tr>
-      <tr><td>시험 결과가 이상하면</td><td>OOS·OOT 조사</td><td><a href="#qc-15">QC-15</a></td></tr>
-      <tr><td>시간이 지나도 괜찮은가</td><td>안정성시험</td><td><a href="#qc-10">QC-10</a></td></tr>
+      <tr><td>시험법이 맞는가</td><td>공정서 시험법은 자사 적용 확인(Verification), 자사 시험법은 시험법 밸리데이션(MV)</td><td><a class="xref" href="#qc-11" title="카드로 이동">QC-11</a>, <a class="xref" href="#qc-12" title="카드로 이동">QC-12</a></td></tr>
+      <tr><td>오늘 시스템이 맞는가</td><td>시스템적합성(SST): 분리도, 대칭계수, 반복성 RSD, 신호 대 잡음비</td><td><a class="xref" href="#qc-13" title="카드로 이동">QC-13</a></td></tr>
+      <tr><td>기기가 맞는가</td><td>기기 적격성평가(AIQ)와 검교정</td><td><a class="xref" href="#qc-14" title="카드로 이동">QC-14</a></td></tr>
+      <tr><td>시험 결과가 이상하면</td><td>OOS·OOT 조사</td><td><a class="xref" href="#qc-15" title="카드로 이동">QC-15</a></td></tr>
+      <tr><td>시간이 지나도 괜찮은가</td><td>안정성시험</td><td><a class="xref" href="#qc-10" title="카드로 이동">QC-10</a></td></tr>
     </tbody>
   </table></div>
-  <p> 위 표의 "시험 항목 자체"이고, 아래 줄들은 그 시험 결과를 믿을 수 있게 하는 장치입니다. 이 책임 분담이 정리되면 제품QC 업무의 큰 그림이 완성됩니다.</p>
+  <p>앞쪽 카드들은 "무엇을 시험하는가"였고, 이 표는 "그 결과를 왜 믿을 수 있는가"입니다. 두 가지를 짝지어 말할 수 있으면 제품QC 업무의 큰 그림이 잡힙니다. 오른쪽 열의 카드 번호를 누르면 해당 카드로 이동합니다.</p>
 </section>
 <section class="card" id="qc-11" data-tag="must">
   <h3><span class="tag t-must">최우선</span> MV(시험방법 밸리데이션) 완전정리 <span class="no">QC-11</span></h3>
@@ -1054,7 +1060,7 @@ body.editing .card-tools button{display:inline-block}
     </tbody>
   </table></div>
   <div class="flow"><span>SOP 확인</span><i>›</i><span>SST 수행</span><i>›</i><span class="hi">적합 → 본시험</span><i>·</i><span>부적합 → 재점검·재주입</span><i>›</i><span>반복 시 조사</span></div>
-  <div class="note warn"><b class="lb">SST Fail은 그냥 다시 찍는 게 아니다</b>SST 부적합이 반복되는데 조사 없이 무한 재주입하면 <strong>실사 지적 대상</strong>입니다(실제 국내 대기업 FDA 지적 사례). 회사마다 재시도 횟수 한도(예: 2회)를 정해두고, 그 이상이면 <strong>시험실 조사를 개시</strong>합니다 (QC-15).</div>
+  <div class="note warn"><b class="lb">SST Fail은 그냥 다시 찍는 게 아니다</b>SST 부적합이 반복되는데 조사 없이 무한 재주입하면 <strong>실사 지적 대상</strong>입니다(실제 국내 대기업 FDA 지적 사례). 회사마다 재시도 횟수 한도(예: 2회)를 정해두고, 그 이상이면 <strong>시험실 조사를 개시</strong>합니다 (<a class="xref" href="#qc-15" title="QC-15 카드로 이동">QC-15</a>).</div>
   <div class="note say"><b class="lb">면접 답변안 · "SST는 왜 매번 하나요"</b>"<strong>밸리데이션은 시험법 자체가 신뢰할 만한지를 한 번 증명하는 활동</strong>이고, <strong>SST는 오늘 이 시스템이 그 시험법을 수행하기에 적합한 상태인지를 매 회 확인하는 절차</strong>입니다. 컬럼 노화, 이동상 조제 편차, 장비 상태 같은 변동 요인이 있기 때문에, 밸리데이션된 방법이라도 매번 적합성을 확인해야 결과를 신뢰할 수 있습니다."</div>
 </section>
 <section class="card" id="qc-14" data-tag="core">
@@ -1268,7 +1274,7 @@ body.editing .card-tools button{display:inline-block}
       <tr><td><b>OOS</b> Out of Specification</td><td>시험 결과가 미리 정해진 <strong>시험기준을 벗어난 경우</strong></td><td>부적합</td></tr>
       <tr><td><b>OOT</b> Out of Trend</td><td>규격 내이지만 <strong>경향을 벗어난 경우</strong>. 3년간 데이터의 3σ 이탈로 자동 산출하거나(LIMS), 허가기준보다 좁은 관리선(예: 90~110% 중 92~108%)으로 설정</td><td>적합이나 관리 대상</td></tr>
       <tr><td><b>OOE</b> Out of Expectation</td><td>규격 내이면서 경향도 벗어나지 않았지만 <strong>예외적·설명되지 않는 결과</strong> (예: 불명확한 미지 피크)</td><td>적합이나 조사 대상. 일부 회사만 운영</td></tr>
-      <tr><td><b>SST Fail</b></td><td>시스템적합성 부적합</td><td>조사 대상 (QC-13)</td></tr>
+      <tr><td><b>SST Fail</b></td><td>시스템적합성 부적합</td><td>조사 대상 (<a class="xref" href="#qc-13" title="QC-13 카드로 이동">QC-13</a>)</td></tr>
     </tbody>
   </table></div>
   <div class="note"><b class="lb">OOE의 무게 — 실제 사례</b>불명확한 불순물 피크가 검출됐지만 시험 자체는 적합이었던 건이 있었습니다. 조사해 보니 <strong>생산 과정의 교차오염</strong>이 원인이었고, 다음 생산분에서 부적합·전량 폐기로 이어졌습니다. "적합이니까 넘어간다"가 가장 위험한 판단입니다.</div>
@@ -1432,7 +1438,7 @@ body.editing .card-tools button{display:inline-block}
     <li>별표 2 제제총칙의 정제 항목(제법, 보존 용기)을 원문으로 확인</li>
     <li>용출시험법 판정법 1·2 중 아세트아미노펜정 각조에 적용되는 것을 원문 문구로 확정</li>
     <li>제제균일성 MV/CU 결정을 실제 제품 함량으로 연습</li>
-    <li>공정 밸리데이션·세척 밸리데이션에서 QC가 맡는 시험을 보강 (<a href="#qc-17">QC-17</a>은 접점만 다룸)</li>
+    <li>공정 밸리데이션·세척 밸리데이션에서 QC가 맡는 시험을 보강 (<a class="xref" href="#qc-17" title="카드로 이동">QC-17</a>은 접점만 다룸)</li>
     <li>다른 완제(캡슐제, 주사제)로 같은 틀을 적용</li>
   </ul>
 </section>
@@ -2117,6 +2123,7 @@ body.editing .card-tools button{display:inline-block}
   function render(){ renderMap(); renderPanel(); }
 
   function gotoCard(id){
+    if(window.QCJump){ window.QCJump(id); return; }
     var el=$(id); if(!el) return;
     if(el.classList.contains('hidden')){ if(window.QCSearch){ window.QCSearch.showAll(); window.QCSearch.clear(); } }
     el.scrollIntoView({behavior:'smooth',block:'start'});
@@ -2208,6 +2215,35 @@ body.editing .card-tools button{display:inline-block}
   var rz=null; window.addEventListener('resize',function(){ clearTimeout(rz); rz=setTimeout(applyZoom,120); });
   buildCardList(); render(); centerRoot();
   try{ if(!localStorage.getItem(KEY)) setStatus('편집하면 이 브라우저에 자동 저장됩니다'); else setStatus('저장된 지도를 불러왔습니다'); }catch(e){ setStatus('이 브라우저는 저장을 지원하지 않아 내보내기를 이용하세요'); }
+})();
+</script>
+
+<script>
+(function(){
+  var back=document.createElement('button'); back.id='xref-back'; back.type='button'; back.hidden=true; back.textContent='↩ 이전 위치로'; document.body.appendChild(back);
+  var prevY=null;
+  function jump(id){
+    var el=document.getElementById(id); if(!el) return;
+    var st=document.getElementById('mm-stage'), delay=0;
+    if(st&&st.classList.contains('full')){ var fb=document.getElementById('mm-full'); if(fb) fb.click(); delay=140; }
+    if(el.classList.contains('hidden')&&window.QCSearch){ window.QCSearch.showAll(); window.QCSearch.clear(); }
+    prevY=window.scrollY; back.hidden=false;
+    setTimeout(function(){
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+      if(el.classList.contains('card')){ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+    },delay);
+    setTimeout(function(){ var r=el.getBoundingClientRect().top; if(Math.abs(r-112)>60) el.scrollIntoView({block:'start'}); },delay+1100);
+  }
+  window.QCJump=jump;
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+    if(a.closest('header.top,.mm-to-top,#log-drawer')) return;
+    var id=a.getAttribute('href').slice(1); if(!id||!document.getElementById(id)) return;
+    if(document.body.classList.contains('editing')&&!(e.ctrlKey||e.metaKey)) { e.preventDefault(); return; }
+    e.preventDefault(); jump(id);
+  });
+  back.addEventListener('click',function(){ if(prevY!=null) window.scrollTo({top:prevY,behavior:'smooth'}); back.hidden=true; prevY=null; });
+  var t=null; window.addEventListener('scroll',function(){ if(prevY==null) return; clearTimeout(t); t=setTimeout(function(){ if(Math.abs(window.scrollY-prevY)<40){ back.hidden=true; prevY=null; } },300); },{passive:true});
 })();
 </script>
 
