@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>제약 QC 영어 학습</title><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--paper:#ECEFE9;--card:#FAFBF8;--sunk:#E3E7DF;--ink:#11171A;--slate:#4F5D65;--faint:#829097;--line:#D3D9D1;--accent:#A3215C;--qc:#0F3540;--ok:#2C6A4A;--ok-bg:#E1EDE4;--warn:#8A6512;--warn-bg:#F6EEDA;--job-bg:#F8E4EE;
+--sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--serif:"Hahmlet","Noto Serif KR",Georgia,serif}
+@media(prefers-color-scheme:dark){:root{--paper:#0E1214;--card:#161C1F;--sunk:#1B2326;--ink:#E7ECE9;--slate:#A3B0B6;--faint:#7C8A90;--line:#283236;--accent:#EE86AE;--qc:#7FC4D3;--ok:#7BC49B;--ok-bg:#16291F;--warn:#E0B65A;--warn-bg:#2B2410;--job-bg:#2B1822}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.7 var(--sans)}
+header{padding:22px 20px 8px;max-width:980px;margin:0 auto}h1{font:700 24px var(--serif);margin:0 0 4px}header p{color:var(--slate);margin:4px 0}
+header a{color:var(--accent)}
+main{max-width:980px;margin:0 auto;padding:0 20px 80px}
+.tabs{position:sticky;top:0;background:var(--paper);display:flex;gap:6px;overflow-x:auto;padding:10px 20px;max-width:980px;margin:0 auto;border-bottom:1px solid var(--line);z-index:5}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit;white-space:nowrap}
+.tab.on{background:var(--qc);color:#fff;border-color:var(--qc)}
+.pane{padding-top:18px}h2{font:700 19px var(--serif);margin:0 0 8px}h3{font-size:15px;margin:18px 0 6px}
+.muted{color:var(--faint)}.note{background:var(--warn-bg);border-left:3px solid var(--warn);padding:8px 12px;border-radius:4px;margin:10px 0}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;font:inherit}
+.btn.sm{padding:3px 10px;font-size:13px}.btn.on{background:var(--qc);color:#fff;border-color:var(--qc)}.btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+textarea,input[type=text],input[type=number],select{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px}
+label{display:block;margin-top:8px;font-size:13px;color:var(--slate)}label textarea{margin-top:3px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:8px 0}
+summary{padding:10px 14px;cursor:pointer;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.expb,.qb{padding:2px 14px 14px;border-top:1px solid var(--line)}
+.chip{font-size:12px;background:var(--sunk);padding:1px 8px;border-radius:999px;color:var(--slate)}
+.chip.x{cursor:pointer;background:var(--job-bg);color:var(--accent)}
+.chipb{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:3px 10px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px;margin:2px}
+.chipb.on{background:var(--qc);color:#fff;border-color:var(--qc)}
+.cat{font-size:12px;background:var(--sunk);color:var(--qc);padding:1px 8px;border-radius:4px}
+.src{font-size:11px;color:var(--faint);border:1px solid var(--line);padding:0 6px;border-radius:4px}
+.stb{margin-left:auto;font-size:12px;color:var(--faint)}.q.st1 .stb{color:var(--warn)}.q.st2 .stb{color:var(--ok)}
+.hint{background:var(--sunk);padding:8px 12px;border-radius:6px}.fu{margin:8px 0 0}.lk a{color:var(--accent)}
+.mapx{margin-top:8px}.mapx select{width:auto}
+.time{font:700 48px/1 var(--serif);text-align:center;margin:12px 0}.time.warn{color:var(--warn)}.time.over{color:var(--accent)}
+.big{font:600 20px/1.5 var(--serif);padding:16px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.tb{border-collapse:collapse;width:100%}.tb th,.tb td{border:1px solid var(--line);padding:6px 10px;text-align:left}.tb th{background:var(--sunk)}
+.ck{display:inline-block;margin:2px 10px 2px 0;color:var(--ink)}.ptq{display:block;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0;color:var(--ink);background:var(--card)}
+ul.chk{list-style:none;padding:0}ul.chk li{padding:2px 0}.mineview{white-space:pre-wrap}
+#top{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+
+.center{text-align:center}.ansbox{background:var(--sunk);border-radius:8px;padding:10px 14px;margin:10px 0}
+.okmsg{color:var(--ok);font-weight:700;margin:8px 0}.badmsg{color:var(--accent);font-weight:700;margin:8px 0}
+.blk{border-bottom:2px solid var(--accent);padding:0 8px;color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}.kpis div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.8rem;color:var(--slate)}.kpis b{display:block;font-size:1.6rem;color:var(--ink)}
+.bars{display:flex;gap:8px;align-items:flex-end;height:120px}.bars div{flex:1;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:.75rem}.bars i{display:block;width:70%;background:var(--qc);border-radius:4px 4px 0 0;min-height:2px}.bars small{color:var(--faint)}
+.sp{padding:1px 8px}.plan td,.plan th{vertical-align:top}
+</style></head><body><header><h1>제약 QC 영어 학습</h1><p>취업 준비용: QC 용어 · 실무 문장 · 면접 영어. 기록은 이 브라우저에만 저장됩니다. <a href="index.html">QC 학습노트 ↗</a> · <a href="interview.html">면접 준비 ↗</a></p>
+<div id="top"><button class="btn sm" id="exp">내보내기(백업)</button><label class="btn sm" style="margin:0;color:var(--ink)">가져오기<input type="file" id="imp" accept=".json" hidden></label><button class="btn sm" id="rst">전체 지우기</button><span id="ratebox" class="muted" style="display:inline-flex;gap:6px;align-items:center">읽기 속도 <select id="rate" style="width:auto"><option value="0.7">느리게</option><option value="0.9">보통</option><option value="1.1">빠르게</option></select></span></div></header>
+<nav class="tabs"><button class="tab" data-t="home">시작</button><button class="tab" data-t="card">용어 카드</button><button class="tab" data-t="cloze">문장 빈칸</button><button class="tab" data-t="iv">면접 영어</button><button class="tab" data-t="stat">현황</button></nav><main>
+<section class="pane" id="p-home"><h2>오늘 할 일</h2><div id="hq"></div>
+<div class="row"><button class="btn pri" data-go="card">용어 카드 시작</button><button class="btn" data-go="cloze">문장 빈칸</button><button class="btn" data-go="iv">면접 영어</button></div>
+<h3>하루 30분 루틴 (추천)</h3>
+<table class="tb plan"><tr><th>시간</th><th>무엇을</th><th>왜</th></tr>
+<tr><td>5분</td><td>용어 카드 복습 (오늘 복습 분량)</td><td>QC 용어는 짧은 간격으로 반복해야 오래 갑니다.</td></tr>
+<tr><td>10분</td><td>문장 빈칸 연습 + 🔊 듣고 따라 읽기</td><td>단어보다 문장 단위로 익혀야 입에서 나옵니다.</td></tr>
+<tr><td>10분</td><td>면접 영어: 한 문항을 소리 내어 30초씩 3번</td><td>눈으로 읽는 것과 입으로 말하는 것은 다른 기술입니다.</td></tr>
+<tr><td>5분</td><td>영어 자료 한 단락 읽기 (아래 추천 자료)</td><td>실제 문서의 표현에 익숙해지기.</td></tr></table>
+<h3>4주 계획</h3>
+<table class="tb plan"><tr><th>주</th><th>목표</th></tr>
+<tr><td>1주</td><td>용어 카드 매일 10개씩 새로 보기. 1분 자기소개 영어 초안 쓰기.</td></tr>
+<tr><td>2주</td><td>용어 50개 이상 3단계 이상. 자기소개를 외워서 30초 이내로 말하기. 휴대폰으로 녹음해서 들어 보기.</td></tr>
+<tr><td>3주</td><td>면접 영어 질문 6개 이상에 답변 작성. 문장 빈칸 정답률 70% 이상.</td></tr>
+<tr><td>4주</td><td>모의 면접처럼 질문을 무작위로 골라 30초 답변. 모르는 질문에는 "Could you please clarify the question?"으로 되묻기 연습.</td></tr></table>
+<h3>읽으면 좋은 자료 (모두 공개 문서)</h3>
+<ul><li><b>ICH 가이드라인 영문본</b>: Q2(R2) 시험법 밸리데이션, Q1 안정성, Q9 품질 위험관리, Q10 의약품 품질 시스템. 용어가 이 업계의 표준 영어입니다. 처음에는 용어 정의(Glossary) 부분만 읽어도 충분합니다.</li>
+<li><b>식약처 의약품 GMP 영문 자료와 PIC/S GMP guide</b>: 일탈, CAPA, 데이터 완전성 문장을 볼 수 있습니다.</li>
+<li><b>FDA 21 CFR Part 211</b>: 미국 GMP 규정 영문 원문. 실험실 관리와 기록 조항을 보세요.</li>
+<li><b>지원하려는 회사의 영문 홈페이지와 제품 소개</b>: 면접에서 쓸 회사 표현을 미리 익힐 수 있습니다.</li></ul>
+<p class="note">공고의 우대사항(TOEIC, OPIc 등)은 회사마다 다르니 지원 직무마다 확인하세요. 이 도구는 시험 점수용이 아니라 면접과 실무에서 쓰는 영어를 연습하는 용도입니다.</p>
+<h3>공부 요령</h3><ul><li>모르는 단어가 나와도 멈추지 말고, 아는 단어로 풀어 말하는 연습을 하세요. (예: "a test to see if two substances are the same")</li><li>문장은 짧게. 짧은 문장 여러 개가 긴 문장 하나보다 안전합니다.</li><li>🔊는 브라우저의 음성 합성을 씁니다. 기기에 따라 발음 품질이 다릅니다.</li><li>자기 답변은 "내 이야기"로 채워야 합니다. 거짓 경험을 쓰지 마세요. 실제 한 일을 쉬운 영어로 말하는 것이 낫습니다.</li></ul></section>
+<section class="pane" id="p-card" hidden><h2>용어 카드 (109개)</h2><div class="row"><select id="ccat" style="width:auto"></select><select id="cdir" style="width:auto"><option value="ko2en">한글 → 영어</option><option value="en2ko">영어 → 한글</option></select><label style="margin:0">하루 새 카드 <select id="cnew" style="width:auto"><option>5</option><option>10</option><option>20</option></select></label></div><p class="muted" id="csum"></p><p class="muted" id="cprog"></p><div id="cstage"></div></section>
+<section class="pane" id="p-cloze" hidden><h2>문장 빈칸 (28문장)</h2><div class="row"><select id="pcat" style="width:auto"></select><span class="muted" id="zprog"></span></div><div id="zstage"></div><details><summary><b>전체 문장 목록 (듣기)</b></summary><div class="qb"><table class="tb"><tr><th>English</th><th>한글</th><th>분류</th></tr><tbody id="plist"></tbody></table></div></details></section>
+<section class="pane" id="p-iv" hidden><h2>면접 영어</h2><p class="muted">틀의 ___를 내 이야기로 채워 보세요. 짧고 쉬운 문장이 좋습니다. 완성하면 "내 답변 듣기"로 들어 보고, 30초 타이머로 소리 내어 말해 보세요.</p><div id="ivs"></div></section>
+<section class="pane" id="p-stat" hidden><h2>현황</h2><div id="statbox"></div></section></main><script>window.EN_DATA={"T": [["test", "정량법", "assay", [], "함량을 구하는 시험"], ["test", "확인시험", "identification test", ["identification"], "같은 물질인지 확인"], ["test", "순도시험", "purity test", [], "불순물 한도를 보는 시험"], ["test", "유연물질", "related substances", ["related compounds"], "주성분과 구조가 비슷한 불순물"], ["test", "용출시험", "dissolution test", ["dissolution"], "정제·캡슐에서 약물이 녹아 나오는 정도"], ["test", "함량균일성시험", "content uniformity test", ["content uniformity"], "각 단위의 함량이 고른지 확인"], ["test", "질량편차시험", "mass variation test", ["weight variation test", "mass variation"], "정제 질량의 편차로 균일성을 보는 시험"], ["test", "제제균일성시험", "uniformity of dosage units", [], "함량균일성 또는 질량편차로 확인"], ["test", "붕해시험", "disintegration test", ["disintegration"], "정제가 부서지는 시간"], ["test", "건조감량", "loss on drying", ["LOD"], "가열해서 줄어든 질량 비율"], ["test", "수분", "water content", ["moisture content", "water"], "칼피셔법으로 측정하는 경우가 많음"], ["test", "강열잔분", "residue on ignition", ["sulfated ash"], "태우고 남은 무기물"], ["test", "성상", "description", ["appearance"], "색, 모양, 냄새 등 겉모습"], ["test", "규격", "specification", ["spec"], "시험 항목과 기준, 방법을 묶어서 부르는 말"], ["test", "판정기준", "acceptance criteria", ["acceptance criterion"], "적합 여부를 정하는 기준"], ["test", "시험방법", "analytical procedure", ["test method", "analytical method"], "시험 절차"], ["test", "표준품", "reference standard", ["standard"], "비교 기준이 되는 물질"], ["test", "표준액", "standard solution", [], "표준품을 녹여 만든 용액"], ["test", "검액", "sample solution", ["test solution"], "시료를 녹여 만든 용액"], ["test", "시약", "reagent", [], ""], ["test", "완충액", "buffer solution", ["buffer"], "pH를 유지하는 용액"], ["test", "이동상", "mobile phase", [], "크로마토그래피에서 흐르는 용매"], ["test", "칼럼", "column", [], "분리가 일어나는 관"], ["test", "유지시간", "retention time", ["RT"], "시료가 주입되고 피크로 나오기까지의 시간"], ["test", "피크 면적", "peak area", [], "정량에 쓰는 값"], ["test", "분리도", "resolution", [], "두 피크가 얼마나 잘 갈라지는지"], ["test", "이론단수", "theoretical plates", ["plate count"], "칼럼의 효율"], ["test", "꼬리끌림계수", "tailing factor", ["symmetry factor"], "피크 모양이 대칭인지"], ["test", "상대표준편차", "relative standard deviation", ["RSD"], "반복 측정의 흩어짐"], ["test", "시스템 적합성", "system suitability", ["SST"], "매 시험 전에 장비와 방법이 괜찮은지 확인"], ["test", "검량선", "calibration curve", ["calibration"], "농도와 신호의 관계"], ["test", "직선성", "linearity", [], "밸리데이션 항목"], ["test", "정밀성", "precision", [], "반복했을 때 값이 비슷한 정도"], ["test", "정확성", "accuracy", [], "참값에 가까운 정도"], ["test", "특이성", "specificity", [], "원하는 성분만 구별해서 측정하는 능력"], ["test", "검출한계", "limit of detection", ["LOD"], "있는지 알 수 있는 최소량"], ["test", "정량한계", "limit of quantitation", ["LOQ", "limit of quantification"], "숫자로 믿을 수 있는 최소량"], ["test", "완건성", "robustness", [], "조건이 조금 바뀌어도 결과가 유지되는 정도"], ["test", "시험 결과", "test result", ["result"], ""], ["test", "재시험", "retest", [], "절차에 따라서만"], ["sample", "검체", "sample", ["specimen"], "시험 대상"], ["sample", "배치", "batch", ["lot"], "한 번에 만든 제품 단위"], ["sample", "반제품", "intermediate", ["in-process material", "bulk product"], "제조 중간 단계 제품"], ["sample", "완제품", "finished product", ["drug product"], "포장까지 끝난 제품"], ["sample", "원료의약품", "active pharmaceutical ingredient", ["API", "drug substance"], "유효성분"], ["sample", "첨가제", "excipient", [], "유효성분이 아닌 성분"], ["sample", "포장재", "packaging material", [], ""], ["sample", "입고검사", "incoming inspection", ["receiving inspection"], "자재를 받을 때 하는 검사"], ["sample", "불순물", "impurity", [], ""], ["sample", "분해산물", "degradation product", ["degradant"], "보관 중 생기는 불순물"], ["sample", "유효기간", "expiry date", ["shelf life", "expiration date"], "사용할 수 있는 기한"], ["sample", "보관조건", "storage condition", ["storage conditions"], ""], ["sample", "안정성시험", "stability study", ["stability test"], ""], ["sample", "가속시험", "accelerated study", ["accelerated stability study"], "높은 온도·습도에서 빠르게 확인"], ["sample", "장기보존시험", "long-term study", ["long-term stability study"], "실제 보관 조건에서 확인"], ["gmp", "품질관리", "quality control", ["QC"], "시험·검사"], ["gmp", "품질보증", "quality assurance", ["QA"], "시스템 전체의 보증과 승인"], ["gmp", "우수의약품제조관리기준", "good manufacturing practice", ["GMP"], ""], ["gmp", "표준작업지침서", "standard operating procedure", ["SOP"], ""], ["gmp", "일탈", "deviation", [], "절차나 기준에서 벗어난 일"], ["gmp", "시정 및 예방조치", "corrective and preventive action", ["CAPA"], ""], ["gmp", "기준 이탈 결과", "out of specification", ["OOS"], "규격을 벗어난 시험 결과"], ["gmp", "경향 이탈", "out of trend", ["OOT"], "기준 안이지만 추세가 이상한 결과"], ["gmp", "변경관리", "change control", [], ""], ["gmp", "데이터 완전성", "data integrity", ["DI"], "ALCOA++ 원칙"], ["gmp", "감사추적", "audit trail", [], "누가 언제 무엇을 바꿨는지 남기는 기록"], ["gmp", "시험성적서", "certificate of analysis", ["COA"], ""], ["gmp", "제조기록서", "batch record", ["batch manufacturing record"], ""], ["gmp", "원시자료", "raw data", ["source data"], ""], ["gmp", "시험일지", "laboratory notebook", ["lab notebook", "notebook"], ""], ["gmp", "교정", "calibration", [], "기기를 표준에 맞춰 보정하고 확인"], ["gmp", "적격성평가", "qualification", [], "기기가 목적에 맞는지 확인"], ["gmp", "설치적격성평가", "installation qualification", ["IQ"], ""], ["gmp", "운전적격성평가", "operational qualification", ["OQ"], ""], ["gmp", "성능적격성평가", "performance qualification", ["PQ"], ""], ["gmp", "밸리데이션", "validation", [], ""], ["gmp", "시험법 밸리데이션", "analytical method validation", ["method validation"], ""], ["gmp", "동시 기록", "contemporaneous recording", ["contemporaneous"], "일이 일어난 그때 기록"], ["gmp", "검토와 승인", "review and approval", [], ""], ["gmp", "자체 점검", "self-inspection", ["internal audit"], ""], ["gmp", "감사", "audit", [], ""], ["equip", "고성능액체크로마토그래프", "high-performance liquid chromatography", ["HPLC", "high performance liquid chromatography"], ""], ["equip", "가스크로마토그래프", "gas chromatography", ["GC"], ""], ["equip", "박층크로마토그래프법", "thin-layer chromatography", ["TLC", "thin layer chromatography"], ""], ["equip", "분광광도계", "spectrophotometer", [], ""], ["equip", "자외가시부흡광도측정법", "ultraviolet-visible spectrophotometry", ["UV-Vis", "UV/Vis", "UV"], ""], ["equip", "적외부흡수스펙트럼측정법", "infrared spectrophotometry", ["IR", "infrared spectroscopy"], ""], ["equip", "용출시험기", "dissolution tester", [], ""], ["equip", "붕해시험기", "disintegration tester", [], ""], ["equip", "분석 저울", "analytical balance", ["balance"], ""], ["equip", "산도측정기", "pH meter", [], ""], ["equip", "칼피셔 적정기", "Karl Fischer titrator", ["Karl Fischer"], "수분 측정"], ["equip", "건조기", "drying oven", ["oven"], ""], ["equip", "정제수", "purified water", ["PW"], ""], ["equip", "총유기탄소", "total organic carbon", ["TOC"], "물의 유기물 오염 지표"], ["equip", "전도도", "conductivity", [], "물의 이온 오염 지표"], ["equip", "초음파 세척기", "ultrasonic bath", ["sonicator"], "용해에 자주 사용"], ["equip", "피펫", "pipette", [], ""], ["equip", "부피 플라스크", "volumetric flask", [], ""], ["dose", "정제", "tablet", [], ""], ["dose", "캡슐제", "capsule", [], ""], ["dose", "주사제", "injection", ["injectable"], ""], ["dose", "시럽제", "syrup", [], ""], ["dose", "연고제", "ointment", [], ""], ["dose", "점안제", "eye drops", ["ophthalmic solution"], ""], ["dose", "서방성 제제", "extended-release", ["sustained release"], ""], ["dose", "복제의약품", "generic drug", ["generic"], ""], ["dose", "대조약", "reference product", ["reference listed drug", "innovator"], ""], ["dose", "비교용출시험", "comparative dissolution test", [], "동등성 확인에 쓰는 용출 비교"]], "TC": {"test": "시험·분석", "sample": "시료·제품", "gmp": "품질시스템·GMP", "equip": "기기·용수", "dose": "제형"}, "P": [["The sample was analyzed by HPLC.", "시료는 HPLC로 분석되었습니다.", ["analyzed", "analysed"], "보고", "수동태로 한 일을 설명"], ["The result met the acceptance criteria.", "결과는 판정기준에 적합했습니다.", ["acceptance"], "보고", "결과 보고"], ["The result was out of specification.", "결과가 규격을 벗어났습니다.", ["specification"], "보고", "OOS 보고"], ["Store at 2 to 8 °C and protect from light.", "2~8 °C에서 보관하고 빛을 피하세요.", ["protect"], "규정", "보관 문구"], ["Weigh accurately about 20 mg of the sample.", "시료 약 20 mg을 정밀하게 다십시오.", ["accurately"], "약전", "\"정밀하게 단다\"의 영문 표현"], ["Dissolve in the mobile phase and dilute to 50 mL.", "이동상에 녹이고 50 mL로 희석하십시오.", ["dilute"], "약전", "시험 절차 문장"], ["The system suitability requirements were met.", "시스템 적합성 요건을 충족했습니다.", ["suitability"], "보고", "SST 결과"], ["The deviation was reported to QA immediately.", "일탈은 즉시 QA에 보고되었습니다.", ["immediately"], "보고", "일탈 보고"], ["Please find the attached certificate of analysis.", "첨부된 시험성적서를 확인해 주세요.", ["attached"], "이메일", "메일 첨부"], ["The test was repeated according to the SOP.", "시험은 SOP에 따라 다시 수행되었습니다.", ["according"], "보고", "절차 준수"], ["All data must be recorded at the time of the activity.", "모든 데이터는 작업 시점에 기록해야 합니다.", ["recorded"], "규정", "ALCOA의 Contemporaneous"], ["The balance was calibrated before use.", "저울은 사용 전에 교정되었습니다.", ["calibrated"], "보고", "기기 상태"], ["The results will be available by Friday.", "결과는 금요일까지 나올 예정입니다.", ["available"], "이메일", "일정 안내"], ["I would like to confirm the test schedule.", "시험 일정을 확인하고 싶습니다.", ["confirm"], "이메일", "확인 요청"], ["Could you show me how to use this instrument?", "이 기기 사용법을 알려 주시겠어요?", ["show"], "회화", "도움 요청"], ["I corrected the entry with a single line, my initials, and the date.", "한 줄을 긋고 서명과 날짜를 적어 정정했습니다.", ["single", "corrected"], "규정", "기록 정정 방법"], ["The product complies with the requirements of the monograph.", "제품은 각조의 요건에 적합합니다.", ["complies"], "약전", "적합 표현"], ["The retention time of the sample peak corresponds to that of the standard.", "검액 피크의 유지시간이 표준액과 일치합니다.", ["corresponds"], "약전", "확인시험 문장"], ["Samples were stored at 40 °C and 75% RH for six months.", "시료는 40 °C, 상대습도 75%에서 6개월 보관되었습니다.", ["stored"], "보고", "가속시험 조건"], ["The change was approved by QA before implementation.", "변경은 시행 전에 QA의 승인을 받았습니다.", ["approved"], "보고", "변경관리"], ["I am sorry for the delay. The analysis will be completed by tomorrow.", "늦어서 죄송합니다. 분석은 내일까지 완료됩니다.", ["completed"], "이메일", "지연 사과"], ["Could you please clarify the question?", "질문을 다시 설명해 주시겠어요?", ["clarify"], "회화", "면접에서 질문을 못 알아들었을 때"], ["I was responsible for sampling and recording raw data.", "저는 시료 채취와 원시 데이터 기록을 담당했습니다.", ["responsible"], "면접", "경험 설명"], ["Results are reported to the nearest 0.1 percent.", "결과는 소수점 첫째 자리까지 보고합니다.", ["nearest"], "보고", "반올림 표현"], ["I carried out the test according to the procedure.", "저는 절차에 따라 시험을 수행했습니다.", ["carried"], "면접", "경험 설명"], ["If the result is out of specification, an investigation must be started.", "결과가 규격을 벗어나면 조사를 시작해야 합니다.", ["investigation"], "규정", "OOS 대응"], ["The reagent has expired and must not be used.", "시약의 사용기한이 지났으므로 사용하면 안 됩니다.", ["expired"], "규정", "시약 관리"], ["Data must be attributable, legible, contemporaneous, original, and accurate.", "데이터는 귀속성, 판독성, 동시성, 원본성, 정확성을 갖춰야 합니다.", ["attributable"], "규정", "ALCOA 5요소"]], "I": [["Please introduce yourself in 30 seconds.", "Hello, my name is ___. I majored in ___ at ___. I worked as ___ at ___, where I ___. I am interested in pharmaceutical QC because ___. I am careful and ___. Thank you.", "짧은 문장 6~8개. 이름, 전공, 경험 하나, 지원 이유, 강점, 마무리."], ["Why do you want to work in pharmaceutical QC?", "I want to work in QC because ___. Quality testing protects patients, and I like ___. In my experience with ___, I learned that ___. I want to build my career as ___.", "이유 1개 + 근거 경험 1개 + 목표."], ["What are your strengths?", "My main strength is ___. For example, when I ___, I ___. As a result, ___. I think this helps in QC because ___.", "강점 한 가지와 사례. \"careful\", \"reliable\", \"responsible\" 등 쉬운 단어."], ["What is your weakness?", "My weakness is ___. To improve it, I ___. Now I ___.", "약점 + 개선 노력. 직무에 치명적이지 않은 것으로."], ["Tell me about a mistake you made and what you learned.", "Once, I ___. I noticed the mistake when ___. I reported it to ___ and ___. Since then, I always ___.", "실수 → 즉시 보고 → 재발 방지. 정직이 핵심."], ["Describe an analysis or experiment you have done.", "I performed ___ using ___. First, I ___. Then I ___. The result was ___. I recorded the data and ___.", "순서 표현(first, then, finally)을 쓴다."], ["Why should we hire you?", "You should hire me because ___. I have ___ and I am willing to ___. I will ___.", "강점 2개와 배우려는 태도."], ["What movie did you recently watch? (10 seconds)", "I recently watched ___. It is about ___. I liked it because ___.", "3문장. 제목은 미리 영어로 확인."], ["Can you communicate in English with overseas partners?", "My English is at the ___ level. I can ___, and I am studying ___ every day to improve. I am willing to learn the technical terms quickly.", "수준을 과장하지 말고 현재 가능한 것과 학습 계획을 말한다."], ["Where do you see yourself in five years?", "In five years, I want to ___. I will ___ to reach that goal.", "1~3년은 숙련, 5년은 시험법·기록 개선 같은 구체적 목표."], ["Do you have any questions for us?", "Yes. I would like to ask ___. Also, ___.", "예: What will a new employee do in the first three months? How is training provided?"]]};</script><script>(function(){
+var D=window.EN_DATA,KEY='qceng.v1',INT=[0,1,3,7,14,30];
+var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){S=null}
+if(!S||typeof S!=='object')S={};
+S.terms=S.terms||{};S.pat=S.pat||{};S.iv=S.iv||{};S.days=S.days||{};S.pref=S.pref||{dir:'ko2en',rate:0.9,newn:10};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function bump(){S.days[today()]=(S.days[today()]||0)+1;save()}
+var tts='speechSynthesis' in window;
+function speak(t){if(!tts)return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=S.pref.rate||0.9;speechSynthesis.speak(u)}catch(e){}}
+function sp(t){return tts?'<button class="btn sm sp" data-say="'+esc(t)+'" title="듣기">🔊</button>':''}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-say]');if(b){e.preventDefault();speak(b.dataset.say)}});
+/* tabs */
+var tabs=$$('.tab'),panes=$$('.pane');
+function show(id){tabs.forEach(function(t){t.classList.toggle('on',t.dataset.t===id)});panes.forEach(function(p){p.hidden=p.id!=='p-'+id});try{history.replaceState(null,'','#'+id)}catch(e){}if(id==='stat')renderStat();if(id==='home')renderHome();if(id==='card')cardInit();if(id==='cloze')clozeInit();if(id==='iv')renderIv()}
+tabs.forEach(function(t){t.onclick=function(){show(t.dataset.t)}});
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){e.preventDefault();show(g.dataset.go)}});
+/* ---- term cards ---- */
+function tstat(i){return S.terms[i]}
+function dueList(){var now=Date.now(),cat=$('#ccat').value,out=[],nw=[];
+  D.T.forEach(function(t,i){if(cat!=='all'&&t[0]!==cat)return;var s=tstat(i);if(!s){nw.push(i)}else if(s.due<=now)out.push(i)});
+  out.sort(function(a,b){return S.terms[a].due-S.terms[b].due});
+  return {due:out,nw:nw}}
+var sess={q:[],i:0,rev:false,miss:{}};
+function cardInit(){
+  if(!$('#ccat').dataset.ok){var h='<option value="all">전체 분류</option>';Object.keys(D.TC).forEach(function(k){h+='<option value="'+k+'">'+D.TC[k]+'</option>'});$('#ccat').innerHTML=h;$('#ccat').dataset.ok=1;
+    $('#cdir').value=S.pref.dir;$('#ccat').onchange=cardInit;$('#cdir').onchange=function(){S.pref.dir=this.value;save();cardInit()};$('#cnew').value=S.pref.newn;$('#cnew').onchange=function(){S.pref.newn=+this.value;save();cardInit()}}
+  var d=dueList();var nn=Math.min(d.nw.length,S.pref.newn);
+  sess.q=d.due.concat(d.nw.slice(0,nn));sess.i=0;sess.rev=false;sess.miss={};
+  $('#csum').textContent='복습 '+d.due.length+'개 + 새 카드 '+nn+'개 (남은 새 카드 '+(d.nw.length-nn)+')';
+  cardRender()}
+function norm(s){return String(s).toLowerCase().replace(/[^a-z0-9가-힣]/g,'')}
+function cardRender(){
+  var st=$('#cstage');
+  if(sess.i>=sess.q.length){st.innerHTML='<div class="big center">오늘 분량 끝!<br><span class="muted" style="font-size:.9rem">새 카드를 더 하려면 위에서 개수를 늘리거나 다른 분류를 선택하세요.</span></div>';$('#cprog').textContent='';return}
+  var i=sess.q[sess.i],t=D.T[i],k2e=S.pref.dir==='ko2en';
+  $('#cprog').textContent=(sess.i+1)+' / '+sess.q.length;
+  var p=k2e?t[1]:t[2];
+  var h='<div class="big center"><div class="muted" style="font-size:.8rem">'+D.TC[t[0]]+'</div><div>'+esc(p)+'</div>'+(k2e?'':sp(t[2]))+'</div>';
+  if(k2e)h+='<input type="text" id="cin" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="영어로 입력 (선택, Enter로 확인)">';
+  h+='<div class="row" style="justify-content:center"><button class="btn pri" id="cshow">정답 보기</button></div><div id="cans"></div>';
+  st.innerHTML=h;sess.rev=false;
+  var inp=$('#cin');if(inp){inp.focus({preventScroll:true});inp.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();reveal()}}}
+  $('#cshow').onclick=reveal}
+function reveal(){
+  if(sess.rev)return;sess.rev=true;var i=sess.q[sess.i],t=D.T[i],k2e=S.pref.dir==='ko2en';
+  var h='<div class="ansbox"><b>'+esc(t[2])+'</b> '+sp(t[2])+(t[3].length?'<span class="muted"> · '+esc(t[3].join(', '))+'</span>':'')+'<br>'+esc(t[1])+(t[4]?'<br><span class="muted">'+esc(t[4])+'</span>':'')+'</div>';
+  var auto='';var inp=$('#cin');
+  if(k2e&&inp&&inp.value.trim()){var ok=[t[2]].concat(t[3]).some(function(a){return norm(a)===norm(inp.value)});auto=ok?'<p class="okmsg">✓ 맞았어요</p>':'<p class="badmsg">✗ 입력: '+esc(inp.value)+'</p>'}
+  h+=auto+'<div class="row" style="justify-content:center"><button class="btn sm" data-r="miss">몰랐다</button><button class="btn sm" data-r="unsure">헷갈렸다</button><button class="btn sm pri" data-r="know">알았다</button></div>';
+  $('#cans').innerHTML=h;$('#cshow').hidden=true;
+  $$('[data-r]',$('#cans')).forEach(function(b){b.onclick=function(){rate(i,b.dataset.r)}});
+  if(auto.indexOf('okmsg')>-1){var kb=$('[data-r=know]');if(kb)kb.focus({preventScroll:true})}}
+function rate(i,lv){
+  var s=S.terms[i]||(S.terms[i]={box:0,due:0,n:0});s.n++;var now=Date.now();
+  if(lv==='know'){s.box=Math.min(5,s.box+1);s.due=now+INT[s.box]*864e5}
+  else if(lv==='unsure'){s.box=Math.max(1,s.box-1);s.due=now+864e5}
+  else{s.box=1;s.due=now+6e5;if(!sess.miss[i]){sess.miss[i]=1;sess.q.splice(Math.min(sess.q.length,sess.i+4),0,i)}}
+  bump();save();sess.i++;cardRender()}
+/* ---- cloze ---- */
+var cz={q:[],i:0,rev:false};
+function clozeInit(){if(!$('#pcat').dataset.ok){var cs={};D.P.forEach(function(p){cs[p[3]]=1});var h='<option value="all">전체 분류</option>'+Object.keys(cs).map(function(c){return '<option>'+c+'</option>'}).join('');$('#pcat').innerHTML=h;$('#pcat').dataset.ok=1;$('#pcat').onchange=clozeInit}
+  var cat=$('#pcat').value,l=[];D.P.forEach(function(p,i){if(cat==='all'||p[3]===cat)l.push(i)});
+  for(var k=l.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),t=l[k];l[k]=l[j];l[j]=t}
+  cz.q=l;cz.i=0;clozeRender();renderPlist()}
+function blank(sen,w){var re=new RegExp('\\b'+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');return sen.replace(re,'<span class="blk">_____</span>')}
+function clozeRender(){var st=$('#zstage');
+  if(cz.i>=cz.q.length){st.innerHTML='<div class="big center">한 바퀴 끝! 다시 하려면 분류를 다시 선택하세요.</div>';$('#zprog').textContent='';return}
+  var p=D.P[cz.q[cz.i]];$('#zprog').textContent=(cz.i+1)+' / '+cz.q.length;
+  st.innerHTML='<div class="big">'+blank(esc(p[0]),p[2][0].replace(/&/g,'&amp;'))+'</div><p class="muted">'+esc(p[1])+' · '+esc(p[3])+'</p><input type="text" id="zin" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="빈칸에 들어갈 단어"><div class="row"><button class="btn pri" id="zok">확인</button><button class="btn" id="zskip">모르겠어요</button></div><div id="zres"></div>';
+  $('#zin').focus({preventScroll:true});$('#zin').onkeydown=function(e){if(e.key==='Enter')zcheck()};$('#zok').onclick=zcheck;$('#zskip').onclick=function(){zshow(false)}}
+function zcheck(){if($('#zok').disabled)return;var p=D.P[cz.q[cz.i]],v=$('#zin').value.trim().toLowerCase();zshow(p[2].some(function(a){return a.toLowerCase()===v}))}
+function zshow(ok){var id=cz.q[cz.i],p=D.P[id];var s=S.pat[id]||(S.pat[id]={ok:0,n:0});s.n++;if(ok)s.ok++;bump();save();
+  $('#zok').disabled=true;$('#zskip').disabled=true;
+  $('#zres').innerHTML='<p class="'+(ok?'okmsg':'badmsg')+'">'+(ok?'✓ 정답':'✗ 정답: '+esc(p[2][0]))+'</p><div class="ansbox"><b>'+esc(p[0])+'</b> '+sp(p[0])+'<br>'+esc(p[1])+'<br><span class="muted">'+esc(p[4])+'</span></div><div class="row"><button class="btn pri" id="znext">다음</button></div>';
+  $('#znext').focus({preventScroll:true});$('#znext').onclick=function(){cz.i++;clozeRender()}}
+function renderPlist(){$('#plist').innerHTML=D.P.map(function(p){return '<tr><td>'+esc(p[0])+' '+sp(p[0])+'</td><td>'+esc(p[1])+'</td><td>'+esc(p[3])+'</td></tr>'}).join('')}
+/* ---- interview english ---- */
+var IVST=['미작성','작성함','말로 연습함'];
+function renderIv(){var box=$('#ivs');box.innerHTML='';
+  D.I.forEach(function(q,i){var a=S.iv['i'+i]||(S.iv['i'+i]={text:'',st:0});
+    var d=document.createElement('details');d.className='q st'+a.st;
+    d.innerHTML='<summary>'+esc(q[0])+' '+sp(q[0])+'<span class="stb">'+IVST[a.st]+'</span></summary><div class="qb"><p class="hint"><b>답변 틀</b> '+esc(q[1])+'<br><b>팁</b> '+esc(q[2])+'</p><label>내 영어 답변 (___ 부분을 내 이야기로 채우기)<textarea rows="6" class="mine" placeholder="짧은 문장으로 적으세요. 길게 쓰지 않아도 됩니다."></textarea></label><div class="row">'+sp('')+'<button class="btn sm" data-lis>내 답변 듣기 🔊</button><button class="btn sm" data-tm>30초 말하기</button><span class="tmv muted"></span><span style="margin-left:auto"></span>'+IVST.map(function(s,k){return '<button class="btn sm stbtn'+(a.st===k?' on':'')+'" data-s="'+k+'">'+s+'</button>'}).join('')+'</div></div>';
+    box.appendChild(d);$('.mine',d).value=a.text||'';
+    $('.mine',d).oninput=function(){a.text=this.value;save()};
+    $('[data-lis]',d).onclick=function(){if(!tts){alert('이 브라우저는 음성 읽기를 지원하지 않습니다.');return}var t=$('.mine',d).value.trim();if(t)speak(t)};
+    var sp0=d.querySelector('.sp[data-say=""]');if(sp0)sp0.remove();
+    var tm=null;$('[data-tm]',d).onclick=function(){var b=this,v=$('.tmv',d);if(tm){clearInterval(tm);tm=null;v.textContent='';b.textContent='30초 말하기';return}var l=30;b.textContent='그만';v.textContent=l+'초';tm=setInterval(function(){l--;v.textContent=l>0?l+'초':'끝!';if(l<=0){clearInterval(tm);tm=null;b.textContent='30초 말하기';bump()}},1000)};
+    $$('.stbtn',d).forEach(function(b){b.onclick=function(){a.st=+b.dataset.s;save();$$('.stbtn',d).forEach(function(x){x.classList.toggle('on',x===b)});d.className='q st'+a.st;$('.stb',d).textContent=IVST[a.st];if(a.st===2)bump()}})})}
+/* ---- home / stat ---- */
+function renderHome(){var now=Date.now(),due=0,nw=0;D.T.forEach(function(t,i){var s=S.terms[i];if(!s)nw++;else if(s.due<=now)due++});
+  $('#hq').innerHTML='<div class="kpis"><div><b>'+due+'</b>오늘 복습할 용어</div><div><b>'+nw+'</b>아직 안 본 용어</div><div><b>'+(S.days[today()]||0)+'</b>오늘 한 횟수</div><div><b>'+streak()+'</b>연속 학습일</div></div>'}
+function streak(){var n=0,d=new Date();while(true){var k=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);if(S.days[k]){n++;d.setDate(d.getDate()-1)}else{if(n===0&&k===today()){d.setDate(d.getDate()-1);continue}break}}return n}
+function renderStat(){var bx=[0,0,0,0,0,0];D.T.forEach(function(t,i){var s=S.terms[i];bx[s?s.box:0]++});
+  var h='<h3>용어 카드 단계</h3><table class="tb"><tr><th>새 카드</th><th>1단계</th><th>2단계</th><th>3단계</th><th>4단계</th><th>5단계(외움)</th></tr><tr>'+bx.map(function(x){return '<td>'+x+'</td>'}).join('')+'</tr></table>';
+  var pc=0,pn=0;Object.keys(S.pat).forEach(function(k){pc+=S.pat[k].ok;pn+=S.pat[k].n});
+  h+='<h3>문장 빈칸</h3><p>시도 '+pn+'회 · 정답 '+pc+'회'+(pn?' ('+Math.round(pc/pn*100)+'%)':'')+'</p>';
+  var iv=[0,0,0];D.I.forEach(function(q,i){var a=S.iv['i'+i];iv[a?a.st:0]++});
+  h+='<h3>면접 영어</h3><p>미작성 '+iv[0]+' · 작성함 '+iv[1]+' · 말로 연습함 '+iv[2]+'</p><h3>최근 7일</h3><div class="bars">';
+  var d=new Date();d.setDate(d.getDate()-6);var mx=1,arr=[];for(var k=0;k<7;k++){var key=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);var v=S.days[key]||0;arr.push([key.slice(5),v]);mx=Math.max(mx,v);d.setDate(d.getDate()+1)}
+  h+=arr.map(function(a){return '<div><i style="height:'+Math.round(a[1]/mx*70)+'px"></i><span>'+a[1]+'</span><small>'+a[0]+'</small></div>'}).join('')+'</div>';
+  $('#statbox').innerHTML=h}
+/* ---- settings ---- */
+$('#rate').value=S.pref.rate;$('#rate').onchange=function(){S.pref.rate=+this.value;save()};if(!tts)$('#ratebox').hidden=true;
+$('#exp').onclick=function(){var b=new Blob([JSON.stringify({kind:'qcenglish',v:1,data:S},null,1)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='qc-english.json';a.click()};
+$('#imp').onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(o.kind!=='qcenglish')throw 0;if(!confirm('가져오면 지금 기록이 바뀝니다. 계속할까요?'))return;S=o.data;save();location.reload()}catch(e){alert('영어 학습 파일이 아닙니다.')}};r.readAsText(f)};
+$('#rst').onclick=function(){if(confirm('모든 영어 학습 기록을 지울까요? 먼저 내보내기를 권합니다.')){localStorage.removeItem(KEY);location.reload()}};
+var h=(location.hash||'').slice(1);show(['home','card','cloze','iv','stat'].indexOf(h)>-1?h:'home');
+})();
+</script></body></html>
