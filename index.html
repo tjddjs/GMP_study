@@ -602,7 +602,7 @@ body.has-side #ui-open{display:inline-block}
 <header class="top">
   <div class="topin">
     <div class="brand">제품QC <i>학습노트</i></div>
-    <nav class="tracks" aria-label="이동"><a href="#mindmap">마인드맵</a><a href="#map">A 근거</a><a href="#anatomy">B 시험 항목</a><a href="#prep">C 시험실·준비물</a><a href="#trust">D 신뢰성</a><a href="#stab">E 안정성</a><a href="#oos">F 이상 결과</a><a href="#pvcv">G 밸리데이션 지원</a><a href="#dosage">H 제형 특화</a><a href="#adj">I 인접 영역</a><a href="#drill">J 복습</a><a href="interview.html">면접 준비 ↗</a></nav>
+    <nav class="tracks" aria-label="이동"><a href="#mindmap">마인드맵</a><a href="#map">A 근거</a><a href="#anatomy">B 시험 항목</a><a href="#prep">C 시험실·준비물</a><a href="#trust">D 신뢰성</a><a href="#stab">E 안정성</a><a href="#oos">F 이상 결과</a><a href="#pvcv">G 밸리데이션 지원</a><a href="#dosage">H 제형 특화</a><a href="#adj">I 인접 영역</a><a href="#drill">J 복습</a><a href="interview.html">면접 준비 ↗</a><a href="kgec.html">KGEC 교육노트 ↗</a></nav>
     <div class="tools">
       <label class="search">
         <input id="q" type="search" placeholder="검색 (카드·마인드맵)" aria-label="검색">
@@ -3076,7 +3076,7 @@ var MIGRATE={'t1a':['44. 액체크로마토그래프법','액체크로마토그�
 </script>
 
 <script>(function(){
-  var KEY='qcui.read.v1', PK='qcui.pref.v1';
+  var KEY=window.QCUI_KEY||'qcui.read.v1', PK='qcui.pref.v1';
   function rd(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
   function wr(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
   var read=rd(KEY,{}), pref=rd(PK,{});
@@ -3111,11 +3111,12 @@ var MIGRATE={'t1a':['44. 액체크로마토그래프법','액체크로마토그�
   });
   var total=0;groups.forEach(function(g){total+=g.items.length});
   var side=document.createElement('aside');side.id='ui-side';
-  side.innerHTML='<div class="us-top"><div class="t1">목차<span id="us-prog"></span><button class="us-hide" id="us-hide" title="목차 숨기기">⟨</button></div><div class="us-bar"><i></i></div><div class="us-cur" id="us-cur"></div></div><div class="us-list" id="us-list"></div><div class="us-foot"><a href="#mindmap" data-top>↑ 마인드맵</a><a href="#drill">복습 훈련</a><a href="interview.html">면접 준비 ↗</a><a href="english.html">영어 학습 ↗</a><a href="toeic.html">TOEIC 단어장 ↗</a></div>';
+  side.innerHTML='<div class="us-top"><div class="t1">목차<span id="us-prog"></span><button class="us-hide" id="us-hide" title="목차 숨기기">⟨</button></div><div class="us-bar"><i></i></div><div class="us-cur" id="us-cur"></div></div><div class="us-list" id="us-list"></div><div class="us-foot"><a href="#mindmap" data-top>↑ 마인드맵</a><a href="#drill">복습 훈련</a><a href="interview.html">면접 준비 ↗</a><a href="english.html">영어 학습 ↗</a><a href="toeic.html">TOEIC 단어장 ↗</a><a href="kgec.html">KGEC 교육노트 ↗</a></div>';
+  if(window.QCUI_FOOT){var ft=side.querySelector('.us-foot');if(ft)ft.innerHTML=window.QCUI_FOOT}
   document.body.appendChild(side);
   var bg=document.createElement('div');bg.id='ui-bg';document.body.appendChild(bg);
   var ob=document.createElement('button');ob.id='ui-open';ob.className='ui-btn';ob.textContent='☰ 목차';document.body.appendChild(ob);
-  var list=side.querySelector('#us-list'),html='<div class="usg"><a class="single" href="#mindmap" data-jump="mindmap">마인드맵</a></div>';
+  var list=side.querySelector('#us-list'),html=document.getElementById('mindmap')?'<div class="usg"><a class="single" href="#mindmap" data-jump="mindmap">마인드맵</a></div>':'';
   groups.forEach(function(g,gi){
     html+='<div class="usg" data-g="'+gi+'"><button class="usg-h"><span class="k">'+g.k.replace(/</g,'&lt;')+'</span><span class="t">'+g.t.replace(/</g,'&lt;')+'</span><span class="n"></span></button><ul>'+
       g.items.map(function(it){return '<li><a class="it" href="#'+it.id+'" data-jump="'+it.id+'"><span class="ck" data-ck="'+it.id+'"></span><span class="tt">'+it.t.replace(/</g,'&lt;')+'</span><span class="no">'+it.no+'</span></a></li>'}).join('')+'</ul></div>';
@@ -3132,7 +3133,7 @@ var MIGRATE={'t1a':['44. 액체크로마토그래프법','액체크로마토그�
     var a=e.target.closest('[data-jump]');
     if(a){e.preventDefault();var id=a.dataset.jump;if(id==='mindmap'||id==='drill'){var t=document.getElementById(id);if(t)t.scrollIntoView({block:'start',behavior:'smooth'})}else jump(id);if(window.innerWidth<1180)closeD()}
   });
-  side.querySelector('[data-top]').onclick=function(e){e.preventDefault();var t=document.getElementById('mindmap');if(t)t.scrollIntoView({behavior:'smooth'})};
+  var tp=side.querySelector('[data-top]');if(tp)tp.onclick=function(e){e.preventDefault();var t=document.getElementById('mindmap');if(t)t.scrollIntoView({behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'})};
   function toggle(id){if(read[id])delete read[id];else read[id]=1;wr(KEY,read);upd()}
   window.QCRead={toggle:toggle};
   function openD(){document.body.classList.add('drawer')}function closeD(){document.body.classList.remove('drawer')}
